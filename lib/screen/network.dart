@@ -22,12 +22,11 @@ class _NetworkPageState extends State<NetworkPage> {
     _weatherData = repo.fetchCurrentWeatherByCityName(context, 'changsha');
   }
 
-  void _reloadWeatherData() {
+  _reloadWeatherData() {
     // 重新给future赋值
     _loadWeatherData();
     // 使用新的future重建FutureBuilder
-    setState(() {
-    });
+    setState(() {});
   }
 
   @override
