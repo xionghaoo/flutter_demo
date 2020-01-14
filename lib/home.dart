@@ -60,7 +60,21 @@ class _HomePageState extends State<HomePage> {
                 color: Colors.brown,
                 textColor: Colors.white,
               ),
-            )
+            ),
+            Row(children: <Widget>[
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(15, 10, 15, 10),
+                  child: RaisedButton(
+                    onPressed: () {
+                      print("json序列化");
+                    },
+                    textColor: Colors.black,
+                    child: Text("网络请求"),
+                  ),
+                ),
+              )
+            ]),
           ],
         ),
       ),
