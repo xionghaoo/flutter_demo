@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_demo/repo/data/weather_data.dart';
 import 'package:http/http.dart' as http;
@@ -10,7 +12,10 @@ class Repository {
     var url = "$HOST/data/2.5/weather?APPID=$APPID&q=$city&units=metric&lang=zh_cn";
     final response = await http.get(url);
     if (response.statusCode == 200) {
-
+      print(response.body);
+      return WeatherData.fromJson(json.decode(response.body));
+    } else {
+      throw Exception("fetchCurrentWeatherByCityName failure");
     }
   }
 }

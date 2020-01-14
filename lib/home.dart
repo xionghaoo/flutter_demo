@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_demo/screen/network.dart';
 import 'package:flutter_demo/search.dart';
 
 class HomePage extends StatefulWidget {
@@ -67,7 +68,7 @@ class _HomePageState extends State<HomePage> {
                   padding: const EdgeInsets.fromLTRB(15, 10, 15, 10),
                   child: RaisedButton(
                     onPressed: () {
-                      print("json序列化");
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => NetworkPage()));
                     },
                     textColor: Colors.black,
                     child: Text("网络请求"),
