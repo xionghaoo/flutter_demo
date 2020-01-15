@@ -12,9 +12,15 @@ flutter pub run build_runner build
 
 ## 待开发
 
-+ 调原生接口
-    + 相机
-    + 高德地图
 + app state
     + 原生ChangeNotifier
     + redux
+   
++ 缓存
+
++ 动画
+   
++ 调原生接口
+    + 相机
+    + 高德地图
+    
