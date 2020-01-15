@@ -16,7 +16,8 @@ class _NetworkPageState extends State<NetworkPage> {
   Repository repo = Repository();
   Future<WeatherData> _weatherData;
 //  bool isLoading = false;
-  bool isDisable = true;
+  bool isDisable = false;
+  Widget _resultContent;
 
   _loadWeatherData() {
     _weatherData = repo.fetchCurrentWeatherByCityName(context, 'changsha');
@@ -27,6 +28,24 @@ class _NetworkPageState extends State<NetworkPage> {
     _loadWeatherData();
     // 使用新的future重建FutureBuilder
     setState(() {});
+  }
+
+  // 可以灵活的管理UI的刷新
+  _loadDataManual() {
+    setState(() {
+      isDisable = true;
+      _resultContent = CircularProgressIndicator();
+    });
+    repo.fetchCurrentWeatherByCityName(context, 'shenzhen').then((data) {
+      _resultContent = Text("城市：${data.cityName}, 能见度：${data.visibility}");
+    }).catchError((e) {
+      _resultContent = Text("加载失败");
+    }).whenComplete(() {
+      setState(() {
+        isDisable = false;
+      });
+    });
+
   }
 
   @override
@@ -53,7 +72,7 @@ class _NetworkPageState extends State<NetworkPage> {
             Padding(
               padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
               child: RaisedButton(
-                child: Text("加载天气数据"),
+                child: Text("使用FutureBuilder加载数据"),
                 textColor: Colors.white,
                 color: Colors.amberAccent,
                 disabledColor: Colors.grey,
@@ -68,7 +87,6 @@ class _NetworkPageState extends State<NetworkPage> {
                 child: FutureBuilder<WeatherData>(
                   future: _weatherData,
                   builder: (context, snapshot) {
-//                    print(snapshot.connectionState);
                     if (snapshot.connectionState == ConnectionState.done) {
                       if (snapshot.hasData) {
                         var data = snapshot.data;
@@ -85,7 +103,23 @@ class _NetworkPageState extends State<NetworkPage> {
                   },
                 ),
               )
-            )
+            ),
+            Padding(
+              padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
+              child: RaisedButton(
+                child: Text("自定义加载数据"),
+                textColor: Colors.white,
+                color: Colors.amberAccent,
+                disabledColor: Colors.grey,
+                disabledTextColor: Colors.white,
+                onPressed: isDisable ? null : () {_loadDataManual();},
+              ),
+            ),
+            Container(
+                child: Center(
+                  child: _resultContent
+                )
+            ),
           ],
         ),
       ),
