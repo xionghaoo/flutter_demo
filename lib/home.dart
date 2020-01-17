@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_demo/screen/network.dart';
+import 'package:flutter_demo/screen/test.dart';
 import 'package:flutter_demo/search.dart';
 
 class HomePage extends StatefulWidget {
@@ -76,6 +77,18 @@ class _HomePageState extends State<HomePage> {
                 ),
               )
             ]),
+            Container(
+              width: MediaQuery.of(context).size.width,
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
+                child: RaisedButton(
+                  child: Text("测试页面"),
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => TestPage()));
+                  },
+                ),
+              ),
+            )
           ],
         ),
       ),

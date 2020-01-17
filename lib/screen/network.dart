@@ -1,6 +1,3 @@
-import 'dart:ffi';
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_demo/repo/data/weather_data.dart';
 import 'package:flutter_demo/repo/repository.dart';
