@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class TestPage extends StatefulWidget {
 
@@ -16,7 +17,15 @@ class _TestPageState extends State<TestPage> {
       body: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
-        child: Text("文本")
+        child: Center(
+          child: InkWell(
+            child: Text("This is Button"),
+            onTap: () {
+              print("Click InkWell");
+              Fluttertoast.showToast(msg: "Click InkWell");
+            }
+          ),
+        )
       ),
     );
   }
