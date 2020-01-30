@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_demo/screen/bottom_tabs.dart';
 import 'package:flutter_demo/screen/network.dart';
 import 'package:flutter_demo/screen/test.dart';
 import 'package:flutter_demo/search.dart';
@@ -85,6 +86,18 @@ class _HomePageState extends State<HomePage> {
                   child: Text("测试页面"),
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(builder: (context) => TestPage()));
+                  },
+                ),
+              ),
+            ),
+            Container(
+              width: MediaQuery.of(context).size.width,
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
+                child: RaisedButton(
+                  child: Text("底部Tab切换"),
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => BottomTabsPage()));
                   },
                 ),
               ),
