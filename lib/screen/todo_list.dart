@@ -4,6 +4,7 @@ import 'package:flutter_demo/redux/actions.dart';
 import 'package:flutter_demo/redux/state.dart';
 import 'package:flutter_demo/repo/data/todo_item.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:redux/redux.dart';
 
 /// StoreBuilder (a Widget that receives the Store from the StoreProvider)
@@ -33,7 +34,23 @@ class ToDoListPage extends StatelessWidget {
     if (viewModel is _ToDoItemViewModel) {
       return Row(
         children: <Widget>[
-          Expanded(child: InkWell(child: Text(viewModel.title))),
+          Expanded(
+            child: Container(
+              height: 50,
+              child: InkWell(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 15.0),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(viewModel.title)
+                  ),
+                ),
+                onTap: () {
+                  Fluttertoast.showToast(msg: "click item");
+                },
+              ),
+            )
+          ),
           FlatButton(
             child: Icon(
               viewModel.deleteItemIcon,
@@ -53,7 +70,7 @@ class ToDoListPage extends StatelessWidget {
           ),
         ),
       );
-    }
+    } else return Text("error");
   }
 
 }
