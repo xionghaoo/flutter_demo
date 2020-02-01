@@ -67,22 +67,33 @@ class _DemoItemsView extends StatelessWidget {
     return GridView.count(
       crossAxisCount: 3,
       children: List.generate(items.length, (index) {
-        return InkWell(
-          child: Container(
-            margin: EdgeInsets.all(15.0),
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              color: Colors.cyan,
-              borderRadius: BorderRadius.circular(radius),
-            ),
-            child: Center(
-              child: Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Text(items[index], style: TextStyle(color: Colors.white, fontSize: 15), textAlign: TextAlign.center,),
+        return Padding(
+          padding: const EdgeInsets.all(10.0),
+          // 添加材料控件效果
+          child: Material(
+            // 必须指定裁剪类型，默认是不裁剪
+            clipBehavior: Clip.antiAlias,
+            borderRadius: BorderRadius.circular(radius),
+            child: Ink(
+              // 对InkWell包裹的widget进行装饰，可以添加padding
+              decoration: BoxDecoration(
+                color: Colors.cyan,
+                borderRadius: BorderRadius.circular(radius),
+              ),
+              child: InkWell(
+                child: Container(
+                  alignment: Alignment.center,
+                  child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Text(items[index], style: TextStyle(color: Colors.white, fontSize: 15), textAlign: TextAlign.center,),
+                    ),
+                  ),
+                ),
+                onTap: () => onTappedItem(index),
               ),
             ),
           ),
-          onTap: () => onTappedItem(index),
         );
       }),
     );
