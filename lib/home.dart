@@ -44,7 +44,7 @@ class _HomePageState extends State<HomePage> {
           case 5:
             page = NativeCallPage();
             break;
-          case 5:
+          case 6:
             page = TestPage();
             break;
         }

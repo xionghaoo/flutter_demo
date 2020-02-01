@@ -14,7 +14,6 @@ flutter pub run build_runner build
 
 + app state
     + 原生ChangeNotifier
-    + redux
    
 + 缓存
 
