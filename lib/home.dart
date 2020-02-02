@@ -3,6 +3,7 @@ import 'package:flutter_demo/screen/bottom_tabs.dart';
 import 'package:flutter_demo/screen/native_call.dart';
 import 'package:flutter_demo/screen/network.dart';
 import 'package:flutter_demo/screen/page_view.dart';
+import 'package:flutter_demo/screen/prefs_test.dart';
 import 'package:flutter_demo/screen/sqlite_test.dart';
 import 'package:flutter_demo/screen/test.dart';
 import 'package:flutter_demo/screen/todo_list.dart';
@@ -22,7 +23,7 @@ class _HomePageState extends State<HomePage> {
         title: Text("首页"),
       ),
       body: _DemoItemsView([
-        "搜索", "网络请求", "底部tabs", "Redux", "顶部tabs", "原生调用", "test", "Sqlite"
+        "搜索", "网络请求", "底部tabs", "Redux", "顶部tabs", "原生调用", "test", "Sqlite", "Key-Value存储"
       ], (index) {
         Widget page;
         switch (index) {
@@ -49,6 +50,9 @@ class _HomePageState extends State<HomePage> {
             break;
           case 7:
             page = SqlitePage();
+            break;
+          case 8:
+            page = SharedPreferencesPage();
             break;
         }
         Navigator.of(context).push(MaterialPageRoute(builder: (context) => page));
