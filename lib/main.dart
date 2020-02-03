@@ -22,8 +22,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) => StoreProvider(
     store: store,
     child: MaterialApp(
+      debugShowCheckedModeBanner: false,
+      // 全局主题对象，Theme.of(context)会查找离父级widget最近的theme，如果没有，返回app theme
       theme: ThemeData(
-        primaryColor: primaryColor
+        primaryColor: primaryColor,
+        accentColor: accentColor,
       ),
       home: HomePage(),
     ),
