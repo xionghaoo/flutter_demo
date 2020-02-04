@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:flutter_demo/core/network.dart';
 import 'package:flutter_demo/repo/data/todo_item.dart';
 
 class AppState {
@@ -15,7 +16,7 @@ class AppState {
     ToDoItem("TodoItem1"),
     ToDoItem("TodoItem2"),
     ToDoItem("TodoItem3")
-  ]), ListState.ListOnly, LoginPageState(ApiResponse(Status.none)));
+  ]), ListState.ListOnly, LoginPageState(ApiResponse(Status.none, null)));
 }
 
 enum ListState {
@@ -29,14 +30,4 @@ enum LoginState {
 class LoginPageState {
   final ApiResponse loginResponse;
   LoginPageState(this.loginResponse);
-}
-
-class ApiResponse {
-  final Status status;
-  final String errorMessage;
-  ApiResponse(this.status, {this.errorMessage});
-}
-
-enum Status {
-  success, failure, loading, none
 }

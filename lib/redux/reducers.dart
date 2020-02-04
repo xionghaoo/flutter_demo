@@ -1,3 +1,4 @@
+import 'package:flutter_demo/core/network.dart';
 import 'package:flutter_demo/redux/actions.dart';
 import 'package:flutter_demo/redux/state.dart';
 import 'package:flutter_demo/repo/data/todo_item.dart';
@@ -39,13 +40,4 @@ Reducer<LoginPageState> _loginStateReducer = combineReducers([
   TypedReducer<LoginPageState, ResponseFailureAction>((LoginPageState state, ResponseFailureAction action) => LoginPageState(action.response)),
   TypedReducer<LoginPageState, ResponseLoadingAction>((LoginPageState state, ResponseLoadingAction action) => LoginPageState(action.response))
 ]);
-
-//Reducer<Status> _responseReducer = combineReducers([
-//  TypedReducer<Status, ResponseLoadingAction>((Status status, ResponseLoadingAction action) => Status.loading),
-//  TypedReducer<Status, ResponseSuccessAction>((Status status, ResponseSuccessAction action) => Status.success),
-//  TypedReducer<Status, ResponseFailureAction>((Status status, ResponseFailureAction action) {
-//
-//    return Status.failure;
-//  })
-//]);
 

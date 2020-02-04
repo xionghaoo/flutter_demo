@@ -1,14 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_demo/screen/bottom_tabs.dart';
-import 'package:flutter_demo/screen/login_page.dart';
-import 'package:flutter_demo/screen/native_call.dart';
-import 'package:flutter_demo/screen/network.dart';
-import 'package:flutter_demo/screen/page_view.dart';
-import 'package:flutter_demo/screen/prefs_test.dart';
-import 'package:flutter_demo/screen/sqlite_test.dart';
-import 'package:flutter_demo/screen/test.dart';
-import 'package:flutter_demo/screen/todo_list.dart';
-import 'package:flutter_demo/search.dart';
+import 'package:flutter_demo/constants.dart';
 
 class HomePage extends StatefulWidget {
 
@@ -26,40 +17,42 @@ class _HomePageState extends State<HomePage> {
       body: _DemoItemsView([
         "搜索", "网络请求", "底部tabs", "Redux", "顶部tabs", "原生调用", "test", "Sqlite", "Key-Value存储", "Login"
       ], (index) {
-        Widget page;
+//        Widget page;
+        String page;
         switch (index) {
           case 0:
-            page = SearchPage();
+            page = ScreenPath.SEARCH;
             break;
           case 1:
-            page = NetworkPage();
+            page = ScreenPath.NETWORK;
             break;
           case 2:
-            page = BottomTabsPage();
+            page = ScreenPath.BOTTOM_TABS;
             break;
           case 3:
-            page = ToDoListPage();
+            page = ScreenPath.TODO_LIST;
             break;
           case 4:
-            page = PageViewPage();
+            page = ScreenPath.TODO_LIST;
             break;
           case 5:
-            page = NativeCallPage();
+            page = ScreenPath.TOP_TABS;
             break;
           case 6:
-            page = TestPage();
+            page = ScreenPath.NATIVE_CALL;
             break;
           case 7:
-            page = SqlitePage();
+            page = ScreenPath.SQLITE;
             break;
           case 8:
-            page = SharedPreferencesPage();
+            page = ScreenPath.SHARED_PREFERENCES;
             break;
           case 9:
-            page = LoginPage();
+            page = ScreenPath.LOGIN;
             break;
         }
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) => page));
+//        Navigator.of(context).push(MaterialPageRoute(builder: (context) => page));
+        Navigator.pushNamed(context, page);
       }),
     );
   }

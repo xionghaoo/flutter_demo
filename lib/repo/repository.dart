@@ -10,7 +10,7 @@ class Repository {
 
   Future<WeatherData> fetchCurrentWeatherByCityName(BuildContext context, String city) async {
     var url = "$HOST/data/2.5/weather?APPID=$APPID&q=$city&units=metric&lang=zh_cn";
-    final response = await http.get(url);
+    final response = await http.get(url).timeout(Duration(seconds: 5));
     if (response.statusCode == 200) {
       print(response.body);
       return WeatherData.fromJson(json.decode(response.body));
