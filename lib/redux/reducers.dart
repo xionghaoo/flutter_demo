@@ -8,7 +8,11 @@ import 'package:redux/redux.dart';
 // reducer如何区分state是否变化，猜测是combineReducers循环过程中，
 // 1、如果没有执行action的state，那么返回的是最初传入的对象，可以判定相同，不需要更新ui
 // 2、执行过action的state，是新创建的state，判定与原始对象不同，不需要更新ui
-AppState appReducer(AppState state, action) => AppState(_toDoListStateReducer(state.toDos, action), _listStateReducer(state.listState, action));
+AppState appReducer(AppState state, action) => AppState(
+    _toDoListStateReducer(state.toDos, action),
+    _listStateReducer(state.listState, action),
+    _loginStateReducer(state.loginState, action)
+);
 
 Reducer<List<ToDoItem>> _toDoListStateReducer = combineReducers([
   TypedReducer<List<ToDoItem>, AddItemAction>(_addItem),
@@ -29,3 +33,19 @@ Reducer<ListState> _listStateReducer = combineReducers([
 // 创建一个reducer
 ListState _displayListOnly(ListState state, DisplayListOnlyAction action) => ListState.ListOnly;
 ListState _displayListWithNewItem(ListState state, DisplayListWithNewItemAction action) => ListState.ListWithNewItem;
+
+Reducer<LoginState> _loginStateReducer = combineReducers([
+  TypedReducer<LoginState, LoginSuccessAction>((LoginState state, LoginSuccessAction action) => LoginState.success),
+  TypedReducer<LoginState, LoginFailureAction>((LoginState state, LoginFailureAction action) => LoginState.failure),
+  TypedReducer<LoginState, LoginLoadingAction>((LoginState state, LoginLoadingAction action) => LoginState.loading)
+]);
+
+Reducer<Status> _responseReducer = combineReducers([
+  TypedReducer<Status, ResponseLoadingAction>((Status status, ResponseLoadingAction action) => Status.loading),
+  TypedReducer<Status, ResponseSuccessAction>((Status status, ResponseSuccessAction action) => Status.success),
+  TypedReducer<Status, ResponseFailureAction>((Status status, ResponseFailureAction action) {
+
+    return Status.failure;
+  })
+]);
+

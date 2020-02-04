@@ -18,3 +18,24 @@ class DisplayListOnlyAction {}
 class DisplayListWithNewItemAction {}
 
 class SaveListAction {}
+
+class LoginAction {
+  final String username;
+  final String password;
+
+  LoginAction(this.username, this.password);
+}
+
+class LoginSuccessAction {}
+class LoginFailureAction {
+  final String message;
+  LoginFailureAction(this.message);
+}
+class LoginLoadingAction {}
+
+class ResponseSuccessAction {}
+class ResponseFailureAction {
+  final String message;
+  ResponseFailureAction(this.message);
+}
+class ResponseLoadingAction {}
