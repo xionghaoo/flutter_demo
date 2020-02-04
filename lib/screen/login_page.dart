@@ -31,11 +31,11 @@ class _LoginPageState extends State<LoginPage> {
     super.initState();
     _pwdController = TextEditingController();
     _pwdController.addListener(() {
-      print("input password: ${_pwdController.text}");
+//      print("input password: ${_pwdController.text}");
     });
     _pwdFocusNode = FocusNode();
     _pwdFocusNode.addListener(() {
-      print("keyboard height: $_keyboardHeight, focus: ${_pwdFocusNode.hasFocus}");
+//      print("keyboard height: $_keyboardHeight, focus: ${_pwdFocusNode.hasFocus}");
     });
 
     _accountController = TextEditingController();
@@ -53,24 +53,14 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   @override
+  void didUpdateWidget(LoginPage oldWidget) {
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
   Widget build(BuildContext context) => StoreConnector<AppState, _ViewModel>(
     converter: (Store<AppState> store) => _ViewModel.create(store),
     builder: (BuildContext context, _ViewModel viewModel) {
-      _progressDialog = ProgressDialog(context);
-      _progressDialog.style(message: "正在登陆...");
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        if (viewModel.loginState == LoginState.loading) {
-          _progressDialog.show();
-        } else {
-          if (viewModel.loginState == LoginState.success) {
-            Fluttertoast.showToast(msg: "登陆成功");
-          } else {
-            Fluttertoast.showToast(msg: "登陆失败");
-          }
-          _progressDialog.hide();
-        }
-      });
-//      print("state: ${viewModel.loginState}");
       return Scaffold(
         resizeToAvoidBottomPadding: true,
         body: SingleChildScrollView(
@@ -142,6 +132,7 @@ class _LoginPageState extends State<LoginPage> {
                                   height: 50,
                                   margin: EdgeInsets.only(left: 2),
                                   child: TextField(
+                                    autofocus: false,
                                     controller: _accountController,
                                     focusNode: _accountFocusNode,
                                     decoration: InputDecoration(
@@ -173,6 +164,7 @@ class _LoginPageState extends State<LoginPage> {
                                   height: 50,
                                   margin: EdgeInsets.only(left: 2),
                                   child: TextField(
+                                    autofocus: false,
                                     controller: _pwdController,
                                     focusNode: _pwdFocusNode,
                                     keyboardType: TextInputType.text,
@@ -212,7 +204,10 @@ class _LoginPageState extends State<LoginPage> {
                                         ],
                                       ),
                                       onTap: () {
-                                        viewModel.login(_accountController.text, _pwdController.text);
+                                        // 在键盘隐藏后，布局未完全恢复原状，调用unfocus会无效
+                                        _accountFocusNode.unfocus();
+                                        _pwdFocusNode.unfocus();
+                                        viewModel.login(context, _accountController.text, _pwdController.text);
                                       },
                                     ),
                                   ),
@@ -246,14 +241,14 @@ class _LoginPageState extends State<LoginPage> {
 }
 
 class _ViewModel {
-  final Function(String, String) login;
-  final LoginState loginState;
+  final Function(BuildContext context, String, String) login;
+  final LoginPageState loginState;
 
   _ViewModel(this.login, this.loginState);
 
   factory _ViewModel.create(Store<AppState> store) {
     return _ViewModel(
-        (String username, String password) => store.dispatch(LoginAction(username, password)),
+        (BuildContext context, String username, String password) => store.dispatch(LoginAction(context, username, password)),
         store.state.loginState
     );
   }

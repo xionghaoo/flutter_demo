@@ -6,7 +6,7 @@ class AppState {
   final List<ToDoItem> toDos;
   final ListState listState;
 
-  final LoginState loginState;
+  final LoginPageState loginState;
 
   AppState(this.toDos, this.listState, this.loginState);
 
@@ -15,7 +15,7 @@ class AppState {
     ToDoItem("TodoItem1"),
     ToDoItem("TodoItem2"),
     ToDoItem("TodoItem3")
-  ]), ListState.ListOnly, LoginState.none);
+  ]), ListState.ListOnly, LoginPageState(ApiResponse(Status.none)));
 }
 
 enum ListState {
@@ -26,6 +26,11 @@ enum LoginState {
   none, loading, success, failure
 }
 
+class LoginPageState {
+  final ApiResponse loginResponse;
+  LoginPageState(this.loginResponse);
+}
+
 class ApiResponse {
   final Status status;
   final String errorMessage;
@@ -33,5 +38,5 @@ class ApiResponse {
 }
 
 enum Status {
-  success, failure, loading
+  success, failure, loading, none
 }

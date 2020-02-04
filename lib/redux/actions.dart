@@ -1,4 +1,6 @@
 
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_demo/redux/state.dart';
 import 'package:flutter_demo/repo/data/todo_item.dart';
 
 class RemoveItemAction {
@@ -22,8 +24,9 @@ class SaveListAction {}
 class LoginAction {
   final String username;
   final String password;
+  final BuildContext context;
 
-  LoginAction(this.username, this.password);
+  LoginAction(this.context, this.username, this.password);
 }
 
 class LoginSuccessAction {}
@@ -33,9 +36,15 @@ class LoginFailureAction {
 }
 class LoginLoadingAction {}
 
-class ResponseSuccessAction {}
-class ResponseFailureAction {
-  final String message;
-  ResponseFailureAction(this.message);
+class ResponseSuccessAction {
+  final ApiResponse response;
+  ResponseSuccessAction(this.response);
 }
-class ResponseLoadingAction {}
+class ResponseFailureAction {
+  final ApiResponse response;
+  ResponseFailureAction(this.response);
+}
+class ResponseLoadingAction {
+  final ApiResponse response;
+  ResponseLoadingAction(this.response);
+}

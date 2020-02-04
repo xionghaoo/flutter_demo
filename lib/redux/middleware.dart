@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:flutter_demo/redux/actions.dart';
 import 'package:flutter_demo/redux/state.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:progress_dialog/progress_dialog.dart';
 import 'package:redux/redux.dart';
 
 List<Middleware<AppState>> createStoreMiddleware() => [
@@ -19,15 +21,21 @@ Future _saveList(Store<AppState> store, SaveListAction action, NextDispatcher ne
 Future _login(Store<AppState> store, LoginAction action, NextDispatcher next) async {
   // 同步执行，阻塞3秒
   print("login loading -> username: ${action.username}, password: ${action.password}");
-  next(LoginLoadingAction());
-  print("login loading completed");
+  ProgressDialog progressDialog = ProgressDialog(action.context);
+  progressDialog.style(message: "正在登陆...");
+  progressDialog.show();
+  next(ResponseLoadingAction(ApiResponse(Status.loading)));
+//  print("login loading completed");
   await Future.delayed(Duration(seconds: 3));
+  progressDialog.hide();
   if (action.username == "username" && action.password == "password") {
-    print("login success");
-    next(LoginSuccessAction());
+//    print("login success");
+    Fluttertoast.showToast(msg: "登陆成功");
+    next(ResponseSuccessAction(ApiResponse(Status.success)));
   } else {
-    print("login failure");
-    next(LoginFailureAction("账号密码错误"));
+//    print("login failure");
+    Fluttertoast.showToast(msg: "账号密码错误");
+    next(ResponseFailureAction(ApiResponse(Status.failure, errorMessage: "账号密码错误")));
   }
 }
 

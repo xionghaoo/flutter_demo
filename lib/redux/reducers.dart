@@ -34,18 +34,18 @@ Reducer<ListState> _listStateReducer = combineReducers([
 ListState _displayListOnly(ListState state, DisplayListOnlyAction action) => ListState.ListOnly;
 ListState _displayListWithNewItem(ListState state, DisplayListWithNewItemAction action) => ListState.ListWithNewItem;
 
-Reducer<LoginState> _loginStateReducer = combineReducers([
-  TypedReducer<LoginState, LoginSuccessAction>((LoginState state, LoginSuccessAction action) => LoginState.success),
-  TypedReducer<LoginState, LoginFailureAction>((LoginState state, LoginFailureAction action) => LoginState.failure),
-  TypedReducer<LoginState, LoginLoadingAction>((LoginState state, LoginLoadingAction action) => LoginState.loading)
+Reducer<LoginPageState> _loginStateReducer = combineReducers([
+  TypedReducer<LoginPageState, ResponseSuccessAction>((LoginPageState state, ResponseSuccessAction action) => LoginPageState(action.response)),
+  TypedReducer<LoginPageState, ResponseFailureAction>((LoginPageState state, ResponseFailureAction action) => LoginPageState(action.response)),
+  TypedReducer<LoginPageState, ResponseLoadingAction>((LoginPageState state, ResponseLoadingAction action) => LoginPageState(action.response))
 ]);
 
-Reducer<Status> _responseReducer = combineReducers([
-  TypedReducer<Status, ResponseLoadingAction>((Status status, ResponseLoadingAction action) => Status.loading),
-  TypedReducer<Status, ResponseSuccessAction>((Status status, ResponseSuccessAction action) => Status.success),
-  TypedReducer<Status, ResponseFailureAction>((Status status, ResponseFailureAction action) {
-
-    return Status.failure;
-  })
-]);
+//Reducer<Status> _responseReducer = combineReducers([
+//  TypedReducer<Status, ResponseLoadingAction>((Status status, ResponseLoadingAction action) => Status.loading),
+//  TypedReducer<Status, ResponseSuccessAction>((Status status, ResponseSuccessAction action) => Status.success),
+//  TypedReducer<Status, ResponseFailureAction>((Status status, ResponseFailureAction action) {
+//
+//    return Status.failure;
+//  })
+//]);
 
