@@ -33,13 +33,13 @@ class _HomePageState extends State<HomePage> {
             page = ScreenPath.TODO_LIST;
             break;
           case 4:
-            page = ScreenPath.TODO_LIST;
-            break;
-          case 5:
             page = ScreenPath.TOP_TABS;
             break;
-          case 6:
+          case 5:
             page = ScreenPath.NATIVE_CALL;
+            break;
+          case 6:
+            page = ScreenPath.TEST;
             break;
           case 7:
             page = ScreenPath.SQLITE;

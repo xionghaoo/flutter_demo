@@ -10,9 +10,8 @@ class _WalliePageState extends State<WalliePage> {
 
   @override
   Widget build(BuildContext context) {
-
+    // 获取传递到本页面的参数
     final String username = ModalRoute.of(context).settings.arguments;
-
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
