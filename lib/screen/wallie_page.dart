@@ -203,7 +203,7 @@ class _WalliePageState extends State<WalliePage> {
                                           crossAxisAlignment: CrossAxisAlignment.start,
                                           children: <Widget>[
                                             Text("GoPremium", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),),
-                                            Text("充会员获取强大能量", style: TextStyle(color: Colors.white),),
+                                            Text("成为人民币玩家", style: TextStyle(color: Colors.white),),
                                           ],
                                         ),
                                       )
@@ -219,28 +219,20 @@ class _WalliePageState extends State<WalliePage> {
                           Container(
                               width: MediaQuery.of(context).size.width,
                               margin: EdgeInsets.fromLTRB(20, 10, 20, 10),
-                              child: Column(
+                              child: Wrap(
+                                spacing: 20,
+                                alignment: WrapAlignment.spaceBetween,
                                 children: <Widget>[
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      _menuItemWidget("Top up", Icons.access_time, Color.fromRGBO(88, 114, 226, 0.2)),
-                                      _menuItemWidget("Transfer", Icons.near_me, Color.fromRGBO(231, 239, 56, 0.2)),
-                                      _menuItemWidget("Internet", Icons.network_check, Color.fromRGBO(68, 239, 56, 0.2)),
-                                      _menuItemWidget("Wallet", Icons.content_paste, Color.fromRGBO(239, 56, 96, 0.2)),
-                                    ],
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      _menuItemWidget("Bill", Icons.content_paste, Color.fromRGBO(231, 239, 56, 0.2)),
-                                      _menuItemWidget("Games", Icons.games, Color.fromRGBO(68, 239, 56, 0.2)),
-                                      _menuItemWidget("Mobile Prepaid", Icons.phone_android, Color.fromRGBO(239, 56, 96, 0.2)),
-                                      _menuItemWidget("More", Icons.more_horiz, Color.fromRGBO(88, 114, 226, 0.2)),
-                                    ],
-                                  ),
+                                  // row one
+                                  _menuItemWidget("Top up", Icons.access_time, Color.fromRGBO(88, 114, 226, 0.2)),
+                                  _menuItemWidget("Transfer", Icons.near_me, Color.fromRGBO(231, 239, 56, 0.2)),
+                                  _menuItemWidget("Internet", Icons.network_check, Color.fromRGBO(68, 239, 56, 0.2)),
+                                  _menuItemWidget("Wallet", Icons.content_paste, Color.fromRGBO(239, 56, 96, 0.2)),
+                                  // row two
+                                  _menuItemWidget("Bill", Icons.content_paste, Color.fromRGBO(231, 239, 56, 0.2)),
+                                  _menuItemWidget("Games", Icons.games, Color.fromRGBO(68, 239, 56, 0.2)),
+                                  _menuItemWidget("Mobile Prepaid", Icons.phone_android, Color.fromRGBO(239, 56, 96, 0.2)),
+                                  _menuItemWidget("More", Icons.more_horiz, Color.fromRGBO(88, 114, 226, 0.2)),
                                 ],
                               )
                           ),

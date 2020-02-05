@@ -30,7 +30,7 @@ Future _login(Store<AppState> store, LoginAction action, NextDispatcher next) as
   requestWrapper<String>(
     action.context,
     // 创建异步请求
-    Future.delayed(Duration(seconds: 2), () {
+    Future.delayed(Duration(seconds: 1), () {
       if (action.username == "ningque" && action.password == "n123") {
         return "宁缺";
       } else {
@@ -38,7 +38,7 @@ Future _login(Store<AppState> store, LoginAction action, NextDispatcher next) as
       }
     }),
     (String data) {
-      Navigator.pushNamed(action.context, ScreenPath.WALLIE, arguments: data);
+      Navigator.pushReplacementNamed(action.context, ScreenPath.WALLIE, arguments: data);
       Fluttertoast.showToast(msg: "登陆成功: $data");
     },
     (String error) {

@@ -1,33 +1,33 @@
-import 'dart:math';
-
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_demo/core/water_navigation_bar.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
-class TestPage extends StatefulWidget {
+class WaterNavigationBar extends StatefulWidget {
+
+  final double height;
+  final backgroundColor;
+  final Function(int) onItemTapped;
+
+  WaterNavigationBar({
+    @required this.height,
+    @required this.backgroundColor,
+    @required this.onItemTapped
+  });
 
   @override
-  _TestPageState createState() => _TestPageState();
+  _WaterNavigationBarState createState() => _WaterNavigationBarState();
 }
 
-class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin {
+class _WaterNavigationBarState extends State<WaterNavigationBar> with SingleTickerProviderStateMixin {
   AnimationController _controller;
   Animation<double> _animation;
   int _showIndex;
   int _lastShowIndex;
 
   Future<void> playAnimation(int index) async {
-    print("playAnimation index: $index");
     _showIndex = index;
     _controller.value = 0;
     try {
       await _controller.forward().orCancel;
-      setState(() {
-
-      });
-//      setState(() {
-//        _showIndex = index;
-//      });
     } on TickerCanceled {
       // the animation got canceled, probably because we were disposed
       print("the animation got canceled, probably because we were disposed");
@@ -38,22 +38,51 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
   void initState() {
     super.initState();
     _controller = AnimationController(
-      duration: Duration(seconds: 1),
-      vsync: this
+        duration: Duration(milliseconds: 500),
+        vsync: this
     );
     _animation = CurvedAnimation(
       parent: _controller,
-      curve: Curves.easeIn,
+      curve: Curves.ease,
     )..addStatusListener((status) {
       // animation如果想获取field参数，必须手动调用setState，刷新Widget Tree，不然每次生成的动画都是同样的Widget Tree快照
       if (status == AnimationStatus.completed) {
         _lastShowIndex = _showIndex;
       }
       setState(() {});
-      print("status: ${status}");
     });
     _showIndex = 0;
     _lastShowIndex = 0;
+  }
+
+  Widget _tabItemWidget(IconData icon, Function onItemTapped) {
+    final diameter = MediaQuery.of(context).size.width / 3;
+    return Material(
+      color: Colors.transparent,
+      clipBehavior: Clip.antiAlias,
+      borderRadius: BorderRadius.circular(diameter / 2),
+      child: Ink(
+        decoration: BoxDecoration(
+          color: Colors.transparent,
+          borderRadius: BorderRadius.circular(diameter / 2),
+        ),
+        child: InkWell(
+          child: Container(
+            width: diameter,
+            height: diameter,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+            ),
+            child: Center(
+              child: Icon(icon),
+            ),
+          ),
+          onTap: () {
+            onItemTapped();
+          },
+        ),
+      ),
+    );
   }
 
   @override
@@ -64,64 +93,34 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("测试页面"),
-      ),
-      body: Column(
+    return _WaterAnimationWidget(
+      showIndex: _showIndex,
+      lastShowIndex: _lastShowIndex,
+      height: widget.height,
+      color: widget.backgroundColor,
+      animation: _animation,
+      child: Row(
         children: <Widget>[
-//          AnimatedContainer(
-//            height: 200,
-//            duration: Duration(seconds: 3),
-//            child: Center(child: Text("Hello")),
-//          ),
-          Container(
-            width: MediaQuery.of(context).size.width,
-            height: 200,
-            decoration: ShapeDecoration(
-              color: Colors.red,
-              shape: _WaterShape(
-                controllerPointOneY: 0,
-                controllerPointTwoY: 0,
-                controllerPointThreeY: 20,
-              )
-            ),
-          ),
-          SizedBox(height: 30,),
-          RaisedButton(
-            child: Text("change shape 1"),
-            onPressed: () {
-              playAnimation(0);
-            },
-          ),
-          RaisedButton(
-            child: Text("change shape 2"),
-            onPressed: () {
-              playAnimation(1);
-            },
-          ),
-          RaisedButton(
-            child: Text("change shape 3"),
-            onPressed: () {
-              playAnimation(2);
-            },
-          ),
-          SizedBox(height: 30,),
-          WaterNavigationBar(
-            height: 80,
-            backgroundColor: Colors.red,
-            onItemTapped: (index) {
-              Fluttertoast.showToast(msg: "you clicked $index");
-            },
-          )
+          _tabItemWidget(Icons.home, () {
+            playAnimation(0);
+            widget.onItemTapped(0);
+          }),
+          _tabItemWidget(Icons.style, () {
+            playAnimation(1);
+            widget.onItemTapped(1);
+          }),
+          _tabItemWidget(Icons.person, () {
+            playAnimation(2);
+            widget.onItemTapped(2);
+          })
         ],
       ),
     );
   }
 }
 
-class WaterAnimationWidget extends AnimatedWidget {
-  static final double _waterSize = 30;
+class _WaterAnimationWidget extends AnimatedWidget {
+  static final double _waterSize = 25;
 
   static final _pointOneTween = Tween<double>(begin: 0, end: _waterSize);
   static final _pointTwoTween = Tween<double>(begin: 0, end: _waterSize);
@@ -129,13 +128,22 @@ class WaterAnimationWidget extends AnimatedWidget {
 
   final int showIndex;
   final int lastShowIndex;
+  final double height;
+  final Widget child;
+  final Color color;
 
-  WaterAnimationWidget(this.showIndex, this.lastShowIndex, {Key key, Animation<double> animation})
-      : super(key: key, listenable: animation);
+  _WaterAnimationWidget({Key key,
+    @required this.showIndex,
+    @required this.lastShowIndex,
+    @required this.height,
+    @required this.child,
+    @required this.color,
+    Animation<double> animation
+  }) : super(key: key, listenable: animation);
 
   @override
   Widget build(BuildContext context) {
-    print("showIndex: ${showIndex}, lastIndex: ${lastShowIndex}");
+//    print("showIndex: ${showIndex}, lastIndex: ${lastShowIndex}");
     final animation = listenable as Animation<double>;
     double y1 = 0;
     double y2 = 0;
@@ -171,82 +179,19 @@ class WaterAnimationWidget extends AnimatedWidget {
     }
 
     return Container(
-      width: 300,
-      height: 200,
+      width: MediaQuery.of(context).size.width,
+      height: height,
       decoration: ShapeDecoration(
-          color: Colors.blue,
-          shape: _WaterShape(
-              controllerPointOneY: y1,
-              controllerPointTwoY: y2,
-              controllerPointThreeY: y3
-          )
+        color: color == null ? Colors.white : color,
+        shape: _WaterShape(
+            controllerPointOneY: y1,
+            controllerPointTwoY: y2,
+            controllerPointThreeY: y3
+        )
       ),
+      child: child,
     );
   }
-}
-
-//class TestShape extends ShapeBorder {
-//
-//}
-
-class CustomShape extends ShapeBorder {
-
-  final bool usePadding;
-
-  final double controllerPointY;
-
-  CustomShape(this.controllerPointY, {this.usePadding = true});
-
-  @override
-  EdgeInsetsGeometry get dimensions => EdgeInsets.all(0);
-
-  @override
-  void paint(Canvas canvas, Rect rect, {TextDirection textDirection}) {}
-
-  @override
-  Path getInnerPath(Rect rect, {TextDirection textDirection}) => null;
-
-  @override
-  Path getOuterPath(Rect rect, {TextDirection textDirection}) {
-//    rect = Rect.fromPoints(rect.topLeft, rect.bottomRight - Offset(0, 20));
-//    num degToRad(num deg) => deg * (Math.pi / 180.0);
-    rect = Rect.fromPoints(rect.topLeft, rect.bottomRight);
-
-//    final double mainRadius = 40;
-//    final double subRadius = 10;
-//    return Path()
-//      ..moveTo(rect.topLeft.dx, rect.topLeft.dy)
-//      ..lineTo(rect.topCenter.dx - (mainRadius + subRadius), rect.topCenter.dy)
-//      ..arcTo(Rect.fromCircle(center: rect.topCenter + Offset(-(mainRadius + subRadius), subRadius), radius: subRadius), pi * 1.5, pi * 0.5, false)
-//      ..arcTo(Rect.fromCircle(center: rect.topCenter + Offset(0, subRadius), radius: mainRadius), pi - atan(subRadius/mainRadius), -(pi - atan(subRadius/mainRadius) * 2), false)
-//      ..arcTo(Rect.fromCircle(center: rect.topCenter + Offset(mainRadius + subRadius, subRadius), radius: subRadius), pi, pi / 2, false)
-//      ..lineTo(rect.topRight.dx, rect.topRight.dy)
-//      ..lineTo(rect.bottomRight.dx, rect.bottomRight.dy)
-//      ..lineTo(rect.bottomLeft.dx, rect.bottomLeft.dy)
-//      ..close();
-
-    return Path()
-      ..moveTo(rect.topLeft.dx, rect.topLeft.dy)
-      ..lineTo(rect.topCenter.dx - 60, rect.topCenter.dy)
-      ..cubicTo(
-          rect.topCenter.dx - 30, rect.topCenter.dy,
-          rect.topCenter.dx - 30, rect.topCenter.dy + controllerPointY,
-          rect.topCenter.dx, rect.topCenter.dy + controllerPointY
-      )
-      ..cubicTo(
-          rect.topCenter.dx + 30, rect.topCenter.dy + controllerPointY,
-          rect.topCenter.dx + 30, rect.topCenter.dy,
-          rect.topCenter.dx + 60, rect.topCenter.dy
-      )
-      ..lineTo(rect.topRight.dx, rect.topRight.dy)
-      ..lineTo(rect.bottomRight.dx, rect.bottomRight.dy)
-      ..lineTo(rect.bottomLeft.dx, rect.bottomLeft.dy)
-      ..close();
-
-  }
-
-  @override
-  ShapeBorder scale(double t) => this;
 }
 
 class _WaterShape extends ShapeBorder {

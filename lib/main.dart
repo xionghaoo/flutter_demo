@@ -12,6 +12,7 @@ import 'package:flutter_demo/screen/page_view.dart';
 import 'package:flutter_demo/screen/prefs_test.dart';
 import 'package:flutter_demo/screen/sqlite_test.dart';
 import 'package:flutter_demo/screen/test.dart';
+import 'package:flutter_demo/screen/test_animation.dart';
 import 'package:flutter_demo/screen/todo_list.dart';
 import 'package:flutter_demo/screen/wallie_page.dart';
 import 'package:flutter_demo/search.dart';
@@ -53,7 +54,8 @@ class MyApp extends StatelessWidget {
         ScreenPath.SQLITE: (context) => SqlitePage(),
         ScreenPath.SHARED_PREFERENCES: (context) => SharedPreferencesPage(),
         ScreenPath.LOGIN: (context) => LoginPage(),
-        ScreenPath.WALLIE: (context) => WalliePage()
+        ScreenPath.WALLIE: (context) => WalliePage(),
+        ScreenPath.TEST_ANIM: (context) => TestAnimPage()
       },
 //      home: HomePage(),
     ),

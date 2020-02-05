@@ -15,7 +15,17 @@ class _HomePageState extends State<HomePage> {
         title: Text("首页"),
       ),
       body: _DemoItemsView([
-        "搜索", "网络请求", "底部tabs", "Redux", "顶部tabs", "原生调用", "test", "Sqlite", "Key-Value存储", "Login"
+        "搜索",
+        "网络请求",
+        "底部tabs",
+        "Redux",
+        "顶部tabs",
+        "原生调用",
+        "test",
+        "Sqlite",
+        "Key-Value存储",
+        "登陆页面",
+        "动画"
       ], (index) {
 //        Widget page;
         String page;
@@ -49,6 +59,9 @@ class _HomePageState extends State<HomePage> {
             break;
           case 9:
             page = ScreenPath.LOGIN;
+            break;
+          case 10:
+            page = ScreenPath.TEST_ANIM;
             break;
         }
 //        Navigator.of(context).push(MaterialPageRoute(builder: (context) => page));

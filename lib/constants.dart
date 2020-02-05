@@ -11,4 +11,5 @@ class ScreenPath {
   static const SHARED_PREFERENCES = "/sharedPreferences";
   static const LOGIN = "/login";
   static const WALLIE = "/wallie";
+  static const TEST_ANIM = "/testAnim";
 }
