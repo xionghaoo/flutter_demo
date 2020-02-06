@@ -103,7 +103,7 @@ class _WaterNavigationBarState extends State<WaterNavigationBar> with SingleTick
       width: MediaQuery.of(context).size.width,
       color: widget.backgroundColor,
       fabColor: widget.fabColor,
-      icons: [Icons.home, Icons.style, Icons.person],
+      icons: [Icons.home, Icons.apps, Icons.person],
       menuStatus: _menuStatus,
       onItemClick: (index) {
         switch (index) {

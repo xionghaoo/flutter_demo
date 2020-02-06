@@ -16,6 +16,7 @@ import 'package:flutter_demo/screen/test_animation.dart';
 import 'package:flutter_demo/screen/todo_list.dart';
 import 'package:flutter_demo/screen/wallie_bill_page.dart';
 import 'package:flutter_demo/screen/wallie_page.dart';
+import 'package:flutter_demo/screen/wallie_profile_page.dart';
 import 'package:flutter_demo/search.dart';
 import 'package:flutter_demo/theme/colors.dart';
 import 'package:flutter_redux/flutter_redux.dart';
@@ -57,7 +58,8 @@ class MyApp extends StatelessWidget {
         ScreenPath.LOGIN: (context) => LoginPage(),
         ScreenPath.WALLIE: (context) => WalliePage(),
         ScreenPath.TEST_ANIM: (context) => TestAnimPage(),
-        ScreenPath.WALLIE_BILL_PAGE: (context) => WallieBillPage()
+        ScreenPath.WALLIE_BILL_PAGE: (context) => WallieBillPage(),
+        ScreenPath.WALLIE_PROFILE_PAGE: (context) => WallieProfilePage(),
       },
 //      home: HomePage(),
     ),

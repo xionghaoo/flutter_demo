@@ -13,4 +13,5 @@ class ScreenPath {
   static const WALLIE = "/wallie";
   static const TEST_ANIM = "/testAnim";
   static const WALLIE_BILL_PAGE = "/wallieBill";
+  static const WALLIE_PROFILE_PAGE = "/wallieProfile";
 }

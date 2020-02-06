@@ -24,7 +24,7 @@ class _HomePageState extends State<HomePage> {
         "test",
         "Sqlite",
         "Key-Value存储",
-        "登陆页面",
+        "Wallie app",
         "动画"
       ], (index) {
 //        Widget page;
