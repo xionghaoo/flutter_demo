@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class WaterNavigationBar extends StatefulWidget {
@@ -22,6 +21,8 @@ class _WaterNavigationBarState extends State<WaterNavigationBar> with SingleTick
   Animation<double> _animation;
   int _showIndex;
   int _lastShowIndex;
+//  bool _isInitial = true;
+  MenuStatus _menuStatus = MenuStatus.initial;
 
   Future<void> playAnimation(int index) async {
     _showIndex = index;
@@ -97,26 +98,42 @@ class _WaterNavigationBarState extends State<WaterNavigationBar> with SingleTick
       showIndex: _showIndex,
       lastShowIndex: _lastShowIndex,
       height: widget.height,
+      width: MediaQuery.of(context).size.width,
       color: widget.backgroundColor,
+      icons: [Icons.home, Icons.style, Icons.person],
+      menuStatus: _menuStatus,
+      onItemClick: (index) {
+        switch (index) {
+          case 0: _menuStatus = MenuStatus.showOne; break;
+          case 1: _menuStatus = MenuStatus.showTwo; break;
+          case 2: _menuStatus = MenuStatus.showThree; break;
+        }
+        playAnimation(index);
+        widget.onItemTapped(index);
+      },
       animation: _animation,
-      child: Row(
-        children: <Widget>[
-          _tabItemWidget(Icons.home, () {
-            playAnimation(0);
-            widget.onItemTapped(0);
-          }),
-          _tabItemWidget(Icons.style, () {
-            playAnimation(1);
-            widget.onItemTapped(1);
-          }),
-          _tabItemWidget(Icons.person, () {
-            playAnimation(2);
-            widget.onItemTapped(2);
-          })
-        ],
-      ),
+//      child: Row(
+//        children: <Widget>[
+//          _tabItemWidget(Icons.home, () {
+//            playAnimation(0);
+//            widget.onItemTapped(0);
+//          }),
+//          _tabItemWidget(Icons.style, () {
+//            playAnimation(1);
+//            widget.onItemTapped(1);
+//          }),
+//          _tabItemWidget(Icons.person, () {
+//            playAnimation(2);
+//            widget.onItemTapped(2);
+//          })
+//        ],
+//      ),
     );
   }
+}
+
+enum MenuStatus {
+  initial, showOne, showTwo, showThree
 }
 
 class _WaterAnimationWidget extends AnimatedWidget {
@@ -125,25 +142,72 @@ class _WaterAnimationWidget extends AnimatedWidget {
   static final _pointOneTween = Tween<double>(begin: 0, end: _waterSize);
   static final _pointTwoTween = Tween<double>(begin: 0, end: _waterSize);
   static final _pointThreeTween = Tween<double>(begin: 0, end: _waterSize);
+  static final _scaleTween = Tween<double>(begin: 0, end: 1);
+  static final _scaleDisappearTween = Tween<double>(begin: 1, end: 0);
+  static final _opacityOneTween = Tween<double>(begin: 1, end: 0);
+  static final _opacityTwoTween = Tween<double>(begin: 1, end: 0);
+  static final _opacityThreeTween = Tween<double>(begin: 1, end: 0);
 
+  final MenuStatus menuStatus;
   final int showIndex;
   final int lastShowIndex;
   final double height;
-  final Widget child;
+  final double width;
+//  final Widget child;
   final Color color;
+  final List<IconData> icons;
+  final Function(int) onItemClick;
 
   _WaterAnimationWidget({Key key,
     @required this.showIndex,
     @required this.lastShowIndex,
     @required this.height,
-    @required this.child,
+    @required this.width,
+//    @required this.child,
     @required this.color,
+    @required this.icons,
+    @required this.menuStatus,
+    @required this.onItemClick,
     Animation<double> animation
   }) : super(key: key, listenable: animation);
 
+  Widget _floatActionButton(IconData icon, Color color) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(30),
+        // 在Material组件外部自己添加阴影，
+        // Material的阴影太硬，在这添加更加柔和的阴影
+        boxShadow: [
+          BoxShadow(color: Color.fromRGBO(0, 0, 0, 0.1), blurRadius: 10)
+        ]
+      ),
+      child: Material(
+        clipBehavior: Clip.antiAlias,
+        borderRadius: BorderRadius.circular(30),
+//      shadowColor: Color.fromRGBO(0, 0, 0, 0.5),
+//      elevation: 16,
+        child: Ink(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(30),
+            color: color,
+          ),
+          child: InkWell(
+            child: Container(
+              width: 56,
+              height: 56,
+              child: Center(
+                child: Icon(icon),
+              ),
+            ),
+            onTap: () => print("Clicked"),
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-//    print("showIndex: ${showIndex}, lastIndex: ${lastShowIndex}");
     final animation = listenable as Animation<double>;
     double y1 = 0;
     double y2 = 0;
@@ -178,18 +242,179 @@ class _WaterAnimationWidget extends AnimatedWidget {
       }
     }
 
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      height: height,
-      decoration: ShapeDecoration(
-        color: color == null ? Colors.white : color,
-        shape: _WaterShape(
-            controllerPointOneY: y1,
-            controllerPointTwoY: y2,
-            controllerPointThreeY: y3
+//    print("menuStatus: $menuStatus, showIndex: $showIndex, lastShowIndex: $lastShowIndex, _opacityOneTween: ${_opacityOneTween.evaluate(animation)}");
+
+    // 赋值消失动画
+    Offset iconOneTranslate = lastShowIndex != 0 && showIndex != 0
+        ? Offset(0, 0)
+        : Offset(0, Tween<double>(begin: -63, end: 0).evaluate(animation));
+    double iconOneOpacity = lastShowIndex != 0 && showIndex != 0
+        ? 1
+        : 1 - _opacityOneTween.evaluate(animation);
+    double fabOneScale = lastShowIndex != 0 && showIndex != 0
+        ? 0
+        : Tween<double>(begin: 1, end: 0).evaluate(animation);
+
+    // 赋值消失动画
+    Offset iconTwoTranslate = lastShowIndex != 1 && showIndex != 1
+        ? Offset(0, 0)
+        : Offset(0, Tween<double>(begin: -63, end: 0).evaluate(animation));
+    double iconTwoOpacity = lastShowIndex != 1 && showIndex != 1
+        ? 1
+        : 1 - _opacityTwoTween.evaluate(animation);
+    double fabTwoScale = lastShowIndex != 1 && showIndex != 1
+        ? 0
+        : Tween<double>(begin: 1, end: 0).evaluate(animation);
+
+    // 赋值消失动画
+    Offset iconThreeTranslate = lastShowIndex != 2 && showIndex != 2
+        ? Offset(0, 0)
+        : Offset(0, Tween<double>(begin: -63, end: 0).evaluate(animation));
+    double iconThreeOpacity = lastShowIndex != 2 && showIndex != 2
+        ? 1
+        : 1 - _opacityThreeTween.evaluate(animation);
+    double fabThreeScale = lastShowIndex != 2 && showIndex != 2
+        ? 0
+        : _scaleDisappearTween.evaluate(animation) ;
+
+    // 赋值消失动画
+//    Offset iconThreeTranslate = Offset(0, Tween<double>(begin: -63, end: 0).evaluate(animation));
+//    double iconThreeOpacity = 1 - _opacityThreeTween.evaluate(animation);
+//    double fabThreeScale = Tween<double>(begin: 1, end: 0).evaluate(animation);
+    switch (menuStatus) {
+      case MenuStatus.initial:
+        iconOneTranslate = Offset(0, 0);
+        iconOneOpacity = 0;
+        fabOneScale = 1;
+        break;
+      case MenuStatus.showOne:
+        iconOneTranslate = Offset(0, Tween<double>(begin: 0, end: -63).evaluate(animation));
+        iconOneOpacity = _opacityOneTween.evaluate(animation);
+        fabOneScale = _scaleTween.evaluate(animation);
+        break;
+      case MenuStatus.showTwo:
+        iconTwoTranslate = Offset(0, Tween<double>(begin: 0, end: -63).evaluate(animation));
+        iconTwoOpacity = _opacityTwoTween.evaluate(animation);
+        fabTwoScale = _scaleTween.evaluate(animation);
+        break;
+      case MenuStatus.showThree:
+        iconThreeTranslate = Offset(0, Tween<double>(begin: 0, end: -63).evaluate(animation));
+        iconThreeOpacity = _opacityThreeTween.evaluate(animation);
+        fabThreeScale = _scaleTween.evaluate(animation);
+        break;
+    }
+
+    return Stack(
+      children: <Widget>[
+        Container(
+          alignment: Alignment.bottomCenter,
+          width: width,
+          height: height + _waterSize + 15,
+          decoration: BoxDecoration(
+            color: Colors.transparent
+          ),
+          child: Container(
+            width: width,
+            height: height,
+            decoration: ShapeDecoration(
+              color: color == null ? Colors.white : color,
+              shape: _WaterShape(
+                  controllerPointOneY: y1,
+                  controllerPointTwoY: y2,
+                  controllerPointThreeY: y3
+              ),
+              shadows: [
+                BoxShadow(color: Color.fromRGBO(0, 0, 0, 0.1), blurRadius: 10)
+              ]
+            ),
+            child: Row(
+              children: <Widget>[
+                Flexible(
+                  flex: 1,
+                  child: Transform.translate(
+                    offset: iconOneTranslate,
+                    child: Opacity(
+                      opacity: iconOneOpacity,
+                      child: GestureDetector(
+                        child: Center(
+                          child: Icon(icons[0]),
+                        ),
+                        onTap: () {onItemClick(0);},
+                      ),
+                    ),
+                  ),
+                ),
+                Flexible(
+                  flex: 1,
+                  child: Transform.translate(
+                    offset: iconTwoTranslate,
+                    child: Opacity(
+                      opacity: iconTwoOpacity,
+                      child: GestureDetector(
+                        child: Center(
+                          child: Icon(icons[1]),
+                        ),
+                        onTap: () {onItemClick(1);},
+                      ),
+                    ),
+                  ),
+                ),
+                Flexible(
+                  flex: 1,
+                  child: Transform.translate(
+                    offset: iconThreeTranslate,
+                    child: Opacity(
+                      opacity: iconThreeOpacity,
+                      child: GestureDetector(
+                        child: Center(
+                          child: Icon(icons[2]),
+                        ),
+                        onTap: () {onItemClick(2);},
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
+        Positioned(
+//          top: 0,
+          left: width / 3 * 0.5 - 28,
+          child: Transform.scale(
+            scale: fabOneScale,
+            child: _floatActionButton(icons[0], color == null ? Colors.blue : color),
+          )
+        ),
+        Positioned(
+//            top: -(_waterSize + 15),
+            left: width / 3 * 1.5 - 28,
+            child: Transform.scale(
+              scale: fabTwoScale,
+              child: _floatActionButton(icons[1], color == null ? Colors.blue : color),
+            )
+        ),
+        Positioned(
+//            top: -(_waterSize + 15),
+            left: width / 3 * 2.5 - 28,
+            child: Transform.scale(
+              scale: fabThreeScale,
+              child: _floatActionButton(icons[2], color == null ? Colors.blue : color),
+            )
         )
-      ),
-      child: child,
+//        Positioned(
+//            top: -(_waterSize + 15),
+//            left: width / 3 * 2.5 - 28,
+//            child: Transform.scale(
+//              scale: fabThreeScale,
+//              child: FloatingActionButton(
+//                elevation: 4,
+//                child: Icon(Icons.home),
+//                onPressed: () {},
+//              ),
+//            )
+//        )
+      ],
     );
   }
 }

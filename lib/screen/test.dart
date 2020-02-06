@@ -22,12 +22,7 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
     _controller.value = 0;
     try {
       await _controller.forward().orCancel;
-      setState(() {
-
-      });
-//      setState(() {
-//        _showIndex = index;
-//      });
+      setState(() {});
     } on TickerCanceled {
       // the animation got canceled, probably because we were disposed
       print("the animation got canceled, probably because we were disposed");
@@ -108,7 +103,7 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
           ),
           SizedBox(height: 30,),
           WaterNavigationBar(
-            height: 80,
+            height: 60,
             backgroundColor: Colors.red,
             onItemTapped: (index) {
               Fluttertoast.showToast(msg: "you clicked $index");

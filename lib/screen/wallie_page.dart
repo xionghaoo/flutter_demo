@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_demo/core/water_navigation_bar.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class WalliePage extends StatefulWidget {
@@ -282,24 +283,13 @@ class _WalliePageState extends State<WalliePage> {
                       ),
                     ),
                   ),
-                  Container(
-                    width: MediaQuery.of(context).size.width,
+                  WaterNavigationBar(
                     height: 60,
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(color: Color.fromRGBO(0, 0, 0, 0.03), blurRadius: 10)
-                        ]
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: <Widget>[
-                        _tabItemWidget(Icons.home),
-                        _tabItemWidget(Icons.style),
-                        _tabItemWidget(Icons.person)
-                      ],
-                    ),
-                  ),
+                    backgroundColor: Colors.white,
+                    onItemTapped: (index) {
+//                      Fluttertoast.showToast(msg: "you clicked $index");
+                    },
+                  )
                 ],
               ),
             ),
