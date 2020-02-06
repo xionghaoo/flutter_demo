@@ -15,12 +15,10 @@ flutter pub run build_runner build
 + app state
     + 原生ChangeNotifier
 
-+ 动画
++ 表单验证
 
-+ 列表
++ 跨平台插件  
 
-+ 布局加载刷新
-   
 + 调原生接口
     + 相机
     + 高德地图
