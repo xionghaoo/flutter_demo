@@ -38,7 +38,7 @@ class _WallieHomePageState extends State<WallieHomePage> {
                 width: 40,
                 height: 40,
                 decoration: BoxDecoration(
-                    color: Color.fromRGBO(230, 230, 230, 0.3),
+                    color: Color.fromRGBO(230, 230, 230, 0.4),
                     borderRadius: BorderRadius.all(Radius.circular(4))
                 ),
                 child: Center(
@@ -142,6 +142,7 @@ class _WallieHomePageState extends State<WallieHomePage> {
     return SafeArea(
       child: Column(
         children: <Widget>[
+          SizedBox(height: 20,),
           _toolbar(widget.username),
           Expanded(
             child: Padding(

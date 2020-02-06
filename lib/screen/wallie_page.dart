@@ -24,7 +24,7 @@ class _WalliePageState extends State<WalliePage> {
       case 1:
         return WallieScanPage();
       case 2:
-        return WallieProfilePage();
+        return WallieProfilePage(username: username,);
     }
     return WallieHomePage(username: username,);
   }
