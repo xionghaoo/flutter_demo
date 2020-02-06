@@ -4,11 +4,13 @@ class WaterNavigationBar extends StatefulWidget {
 
   final double height;
   final backgroundColor;
+  final fabColor;
   final Function(int) onItemTapped;
 
   WaterNavigationBar({
     @required this.height,
     @required this.backgroundColor,
+    @required this.fabColor,
     @required this.onItemTapped
   });
 
@@ -100,6 +102,7 @@ class _WaterNavigationBarState extends State<WaterNavigationBar> with SingleTick
       height: widget.height,
       width: MediaQuery.of(context).size.width,
       color: widget.backgroundColor,
+      fabColor: widget.fabColor,
       icons: [Icons.home, Icons.style, Icons.person],
       menuStatus: _menuStatus,
       onItemClick: (index) {
@@ -155,6 +158,7 @@ class _WaterAnimationWidget extends AnimatedWidget {
   final double width;
 //  final Widget child;
   final Color color;
+  final Color fabColor;
   final List<IconData> icons;
   final Function(int) onItemClick;
 
@@ -165,6 +169,7 @@ class _WaterAnimationWidget extends AnimatedWidget {
     @required this.width,
 //    @required this.child,
     @required this.color,
+    @required this.fabColor,
     @required this.icons,
     @required this.menuStatus,
     @required this.onItemClick,
@@ -335,11 +340,18 @@ class _WaterAnimationWidget extends AnimatedWidget {
                     offset: iconOneTranslate,
                     child: Opacity(
                       opacity: iconOneOpacity,
-                      child: GestureDetector(
-                        child: Center(
-                          child: Icon(icons[0]),
+                      child: Center(
+                        child: GestureDetector(
+                          child: Container(
+                            width: height,
+                            height: height,
+                            decoration: BoxDecoration(
+                              color: Colors.transparent
+                            ),
+                            child: Icon(icons[0]),
+                          ),
+                          onTap: () {onItemClick(0);},
                         ),
-                        onTap: () {onItemClick(0);},
                       ),
                     ),
                   ),
@@ -350,11 +362,18 @@ class _WaterAnimationWidget extends AnimatedWidget {
                     offset: iconTwoTranslate,
                     child: Opacity(
                       opacity: iconTwoOpacity,
-                      child: GestureDetector(
-                        child: Center(
-                          child: Icon(icons[1]),
+                      child: Center(
+                        child: GestureDetector(
+                          child: Container(
+                            width: height,
+                            height: height,
+                            decoration: BoxDecoration(
+                                color: Colors.transparent
+                            ),
+                            child: Icon(icons[1]),
+                          ),
+                          onTap: () {onItemClick(1);},
                         ),
-                        onTap: () {onItemClick(1);},
                       ),
                     ),
                   ),
@@ -365,11 +384,18 @@ class _WaterAnimationWidget extends AnimatedWidget {
                     offset: iconThreeTranslate,
                     child: Opacity(
                       opacity: iconThreeOpacity,
-                      child: GestureDetector(
-                        child: Center(
-                          child: Icon(icons[2]),
+                      child: Center(
+                        child: GestureDetector(
+                          child: Container(
+                            width: height,
+                            height: height,
+                            decoration: BoxDecoration(
+                                color: Colors.transparent
+                            ),
+                            child: Icon(icons[2]),
+                          ),
+                          onTap: () {onItemClick(2);},
                         ),
-                        onTap: () {onItemClick(2);},
                       ),
                     ),
                   ),
@@ -383,7 +409,7 @@ class _WaterAnimationWidget extends AnimatedWidget {
           left: width / 3 * 0.5 - 28,
           child: Transform.scale(
             scale: fabOneScale,
-            child: _floatActionButton(icons[0], color == null ? Colors.blue : color),
+            child: _floatActionButton(icons[0], color == null ? Colors.blue : fabColor),
           )
         ),
         Positioned(
@@ -391,7 +417,7 @@ class _WaterAnimationWidget extends AnimatedWidget {
             left: width / 3 * 1.5 - 28,
             child: Transform.scale(
               scale: fabTwoScale,
-              child: _floatActionButton(icons[1], color == null ? Colors.blue : color),
+              child: _floatActionButton(icons[1], color == null ? Colors.blue : fabColor),
             )
         ),
         Positioned(
@@ -399,7 +425,7 @@ class _WaterAnimationWidget extends AnimatedWidget {
             left: width / 3 * 2.5 - 28,
             child: Transform.scale(
               scale: fabThreeScale,
-              child: _floatActionButton(icons[2], color == null ? Colors.blue : color),
+              child: _floatActionButton(icons[2], color == null ? Colors.blue : fabColor),
             )
         )
 //        Positioned(
@@ -451,7 +477,7 @@ class _WaterShape extends ShapeBorder {
     final Offset partTwoCenter = Offset(rect.topLeft.dx + partWidth * 1.5, rect.topCenter.dy);
     final Offset partThreeCenter = Offset(rect.topLeft.dx + partWidth * 2.5, rect.topCenter.dy);
 
-    final waterSize = partWidth / 3;
+    final waterSize = partWidth / 2.5;
 
     return Path()
       ..moveTo(rect.topLeft.dx, rect.topLeft.dy)

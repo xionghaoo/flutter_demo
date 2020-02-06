@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_demo/constants.dart';
 import 'package:flutter_demo/core/water_navigation_bar.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -60,34 +61,37 @@ class _WalliePageState extends State<WalliePage> {
     );
   }
 
-  Widget _menuItemWidget(String menuTitle, IconData icon, Color backgroundColor) {
+  Widget _menuItemWidget(String menuTitle, IconData icon, Color backgroundColor, Function onTap) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-      child: Container(
-        width: 70,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Container(
-              width: 60,
-              height: 60,
-              decoration: BoxDecoration(
-                  color: backgroundColor,
-                  borderRadius: BorderRadius.circular(20)
+      child: GestureDetector(
+        child: Container(
+          width: 70,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Container(
+                width: 60,
+                height: 60,
+                decoration: BoxDecoration(
+                    color: backgroundColor,
+                    borderRadius: BorderRadius.circular(20)
+                ),
+                child: Center(
+                    child: Icon(icon)
+                ),
               ),
-              child: Center(
-                  child: Icon(icon)
-              ),
-            ),
-            SizedBox(height: 10),
-            Text(
-              menuTitle,
-              style: TextStyle(color: Colors.black, fontSize: 16, fontWeight: FontWeight.w500),
-              textAlign: TextAlign.center,
-            )
-          ],
+              SizedBox(height: 10),
+              Text(
+                menuTitle,
+                style: TextStyle(color: Colors.black, fontSize: 16, fontWeight: FontWeight.w500),
+                textAlign: TextAlign.center,
+              )
+            ],
+          ),
         ),
+        onTap: onTap,
       ),
     );
   }
@@ -225,15 +229,15 @@ class _WalliePageState extends State<WalliePage> {
                                 alignment: WrapAlignment.spaceBetween,
                                 children: <Widget>[
                                   // row one
-                                  _menuItemWidget("Top up", Icons.access_time, Color.fromRGBO(88, 114, 226, 0.2)),
-                                  _menuItemWidget("Transfer", Icons.near_me, Color.fromRGBO(231, 239, 56, 0.2)),
-                                  _menuItemWidget("Internet", Icons.network_check, Color.fromRGBO(68, 239, 56, 0.2)),
-                                  _menuItemWidget("Wallet", Icons.content_paste, Color.fromRGBO(239, 56, 96, 0.2)),
+                                  _menuItemWidget("Top up", Icons.access_time, Color.fromRGBO(88, 114, 226, 0.2), () {}),
+                                  _menuItemWidget("Transfer", Icons.near_me, Color.fromRGBO(231, 239, 56, 0.2), () {}),
+                                  _menuItemWidget("Internet", Icons.network_check, Color.fromRGBO(68, 239, 56, 0.2), () {}),
+                                  _menuItemWidget("Wallet", Icons.content_paste, Color.fromRGBO(239, 56, 96, 0.2), () {}),
                                   // row two
-                                  _menuItemWidget("Bill", Icons.content_paste, Color.fromRGBO(231, 239, 56, 0.2)),
-                                  _menuItemWidget("Games", Icons.games, Color.fromRGBO(68, 239, 56, 0.2)),
-                                  _menuItemWidget("Mobile Prepaid", Icons.phone_android, Color.fromRGBO(239, 56, 96, 0.2)),
-                                  _menuItemWidget("More", Icons.more_horiz, Color.fromRGBO(88, 114, 226, 0.2)),
+                                  _menuItemWidget("Bill", Icons.content_paste, Color.fromRGBO(231, 239, 56, 0.2), () => Navigator.of(context).pushNamed(ScreenPath.WALLIE_BILL_PAGE)),
+                                  _menuItemWidget("Games", Icons.games, Color.fromRGBO(68, 239, 56, 0.2), () {}),
+                                  _menuItemWidget("Mobile Prepaid", Icons.phone_android, Color.fromRGBO(239, 56, 96, 0.2), () {}),
+                                  _menuItemWidget("More", Icons.more_horiz, Color.fromRGBO(88, 114, 226, 0.2), () {}),
                                 ],
                               )
                           ),
@@ -286,8 +290,8 @@ class _WalliePageState extends State<WalliePage> {
                   WaterNavigationBar(
                     height: 60,
                     backgroundColor: Colors.white,
+                    fabColor: Colors.green[400],
                     onItemTapped: (index) {
-//                      Fluttertoast.showToast(msg: "you clicked $index");
                     },
                   )
                 ],

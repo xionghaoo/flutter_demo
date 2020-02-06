@@ -105,6 +105,7 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
           WaterNavigationBar(
             height: 60,
             backgroundColor: Colors.red,
+            fabColor: Colors.green[500],
             onItemTapped: (index) {
               Fluttertoast.showToast(msg: "you clicked $index");
             },
