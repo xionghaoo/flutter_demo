@@ -33,6 +33,7 @@ dependencies:
   path: ^1.6.4
   shared_preferences: ^0.5.6+1
   progress_dialog: ^1.2.0
+  pull_to_refresh: ^1.5.7
 
 dev_dependencies:
   flutter_test:
