@@ -7,6 +7,7 @@ import android.content.IntentFilter
 import android.os.BatteryManager
 import android.os.Build
 import android.os.Bundle
+import com.ks.common.utils.SystemUtils
 
 import io.flutter.app.FlutterActivity
 import io.flutter.plugin.common.MethodChannel
@@ -19,6 +20,8 @@ class MainActivity: FlutterActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
+    SystemUtils.statusBarTransparent(window)
+
     GeneratedPluginRegistrant.registerWith(this)
 
     MethodChannel(flutterView, CHANNEL).setMethodCallHandler { call, result ->
