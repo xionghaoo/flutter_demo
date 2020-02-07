@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_demo/constants.dart';
+import 'package:flutter_demo/core/common_widgets.dart';
 
 class HomePage extends StatefulWidget {
 
@@ -86,28 +87,17 @@ class _DemoItemsView extends StatelessWidget {
       children: List.generate(items.length, (index) {
         return Padding(
           padding: const EdgeInsets.all(10.0),
-          // 添加材料控件效果
-          child: Material(
-            // 必须指定裁剪类型，默认是不裁剪
-            clipBehavior: Clip.antiAlias,
+          child: InkBox(
             borderRadius: BorderRadius.circular(radius),
-            child: Ink(
-              // 对InkWell包裹的widget进行装饰，可以添加padding
-              decoration: BoxDecoration(
-                color: Colors.cyan,
-                borderRadius: BorderRadius.circular(radius),
-              ),
-              child: InkWell(
-                child: Container(
-                  alignment: Alignment.center,
-                  child: Center(
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Text(items[index], style: TextStyle(color: Colors.white, fontSize: 15), textAlign: TextAlign.center,),
-                    ),
-                  ),
+            color: Colors.cyan,
+            onTap: () => onTappedItem(index),
+            child: Container(
+              alignment: Alignment.center,
+              child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Text(items[index], style: TextStyle(color: Colors.white, fontSize: 15), textAlign: TextAlign.center,),
                 ),
-                onTap: () => onTappedItem(index),
               ),
             ),
           ),

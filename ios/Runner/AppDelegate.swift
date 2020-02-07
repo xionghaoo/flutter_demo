@@ -26,6 +26,7 @@ import Flutter
         })
         
         GeneratedPluginRegistrant.register(with: self)
+        BuildConfigPlugin.register(with: registrar(forPlugin: "BuildConfigPlugin"))
         return super.application(application, didFinishLaunchingWithOptions: launchOptions)
     }
     

@@ -23,6 +23,7 @@ class MainActivity: FlutterActivity() {
     SystemUtils.statusBarTransparent(window)
 
     GeneratedPluginRegistrant.registerWith(this)
+    BuildConfigPlugin.registerWith(registrarFor("xh.zero.flutter_demo.BuildConfigPlugin"))
 
     MethodChannel(flutterView, CHANNEL).setMethodCallHandler { call, result ->
       when (call.method) {
