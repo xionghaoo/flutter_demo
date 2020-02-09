@@ -26,7 +26,8 @@ class _HomePageState extends State<HomePage> {
         "Sqlite",
         "Key-Value存储",
         "Wallie app",
-        "动画"
+        "动画",
+        "表单"
       ], (index) {
 //        Widget page;
         String page;
@@ -63,6 +64,9 @@ class _HomePageState extends State<HomePage> {
             break;
           case 10:
             page = ScreenPath.TEST_ANIM;
+            break;
+          case 11:
+            page = ScreenPath.FORM_PAGE;
             break;
         }
 //        Navigator.of(context).push(MaterialPageRoute(builder: (context) => page));

@@ -34,7 +34,7 @@ Future _login(Store<AppState> store, LoginAction action, NextDispatcher next) as
       if (action.username == "ningque" && action.password == "n123") {
         return "宁缺";
       } else {
-        throw Exception("账号或密码错误，请重新输入");
+        throw Exception("账号或密码错误");
       }
     }),
     (String data) {

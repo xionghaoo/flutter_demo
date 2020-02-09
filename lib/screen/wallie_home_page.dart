@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import '../constants.dart';
@@ -14,6 +15,8 @@ class WallieHomePage extends StatefulWidget {
 }
 
 class _WallieHomePageState extends State<WallieHomePage> {
+
+  final PageController _pageController = PageController(initialPage: 0);
 
   Widget _toolbar(String username) {
     return Container(
@@ -60,6 +63,42 @@ class _WallieHomePageState extends State<WallieHomePage> {
             ],
           )
         ],
+      ),
+    );
+  }
+
+  Widget _homeCard() {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
+      child: Container(
+        width: MediaQuery.of(context).size.width,
+        height: 120,
+        decoration: BoxDecoration(
+          color: Colors.green,
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Flexible(
+              flex: 1,
+              child: SizedBox.expand(),
+            ),
+            Flexible(
+                flex: 1,
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(10, 20, 10, 10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text("GoPremium", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),),
+                      Text("成为人民币玩家", style: TextStyle(color: Colors.white),),
+                    ],
+                  ),
+                )
+            )
+          ],
+        ),
       ),
     );
   }
@@ -138,6 +177,11 @@ class _WallieHomePageState extends State<WallieHomePage> {
   }
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Column(
@@ -151,37 +195,16 @@ class _WallieHomePageState extends State<WallieHomePage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
-                      child: Container(
-                        width: MediaQuery.of(context).size.width,
-                        height: 120,
-                        decoration: BoxDecoration(
-                          color: Colors.green,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Flexible(
-                              flex: 1,
-                              child: SizedBox.expand(),
-                            ),
-                            Flexible(
-                                flex: 1,
-                                child: Padding(
-                                  padding: const EdgeInsets.fromLTRB(10, 20, 10, 10),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      Text("GoPremium", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),),
-                                      Text("成为人民币玩家", style: TextStyle(color: Colors.white),),
-                                    ],
-                                  ),
-                                )
-                            )
-                          ],
-                        ),
+                    Container(
+                      height: 150,
+                      child: PageView(
+                        controller: _pageController,
+                        scrollDirection: Axis.horizontal,
+                        children: <Widget>[
+                          _homeCard(),
+                          _homeCard(),
+                          _homeCard()
+                        ],
                       ),
                     ),
                     Padding(

@@ -17,7 +17,7 @@ flutter pub run build_runner build
 
 + 表单验证
 
-+ 跨平台插件  
++ 屏幕适配
 
 + 调原生接口
     + 相机
