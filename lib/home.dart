@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_demo/constants.dart';
 import 'package:flutter_demo/core/common_widgets.dart';
+import 'package:flutter_demo/screen/camera_test_page.dart';
 
 class HomePage extends StatefulWidget {
 
@@ -27,7 +28,8 @@ class _HomePageState extends State<HomePage> {
         "Key-Value存储",
         "Wallie app",
         "动画",
-        "表单"
+        "表单",
+        "相机"
       ], (index) {
 //        Widget page;
         String page;
@@ -67,6 +69,9 @@ class _HomePageState extends State<HomePage> {
             break;
           case 11:
             page = ScreenPath.FORM_PAGE;
+            break;
+          case 12:
+            page = CameraTestPage.path;
             break;
         }
 //        Navigator.of(context).push(MaterialPageRoute(builder: (context) => page));

@@ -50,9 +50,9 @@ class _WalliePageState extends State<WalliePage> {
             backgroundColor: Colors.white,
             fabColor: Colors.green[400],
             icons: <Widget>[
-              Icon(Icons.home, color: Colors.green,),
-              Icon(Icons.apps, color: Colors.green,),
-              Icon(Icons.person, color: Colors.green,),
+              Icon(Icons.home),
+              Icon(Icons.apps),
+              Icon(Icons.person),
             ],
             fabIcons: <Widget>[
               Icon(Icons.home, color: Colors.white,),

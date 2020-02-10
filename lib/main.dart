@@ -5,6 +5,7 @@ import 'package:flutter_demo/redux/middleware.dart';
 import 'package:flutter_demo/redux/reducers.dart';
 import 'package:flutter_demo/redux/state.dart';
 import 'package:flutter_demo/screen/bottom_tabs.dart';
+import 'package:flutter_demo/screen/camera_test_page.dart';
 import 'package:flutter_demo/screen/form_page.dart';
 import 'package:flutter_demo/screen/login_page.dart';
 import 'package:flutter_demo/screen/native_call.dart';
@@ -62,6 +63,7 @@ class MyApp extends StatelessWidget {
         ScreenPath.WALLIE_BILL_PAGE: (context) => WallieBillPage(),
         ScreenPath.WALLIE_PROFILE_PAGE: (context) => WallieProfilePage(),
         ScreenPath.FORM_PAGE: (context) => FormPage(),
+        CameraTestPage.path: (context) => CameraTestPage()
       },
 //      home: HomePage(),
     ),
