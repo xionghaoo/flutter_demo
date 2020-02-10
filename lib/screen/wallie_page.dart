@@ -49,6 +49,16 @@ class _WalliePageState extends State<WalliePage> {
             height: 60,
             backgroundColor: Colors.white,
             fabColor: Colors.green[400],
+            icons: <Widget>[
+              Icon(Icons.home, color: Colors.green,),
+              Icon(Icons.apps, color: Colors.green,),
+              Icon(Icons.person, color: Colors.green,),
+            ],
+            fabIcons: <Widget>[
+              Icon(Icons.home, color: Colors.white,),
+              Icon(Icons.apps, color: Colors.white),
+              Icon(Icons.person, color: Colors.white),
+            ],
             onItemTapped: (index) {
               setState(() {
                 pageIndex = index;

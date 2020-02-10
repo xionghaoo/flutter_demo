@@ -3,14 +3,18 @@ import 'package:flutter/material.dart';
 class WaterNavigationBar extends StatefulWidget {
 
   final double height;
-  final backgroundColor;
-  final fabColor;
+  final Color backgroundColor;
+  final Color fabColor;
+  final List<Widget> icons;
+  final List<Widget> fabIcons;
   final Function(int) onItemTapped;
 
   WaterNavigationBar({
     @required this.height,
     @required this.backgroundColor,
     @required this.fabColor,
+    @required this.icons,
+    @required this.fabIcons,
     @required this.onItemTapped
   });
 
@@ -103,7 +107,8 @@ class _WaterNavigationBarState extends State<WaterNavigationBar> with SingleTick
       width: MediaQuery.of(context).size.width,
       color: widget.backgroundColor,
       fabColor: widget.fabColor,
-      icons: [Icons.home, Icons.apps, Icons.person],
+      icons: widget.icons,
+      fabIcons: widget.fabIcons,
       menuStatus: _menuStatus,
       onItemClick: (index) {
         switch (index) {
@@ -159,7 +164,8 @@ class _WaterAnimationWidget extends AnimatedWidget {
 //  final Widget child;
   final Color color;
   final Color fabColor;
-  final List<IconData> icons;
+  final List<Widget> icons;
+  final List<Widget> fabIcons;
   final Function(int) onItemClick;
 
   _WaterAnimationWidget({Key key,
@@ -171,12 +177,13 @@ class _WaterAnimationWidget extends AnimatedWidget {
     @required this.color,
     @required this.fabColor,
     @required this.icons,
+    @required this.fabIcons,
     @required this.menuStatus,
     @required this.onItemClick,
     Animation<double> animation
   }) : super(key: key, listenable: animation);
 
-  Widget _floatActionButton(IconData icon, Color color, Color iconColor) {
+  Widget _floatActionButton(Widget icon, Color color, Color iconColor) {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(30),
@@ -201,7 +208,7 @@ class _WaterAnimationWidget extends AnimatedWidget {
               width: 56,
               height: 56,
               child: Center(
-                child: Icon(icon, color: iconColor,),
+                child: icon,
               ),
             ),
             onTap: () => print("Clicked"),
@@ -348,7 +355,7 @@ class _WaterAnimationWidget extends AnimatedWidget {
                             decoration: BoxDecoration(
                               color: Colors.transparent
                             ),
-                            child: Icon(icons[0]),
+                            child: icons[0],
                           ),
                           onTap: () {onItemClick(0);},
                         ),
@@ -370,7 +377,7 @@ class _WaterAnimationWidget extends AnimatedWidget {
                             decoration: BoxDecoration(
                                 color: Colors.transparent
                             ),
-                            child: Icon(icons[1]),
+                            child: icons[1],
                           ),
                           onTap: () {onItemClick(1);},
                         ),
@@ -392,7 +399,7 @@ class _WaterAnimationWidget extends AnimatedWidget {
                             decoration: BoxDecoration(
                                 color: Colors.transparent
                             ),
-                            child: Icon(icons[2]),
+                            child: icons[2],
                           ),
                           onTap: () {onItemClick(2);},
                         ),
@@ -409,7 +416,7 @@ class _WaterAnimationWidget extends AnimatedWidget {
           left: width / 3 * 0.5 - 28,
           child: Transform.scale(
             scale: fabOneScale,
-            child: _floatActionButton(icons[0], color == null ? Colors.blue : fabColor, Colors.white),
+            child: _floatActionButton(fabIcons[0], color == null ? Colors.blue : fabColor, Colors.white),
           )
         ),
         Positioned(
@@ -417,7 +424,7 @@ class _WaterAnimationWidget extends AnimatedWidget {
             left: width / 3 * 1.5 - 28,
             child: Transform.scale(
               scale: fabTwoScale,
-              child: _floatActionButton(icons[1], color == null ? Colors.blue : fabColor, Colors.white),
+              child: _floatActionButton(fabIcons[1], color == null ? Colors.blue : fabColor, Colors.white),
             )
         ),
         Positioned(
@@ -425,7 +432,7 @@ class _WaterAnimationWidget extends AnimatedWidget {
             left: width / 3 * 2.5 - 28,
             child: Transform.scale(
               scale: fabThreeScale,
-              child: _floatActionButton(icons[2], color == null ? Colors.blue : fabColor, Colors.white),
+              child: _floatActionButton(fabIcons[2], color == null ? Colors.blue : fabColor, Colors.white),
             )
         )
 //        Positioned(

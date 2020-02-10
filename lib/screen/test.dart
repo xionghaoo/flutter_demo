@@ -63,6 +63,7 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
       appBar: AppBar(
         title: Text("测试页面"),
       ),
+      backgroundColor: Colors.white30,
       body: Column(
         children: <Widget>[
 //          AnimatedContainer(
@@ -106,6 +107,17 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
             height: 60,
             backgroundColor: Colors.red,
             fabColor: Colors.green[500],
+            //[Icons.home, Icons.apps, Icons.person]
+            icons: <Widget>[
+              Icon(Icons.home),
+              Icon(Icons.apps),
+              Icon(Icons.person),
+            ],
+            fabIcons: <Widget>[
+              Icon(Icons.home, color: Colors.white,),
+              Icon(Icons.apps, color: Colors.white),
+              Icon(Icons.person, color: Colors.white),
+            ],
             onItemTapped: (index) {
               Fluttertoast.showToast(msg: "you clicked $index");
             },

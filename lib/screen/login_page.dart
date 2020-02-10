@@ -211,6 +211,10 @@ class _LoginPageState extends State<LoginPage> {
                                       // 在键盘隐藏后，布局未完全恢复原状，调用unfocus会无效
                                       _accountFocusNode.unfocus();
                                       _pwdFocusNode.unfocus();
+                                      if (_accountController.text.isEmpty || _pwdController.text.isEmpty) {
+                                        Fluttertoast.showToast(msg: "账号密码不能为空");
+                                        return;
+                                      }
                                       _login(context, _accountController.text, _pwdController.text);
                                     },
                                   ),
