@@ -2,8 +2,9 @@
 
 ## 动画
 
-<img src="https://github.com/xionghaoo/flutter_demo/blob/master/other_files/tab%E5%88%87%E6%8D%A2%E5%8A%A8%E7%94%BB.gif" width="300"/>
-<img src="https://github.com/xionghaoo/flutter_demo/blob/master/other_files/%E5%A4%AA%E6%9E%81%E5%8A%A8%E7%94%BB.gif" width="300"/>
+|  |  |
+| --- | --- |
+| <img src="https://github.com/xionghaoo/flutter_demo/blob/master/other_files/tab%E5%88%87%E6%8D%A2%E5%8A%A8%E7%94%BB.gif" width="300"/> | <img src="https://github.com/xionghaoo/flutter_demo/blob/master/other_files/%E5%A4%AA%E6%9E%81%E5%8A%A8%E7%94%BB.gif" width="300"/> |
 
 ## Json Serialize
 > 官方文档：[JSON and serialization](https://flutter.dev/docs/development/data-and-backend/json)
@@ -16,7 +17,7 @@ flutter pub run build_runner build
 ## 待开发
 
 + app state
-    + 原生ChangeNotifier
+    + ChangeNotifier
 
 + redux to wallie
 
