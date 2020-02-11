@@ -4,8 +4,8 @@ Flutter Demo应用
 
 ## 动画
 
-![tab切换动画](https://github.com/xionghaoo/flutter_demo/other_files/tab切换动画.gif)
-![太极动画](https://github.com/xionghaoo/flutter_demo/other_files/太极动画.gif)
+![tab切换动画](https://github.com/xionghaoo/flutter_demo/blob/master/other_files/tab%E5%88%87%E6%8D%A2%E5%8A%A8%E7%94%BB.gif)
+![太极动画](https://github.com/xionghaoo/flutter_demo/blob/master/other_files/%E5%A4%AA%E6%9E%81%E5%8A%A8%E7%94%BB.gif)
 
 ## Json Serialize
 > 官方文档：[JSON and serialization](https://flutter.dev/docs/development/data-and-backend/json)
