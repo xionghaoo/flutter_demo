@@ -1,11 +1,7 @@
 # flutter_demo
 
-Flutter Demo应用
-
 ## 动画
 
-![tab切换动画]()
-![太极动画]()
 <img src="https://github.com/xionghaoo/flutter_demo/blob/master/other_files/tab%E5%88%87%E6%8D%A2%E5%8A%A8%E7%94%BB.gif" width="300"/>
 <img src="https://github.com/xionghaoo/flutter_demo/blob/master/other_files/%E5%A4%AA%E6%9E%81%E5%8A%A8%E7%94%BB.gif" width="300"/>
 
