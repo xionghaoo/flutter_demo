@@ -18,6 +18,9 @@ class _NativeDevPageState extends State<NativeDevPage> with SingleTickerProvider
 
   AnimationController _controller;
   CurvedAnimation _animation;
+  CurvedAnimation _opacityAnimation;
+
+//  AnimationController _opacityAnimController;
 
   Widget _taiji() {
     final double tajiSize = MediaQuery.of(context).size.width / 2;
@@ -83,6 +86,17 @@ class _NativeDevPageState extends State<NativeDevPage> with SingleTickerProvider
               )
             ],
           ),
+        ),
+        Opacity(
+          opacity: Tween<double>(begin: 0, end: 1).evaluate(_opacityAnimation),
+          child: Container(
+            width: tajiSize,
+            height: tajiSize,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(color: Colors.black, width: 2)
+            ),
+          ),
         )
       ],
     );
@@ -92,10 +106,11 @@ class _NativeDevPageState extends State<NativeDevPage> with SingleTickerProvider
   void initState() {
     super.initState();
     _controller = AnimationController(
-      duration: Duration(milliseconds: 1300),
+      duration: Duration(milliseconds: 1500),
       vsync: this
     );
-    _animation = CurvedAnimation(parent: _controller, curve: Curves.ease);
+    _animation = CurvedAnimation(parent: _controller, curve: Interval(0, 0.8, curve: Curves.ease));
+    _opacityAnimation = CurvedAnimation(parent: _controller, curve: Interval(0.7, 1, curve: Curves.linear));
 //    _controller.addListener((state) {
 //
 //    });
