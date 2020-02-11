@@ -26,11 +26,10 @@ Future _saveList(Store<AppState> store, SaveListAction action, NextDispatcher ne
 }
 
 Future _login(Store<AppState> store, LoginAction action, NextDispatcher next) async {
-  // 同步执行，阻塞3秒
   print("login loading -> username: ${action.username}, password: ${action.password}");
   requestWrapper<String>(
     action.context,
-    // 创建异步请求
+    // 模拟后端登陆校验
     Future.delayed(Duration(seconds: 1), () {
       if (action.username == "ningque" && action.password == "n123") {
         return "宁缺";

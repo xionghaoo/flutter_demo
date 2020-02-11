@@ -1,24 +1,32 @@
 # flutter_demo
 > flutter开发练习
 
-## 功能
+## 基础功能
 > [官方的Cookbook](https://flutter.dev/docs/cookbook)
 
 - [x] 搜索框
 - [x] 网络请求(异步加载和json序列化)
 - [x] 底部tabs切换
 - [x] 顶部tabs切换
+- [x] 下拉刷新
+- [x] PageView(滑动切换页面)
 - [x] Redux集成
 - [x] Sqlite(本地数据库)
 - [x] SharedPreferences(键值对本地存储)
 - [x] 动画
 - [x] 表单
 - [x] 相机
-- [ ] WallieApp(完整的app)
 - [x] 基本的原生调用(插件方式和非插件方式)
 - [ ] 高德地图集成
 - [ ] 屏幕适配
 - [ ] ChangeNotifier
+
+## Wallie(完整的app)
+- [x] 登陆
+- [x] 首页tabs切换
+- [x] 退出登陆
+- [x] Bill页面(下拉刷新)
+- [ ] 集成Redux
 
 ## 动画效果
 
