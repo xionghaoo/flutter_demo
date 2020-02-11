@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_demo/constants.dart';
 import 'package:flutter_demo/core/common_widgets.dart';
 import 'package:flutter_demo/core/utils.dart' as utils;
+import 'package:flutter_demo/screen/wallie_login_page.dart';
 
 class WallieProfilePage extends StatefulWidget {
 
@@ -142,7 +143,7 @@ class _WallieProfilePageState extends State<WallieProfilePage> {
                               child: Text("确定"),
                               onPressed: () {
 
-                                Navigator.of(context).pushNamedAndRemoveUntil(ScreenPath.LOGIN, (route) => false);
+                                Navigator.of(context).pushNamedAndRemoveUntil(WallieLoginPage.path, (route) => false);
                               },
                             )
                           ],

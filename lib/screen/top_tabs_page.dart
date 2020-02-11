@@ -23,27 +23,34 @@ class _PageViewPageState extends State<PageViewPage> with SingleTickerProviderSt
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("PageViewWidget"),
-        bottom: TabBar(
-          indicatorPadding: EdgeInsets.symmetric(horizontal: 10.0),
-          controller: _tabController,
-          tabs: <Widget>[
-            Tab(text: "Tab1"),
-            Tab(text: "Tab2",),
-            Tab(text: "Tab3",),
-          ],
+    return WillPopScope(
+      onWillPop: () {
+        print("onback");
+        Navigator.pop(context, "Hello, I'm Back");
+        return Future.value(false);
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text("PageViewWidget"),
+          bottom: TabBar(
+            indicatorPadding: EdgeInsets.symmetric(horizontal: 10.0),
+            controller: _tabController,
+            tabs: <Widget>[
+              Tab(text: "Tab1"),
+              Tab(text: "Tab2",),
+              Tab(text: "Tab3",),
+            ],
+          ),
         ),
+        body: TabBarView(
+          controller: _tabController,
+          children: <Widget>[
+            _Page("page1"),
+            _Page("page2"),
+            _Page("page3")
+          ],
+        )
       ),
-      body: TabBarView(
-        controller: _tabController,
-        children: <Widget>[
-          _Page("page1"),
-          _Page("page2"),
-          _Page("page3")
-        ],
-      )
     );
   }
 }

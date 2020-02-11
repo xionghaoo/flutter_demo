@@ -7,13 +7,15 @@ import 'package:flutter_demo/screen/wallie_profile_page.dart';
 import 'package:flutter_demo/screen/wallie_scan_page.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-class WalliePage extends StatefulWidget {
+class WallieMainPage extends StatefulWidget {
+
+  static final String path = "/wallieApp";
 
   @override
-  _WalliePageState createState() => _WalliePageState();
+  _WallieMainPageState createState() => _WallieMainPageState();
 }
 
-class _WalliePageState extends State<WalliePage> {
+class _WallieMainPageState extends State<WallieMainPage> {
 
   int pageIndex;
 

@@ -6,6 +6,7 @@ import 'package:flutter_demo/redux/actions.dart';
 import 'package:flutter_demo/redux/state.dart';
 import 'package:flutter_demo/repo/data/weather_data.dart';
 import 'package:flutter_demo/repo/repository.dart';
+import 'package:flutter_demo/screen/wallie_main_page.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:redux/redux.dart';
@@ -38,7 +39,7 @@ Future _login(Store<AppState> store, LoginAction action, NextDispatcher next) as
       }
     }),
     (String data) {
-      Navigator.pushReplacementNamed(action.context, ScreenPath.WALLIE, arguments: data);
+      Navigator.pushReplacementNamed(action.context, WallieMainPage.path, arguments: data);
       Fluttertoast.showToast(msg: "登陆成功: $data");
     },
     (String error) {

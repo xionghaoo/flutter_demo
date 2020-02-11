@@ -7,13 +7,15 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:redux/redux.dart';
 
-class LoginPage extends StatefulWidget {
+class WallieLoginPage extends StatefulWidget {
+
+  static final String path = "/wallieLogin";
 
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _WallieLoginPageState createState() => _WallieLoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _WallieLoginPageState extends State<WallieLoginPage> {
   TextEditingController _pwdController;
   FocusNode _pwdFocusNode;
   TextEditingController _accountController;
@@ -55,7 +57,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   @override
-  void didUpdateWidget(LoginPage oldWidget) {
+  void didUpdateWidget(WallieLoginPage oldWidget) {
     super.didUpdateWidget(oldWidget);
   }
 

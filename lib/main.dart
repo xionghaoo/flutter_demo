@@ -4,20 +4,23 @@ import 'package:flutter_demo/home.dart';
 import 'package:flutter_demo/redux/middleware.dart';
 import 'package:flutter_demo/redux/reducers.dart';
 import 'package:flutter_demo/redux/state.dart';
-import 'package:flutter_demo/screen/bottom_tabs.dart';
+import 'package:flutter_demo/screen/bottom_tabs_page.dart';
 import 'package:flutter_demo/screen/camera_test_page.dart';
+import 'package:flutter_demo/screen/category_page.dart';
 import 'package:flutter_demo/screen/form_page.dart';
-import 'package:flutter_demo/screen/login_page.dart';
-import 'package:flutter_demo/screen/native_call.dart';
-import 'package:flutter_demo/screen/network.dart';
-import 'package:flutter_demo/screen/page_view.dart';
-import 'package:flutter_demo/screen/prefs_test.dart';
-import 'package:flutter_demo/screen/sqlite_test.dart';
+import 'package:flutter_demo/screen/native_dev_page.dart';
+import 'package:flutter_demo/screen/native_plugin_page.dart';
+import 'package:flutter_demo/screen/wallie_login_page.dart';
+import 'package:flutter_demo/screen/native_call_page.dart';
+import 'package:flutter_demo/screen/network_page.dart';
+import 'package:flutter_demo/screen/top_tabs_page.dart';
+import 'package:flutter_demo/screen/prefs_page.dart';
+import 'package:flutter_demo/screen/sqlite_page.dart';
 import 'package:flutter_demo/screen/test.dart';
-import 'package:flutter_demo/screen/test_animation.dart';
-import 'package:flutter_demo/screen/todo_list.dart';
+import 'package:flutter_demo/screen/animation_page.dart';
+import 'package:flutter_demo/screen/redux_page.dart';
 import 'package:flutter_demo/screen/wallie_bill_page.dart';
-import 'package:flutter_demo/screen/wallie_page.dart';
+import 'package:flutter_demo/screen/wallie_main_page.dart';
 import 'package:flutter_demo/screen/wallie_profile_page.dart';
 import 'package:flutter_demo/search.dart';
 import 'package:flutter_demo/theme/colors.dart';
@@ -45,25 +48,28 @@ class MyApp extends StatelessWidget {
         primaryColor: primaryColor,
         accentColor: accentColor,
       ),
-      initialRoute: ScreenPath.HOME,
+      initialRoute: CategoryPage.path,
       routes: {
-        ScreenPath.HOME: (context) => HomePage(),
+        CategoryPage.path: (context) => CategoryPage(),
+        HomePage.path: (context) => HomePage(),
         ScreenPath.SEARCH: (context) => SearchPage(),
         ScreenPath.NETWORK: (context) => NetworkPage(),
         ScreenPath.BOTTOM_TABS: (context) => BottomTabsPage(),
         ScreenPath.TODO_LIST: (context) => ToDoListPage(),
         ScreenPath.TOP_TABS: (context) => PageViewPage(),
-        ScreenPath.NATIVE_CALL: (context) => NativeCallPage(),
+        NativeCallPage.path: (context) => NativeCallPage(),
         ScreenPath.TEST: (context) => TestPage(),
         ScreenPath.SQLITE: (context) => SqlitePage(),
         ScreenPath.SHARED_PREFERENCES: (context) => SharedPreferencesPage(),
-        ScreenPath.LOGIN: (context) => LoginPage(),
-        ScreenPath.WALLIE: (context) => WalliePage(),
+        WallieLoginPage.path: (context) => WallieLoginPage(),
+        WallieMainPage.path: (context) => WallieMainPage(),
         ScreenPath.TEST_ANIM: (context) => TestAnimPage(),
         ScreenPath.WALLIE_BILL_PAGE: (context) => WallieBillPage(),
         ScreenPath.WALLIE_PROFILE_PAGE: (context) => WallieProfilePage(),
         ScreenPath.FORM_PAGE: (context) => FormPage(),
-        CameraTestPage.path: (context) => CameraTestPage()
+        CameraTestPage.path: (context) => CameraTestPage(),
+        NativeDevPage.path: (context) => NativeDevPage(),
+        NativePluginPage.path: (context) => NativePluginPage()
       },
 //      home: HomePage(),
     ),

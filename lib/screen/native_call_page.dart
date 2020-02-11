@@ -4,6 +4,8 @@ import 'package:flutter_demo/plugin/build_config.dart';
 
 class NativeCallPage extends StatefulWidget {
 
+  static const String path = "/nativeCall";
+
   @override
   _NativeCallPageState createState() => _NativeCallPageState();
 }
@@ -16,7 +18,7 @@ class _NativeCallPageState extends State<NativeCallPage> {
   // Get battery level.
   String _batteryLevel = 'Unknown battery level.';
 
-  String _appVersion = '---';
+//  String _appVersion = '---';
 
   Future<void> _getBatteryLevel() async {
     String batteryLevel;
@@ -38,19 +40,13 @@ class _NativeCallPageState extends State<NativeCallPage> {
   void initState() {
     super.initState();
 
-    // 通过插件调用原生
-    BuildConfig().applicationVersion.then((version) {
-      setState(() {
-        _appVersion = version;
-      });
-    }).catchError((e) => print(e));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("原生调用"),
+        title: Text("不使用插件的原生调用"),
       ),
       body: Center(
         child: Column(
@@ -64,7 +60,6 @@ class _NativeCallPageState extends State<NativeCallPage> {
               child: Text("查询电池电量"),
               onPressed: _getBatteryLevel
             ),
-            Text("当前app版本：$_appVersion")
           ],
         ),
       ),

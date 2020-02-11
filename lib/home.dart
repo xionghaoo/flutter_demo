@@ -2,14 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_demo/constants.dart';
 import 'package:flutter_demo/core/common_widgets.dart';
 import 'package:flutter_demo/screen/camera_test_page.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class HomePage extends StatefulWidget {
+
+  static final String path = "/home";
 
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
+
+  Future<void> _startPageWithResult(String page) async {
+    final result = await Navigator.pushNamed(context, page);
+    print("收到结果：$result, type: ${result.runtimeType}");
+    Fluttertoast.showToast(msg: "收到topTabs页面的数据：${result}");
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,16 +32,15 @@ class _HomePageState extends State<HomePage> {
         "底部tabs",
         "Redux",
         "顶部tabs",
-        "原生调用",
+//        "原生调用",
         "test",
         "Sqlite",
         "Key-Value存储",
-        "Wallie app",
+//        "Wallie app",
         "动画",
         "表单",
         "相机"
       ], (index) {
-//        Widget page;
         String page;
         switch (index) {
           case 0:
@@ -49,33 +58,36 @@ class _HomePageState extends State<HomePage> {
           case 4:
             page = ScreenPath.TOP_TABS;
             break;
-          case 5:
-            page = ScreenPath.NATIVE_CALL;
+//          case 5:
+//            page = ScreenPath.NATIVE_CALL;
             break;
-          case 6:
+          case 5:
             page = ScreenPath.TEST;
             break;
-          case 7:
+          case 6:
             page = ScreenPath.SQLITE;
             break;
-          case 8:
+          case 7:
             page = ScreenPath.SHARED_PREFERENCES;
             break;
-          case 9:
-            page = ScreenPath.LOGIN;
+//          case 9:
+//            page = ScreenPath.LOGIN;
             break;
-          case 10:
+          case 8:
             page = ScreenPath.TEST_ANIM;
             break;
-          case 11:
+          case 9:
             page = ScreenPath.FORM_PAGE;
             break;
-          case 12:
+          case 10:
             page = CameraTestPage.path;
             break;
         }
-//        Navigator.of(context).push(MaterialPageRoute(builder: (context) => page));
-        Navigator.pushNamed(context, page);
+        if (index == 4) {
+          _startPageWithResult(page);
+        } else {
+          Navigator.pushNamed(context, page);
+        }
       }),
     );
   }
