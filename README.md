@@ -2,6 +2,11 @@
 
 Flutter Demo应用
 
+## 动画
+
+![tab切换动画](https://github.com/xionghaoo/flutter_demo/tab切换动画.gif)
+![太极动画](https://github.com/xionghaoo/flutter_demo/太极动画.gif)
+
 ## Json Serialize
 > 官方文档：[JSON and serialization](https://flutter.dev/docs/development/data-and-backend/json)
 

@@ -51,7 +51,7 @@ class _CategoryPageState extends State<CategoryPage> {
     // Scaffold是Material样式的布局结构
     return Scaffold(
       appBar: AppBar(
-        title: Text("DemoCategory"),
+        title: Text("Flutter Demo"),
       ),
       body: ListView.builder(
         itemCount: categories.length,
