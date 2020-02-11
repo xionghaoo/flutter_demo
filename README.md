@@ -3,6 +3,7 @@
 
 ## 基础功能
 > [官方的Cookbook](https://flutter.dev/docs/cookbook)
+> 开发中经常会用到一些基础功能
 
 - [x] 搜索框
 - [x] 网络请求(异步加载和json序列化)
@@ -25,6 +26,8 @@
 - [ ] ChangeNotifier
 
 ## Wallie(完整的app)
+> 尝试构建一个功能完善Flutter app
+
 - [x] 登陆
 - [x] 首页tabs切换
 - [x] 退出登陆
