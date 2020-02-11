@@ -3,6 +3,7 @@
 
 ## 基础功能
 > [官方的Cookbook](https://flutter.dev/docs/cookbook)
+>
 > 开发中经常会用到一些基础功能
 
 - [x] 搜索框
@@ -18,6 +19,7 @@
 - [x] 表单
 - [x] 相机
 - [x] 基本的原生调用(插件方式和非插件方式)
+- [ ] 图片选择上传
 - [ ] BLoC集成(State管理框架)
 - [ ] Scoped Model集成(State管理框架)
 - [ ] 高德地图集成
