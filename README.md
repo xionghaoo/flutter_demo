@@ -1,6 +1,25 @@
 # flutter_demo
 > flutter开发练习
 
+## 功能
+> [官方的Cookbook](https://flutter.dev/docs/cookbook)
+
+- [x] 搜索框
+- [x] 网络请求(异步加载和json序列化)
+- [x] 底部tabs切换
+- [x] 顶部tabs切换
+- [x] Redux集成
+- [x] Sqlite(本地数据库)
+- [x] SharedPreferences(键值对本地存储)
+- [x] 动画
+- [x] 表单
+- [x] 相机
+- [ ] WallieApp(完整的app)
+- [x] 基本的原生调用(插件方式和非插件方式)
+- [ ] 高德地图集成
+- [ ] 屏幕适配
+- [ ] ChangeNotifier
+
 ## 动画效果
 
 |  |  |
@@ -14,15 +33,4 @@ Json序列化，代码手动生成命令
 ```
 flutter pub run build_runner build
 ```
-
-## 待开发功能
-
-+ app state
-    + ChangeNotifier
-
-+ redux to wallie
-
-+ 屏幕适配
-
-+ 高德地图
     
