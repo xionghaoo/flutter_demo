@@ -1,6 +1,7 @@
 # flutter_demo
+> flutter开发练习项目
 
-## 动画
+## 动画效果
 
 |  |  |
 | --- | --- |
@@ -14,7 +15,7 @@ Json序列化，代码手动生成命令
 flutter pub run build_runner build
 ```
 
-## 待开发
+## 待开发功能
 
 + app state
     + ChangeNotifier
@@ -23,7 +24,5 @@ flutter pub run build_runner build
 
 + 屏幕适配
 
-+ 调原生接口
-    + 相机
-    + 高德地图
++ 高德地图
     
