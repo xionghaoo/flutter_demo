@@ -1,5 +1,5 @@
 # flutter_demo
-> flutter开发练习项目
+> flutter开发练习
 
 ## 动画效果
 

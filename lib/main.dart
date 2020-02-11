@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_demo/constants.dart';
-import 'package:flutter_demo/home.dart';
+import 'package:flutter_demo/screen/general_dev_page.dart';
 import 'package:flutter_demo/redux/middleware.dart';
 import 'package:flutter_demo/redux/reducers.dart';
 import 'package:flutter_demo/redux/state.dart';
@@ -22,7 +22,7 @@ import 'package:flutter_demo/screen/redux_page.dart';
 import 'package:flutter_demo/screen/wallie_bill_page.dart';
 import 'package:flutter_demo/screen/wallie_main_page.dart';
 import 'package:flutter_demo/screen/wallie_profile_page.dart';
-import 'package:flutter_demo/search.dart';
+import 'package:flutter_demo/screen/search_page.dart';
 import 'package:flutter_demo/theme/colors.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
@@ -51,7 +51,7 @@ class MyApp extends StatelessWidget {
       initialRoute: CategoryPage.path,
       routes: {
         CategoryPage.path: (context) => CategoryPage(),
-        HomePage.path: (context) => HomePage(),
+        GeneralDevPage.path: (context) => GeneralDevPage(),
         ScreenPath.SEARCH: (context) => SearchPage(),
         ScreenPath.NETWORK: (context) => NetworkPage(),
         ScreenPath.BOTTOM_TABS: (context) => BottomTabsPage(),

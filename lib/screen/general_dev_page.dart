@@ -4,15 +4,15 @@ import 'package:flutter_demo/core/common_widgets.dart';
 import 'package:flutter_demo/screen/camera_test_page.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-class HomePage extends StatefulWidget {
+class GeneralDevPage extends StatefulWidget {
 
-  static final String path = "/home";
+  static final String path = "/generalDev";
 
   @override
-  _HomePageState createState() => _HomePageState();
+  _GeneralDevPageState createState() => _GeneralDevPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _GeneralDevPageState extends State<GeneralDevPage> {
 
   Future<void> _startPageWithResult(String page) async {
     final result = await Navigator.pushNamed(context, page);
@@ -32,11 +32,9 @@ class _HomePageState extends State<HomePage> {
         "底部tabs",
         "Redux",
         "顶部tabs",
-//        "原生调用",
         "test",
         "Sqlite",
         "Key-Value存储",
-//        "Wallie app",
         "动画",
         "表单",
         "相机"
@@ -58,9 +56,6 @@ class _HomePageState extends State<HomePage> {
           case 4:
             page = ScreenPath.TOP_TABS;
             break;
-//          case 5:
-//            page = ScreenPath.NATIVE_CALL;
-            break;
           case 5:
             page = ScreenPath.TEST;
             break;
@@ -69,9 +64,6 @@ class _HomePageState extends State<HomePage> {
             break;
           case 7:
             page = ScreenPath.SHARED_PREFERENCES;
-            break;
-//          case 9:
-//            page = ScreenPath.LOGIN;
             break;
           case 8:
             page = ScreenPath.TEST_ANIM;

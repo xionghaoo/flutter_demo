@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_demo/core/common_widgets.dart';
-import 'package:flutter_demo/home.dart';
+import 'package:flutter_demo/screen/general_dev_page.dart';
 import 'package:flutter_demo/screen/native_dev_page.dart';
 import 'package:flutter_demo/screen/wallie_login_page.dart';
 import 'package:flutter_demo/screen/wallie_main_page.dart';
@@ -20,7 +20,7 @@ class _CategoryPageState extends State<CategoryPage> {
   Widget _itemViewForIndex(int index, BuildContext context) {
     switch (index) {
       case 0:
-        return _itemView(index, () => Navigator.pushNamed(context, HomePage.path));
+        return _itemView(index, () => Navigator.pushNamed(context, GeneralDevPage.path));
       case 1:
         return _itemView(index, () => Navigator.pushNamed(context, WallieLoginPage.path));
       case 2:
