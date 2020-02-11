@@ -15,7 +15,7 @@ class CategoryPage extends StatefulWidget {
 
 class _CategoryPageState extends State<CategoryPage> {
 
-  final List<String> categories = ["常规Flutter开发", "WallieApp", "原生开发"];
+  final List<String> categories = ["常规Flutter开发", "Wallie App", "原生开发"];
 
   Widget _itemViewForIndex(int index, BuildContext context) {
     switch (index) {
