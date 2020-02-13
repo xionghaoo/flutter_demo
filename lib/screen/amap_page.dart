@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_demo/platform_view/amap.dart';
+import 'package:flutter_demo/platform_view/amap_view.dart';
 
 class AmapPage extends StatefulWidget {
 
