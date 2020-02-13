@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_demo/plugin/build_config.dart';
+import 'package:flutter_demo/screen/amap_page.dart';
+import 'package:flutter_demo/screen/native_text_view.dart';
 
 class NativePluginPage extends StatefulWidget {
   static const String path = "/nativePlugin";
@@ -29,7 +31,23 @@ class _NativePluginPageState extends State<NativePluginPage> {
         title: Text("插件方式的原生交互"),
       ),
       body: Center(
-        child: Text("当前app版本：$_appVersion")
+        child: Column(
+          children: <Widget>[
+            Text("当前app版本：$_appVersion"),
+            RaisedButton(
+              child: Text("启动高德地图"),
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) => AmapPage()));
+              },
+            ),
+            RaisedButton(
+              child: Text("原生视图"),
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) => NativeTextView()));
+              },
+            )
+          ],
+        )
       ),
     );
   }

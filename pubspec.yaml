@@ -36,6 +36,7 @@ dependencies:
   pull_to_refresh: ^1.5.7
   camera: ^0.5.7+3
   path_provider: ^1.6.0
+  flutter_plugin_android_lifecycle: ^1.0.5
 
 dev_dependencies:
   flutter_test:

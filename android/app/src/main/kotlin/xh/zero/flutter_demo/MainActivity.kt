@@ -7,11 +7,14 @@ import android.content.IntentFilter
 import android.os.BatteryManager
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import com.ks.common.utils.SystemUtils
 
 import io.flutter.app.FlutterActivity
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugins.GeneratedPluginRegistrant
+import xh.zero.flutter_demo.plugins.AmapPlugin
+import xh.zero.flutter_demo.plugins.TextViewPlugin
 
 class MainActivity: FlutterActivity() {
   companion object {
@@ -24,8 +27,12 @@ class MainActivity: FlutterActivity() {
 
     GeneratedPluginRegistrant.registerWith(this)
     BuildConfigPlugin.registerWith(registrarFor("xh.zero.flutter_demo.BuildConfigPlugin"))
+    TextViewPlugin.registerWidth(registrarFor("xh.zero.flutter_demo.plugins.TextViewPlugin"))
+    AmapPlugin.registerWith(registrarFor("xh.zero.flutter_demo.plugins.AmapPlugin"))
 
     MethodChannel(flutterView, CHANNEL).setMethodCallHandler { call, result ->
+      Log.d("amap_test", "getBatteryLevel, ${call.method}")
+
       when (call.method) {
         "getBatteryLevel" -> {
           val batteryLevel = getBatteryLevel()
@@ -37,6 +44,18 @@ class MainActivity: FlutterActivity() {
           }
         }
         else -> result.notImplemented()
+      }
+    }
+
+    MethodChannel(flutterView, "xh.zero/map").setMethodCallHandler { call, result ->
+      Log.d("amap_test", "启动高德地图, ${call.method}")
+
+      if (call.method == "startAMapPage") {
+//        Log.d("amap_test", "启动高德地图")
+        startActivity(Intent(this@MainActivity, TestActivity::class.java))
+        result.success(null)
+      } else {
+        result.notImplemented()
       }
     }
   }
