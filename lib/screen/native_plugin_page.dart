@@ -32,16 +32,19 @@ class _NativePluginPageState extends State<NativePluginPage> {
       ),
       body: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text("当前app版本：$_appVersion"),
+            SizedBox(height: 10,),
             RaisedButton(
-              child: Text("启动高德地图"),
+              child: Text("高德地图"),
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(builder: (context) => AmapPage()));
               },
             ),
+            SizedBox(height: 10,),
             RaisedButton(
-              child: Text("原生视图"),
+              child: Text("Android原生TextView"),
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(builder: (context) => NativeTextView()));
               },

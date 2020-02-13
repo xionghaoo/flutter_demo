@@ -29,10 +29,14 @@ class _AmapPageState extends State<AmapPage> {
         child: Column(
           children: <Widget>[
             RaisedButton(
-              child: Text("高德地图"),
+              child: Text("开启原生高德地图页面"),
               onPressed: () {
                 _startNativePage();
               },
+            ),
+            Padding(
+              padding: EdgeInsets.all(10),
+              child: Text("下面是高德地图的Flutter widget(Android端)"),
             ),
             Expanded(
               child: AmapView(),
