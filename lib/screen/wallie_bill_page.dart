@@ -18,7 +18,6 @@ class _WallieBillPageState extends State<WallieBillPage> {
   RefreshController _refreshController = RefreshController(
       initialRefresh: false);
 //  bool _isInit = true;
-
   void _onRefresh() async {
     // monitor network fetch
 //    print("_onRefresh start");
@@ -146,7 +145,7 @@ class _WallieBillPageState extends State<WallieBillPage> {
   Widget build(BuildContext context) =>
     StoreConnector<AppState, _ViewModel>(
       // 首次加载
-      onInit: (Store<AppState> store) => store.dispatch(WallieBillAction(context, null)),
+      onInit: (Store<AppState> store) => store.dispatch(WallieBillAction(context, ApiResponse(Status.none))),
       // 首先触发初始化的Store，然后触发WallieBillAction的Store
       converter: (Store<AppState> store) => _ViewModel.create(store, context, _refreshController),
       builder: (BuildContext context, _ViewModel viewModel) =>
@@ -156,18 +155,17 @@ class _WallieBillPageState extends State<WallieBillPage> {
               children: <Widget>[
                 _toolbar(),
                 Expanded(
-                  child: NetworkWidget(
-                    status: viewModel.status,
-                    child: SmartRefresher(
-                      enablePullDown: true,
-                      enablePullUp: false,
-                      controller: _refreshController,
-                      onRefresh: () => viewModel.refresh(),
-                      header: WaterDropHeader(),
-                      child: ListView.builder(
-                          itemCount: viewModel.items.length,
-                          itemBuilder: (context, index) => _itemView(index, viewModel.items[index])
-                      ),
+                  child: SmartRefresher(
+                    enablePullDown: true,
+                    enablePullUp: false,
+                    controller: _refreshController,
+                    onRefresh: () => viewModel.refresh(),
+                    header: WaterDropHeader(),
+                    child: viewModel.items.isEmpty
+                        ? Center(child: CircularProgressIndicator(),)
+                        : ListView.builder(
+                      itemCount: viewModel.items.length,
+                      itemBuilder: (context, index) => _itemView(index, viewModel.items[index])
                     ),
                   ),
                 )
@@ -184,25 +182,27 @@ class _ViewModel {
   final Status status;
   final Function refresh;
 
-
   _ViewModel(this.items, this.status, this.refresh);
 
   factory _ViewModel.create(Store<AppState> store, BuildContext context, RefreshController controller) {
-//    print("data = ${store.state.billState.response.data}");
+    print("data = ${store.state.billState.response.data}");
     List<String> data = [];
     if (store.state.billState.response.data != null) {
       data = store.state.billState.response.data;
     }
     if (store.state.billState.response.status == Status.success) {
-      controller.loadComplete();
+      print("load success");
+      controller.refreshCompleted();
     }
     if (store.state.billState.response.status == Status.failure) {
-      controller.loadFailed();
+      print("load failure");
+      controller.refreshFailed();
     }
     return _ViewModel(
       data,
       store.state.billState.response.status,
-      () => store.dispatch(WallieBillAction(context, ApiResponse(Status.none, null)))
+      // data缓存
+      () => store.dispatch(WallieBillAction(context, ApiResponse(Status.none, data: data))),
     );
   }
 }

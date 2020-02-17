@@ -25,8 +25,8 @@ class AppState {
       ListState.ListOnly,
 
       // wallie app
-      LoginPageState(ApiResponse(Status.none, null)),
-      WallieBillState(ApiResponse(Status.none, null))
+      LoginPageState(ApiResponse(Status.none)),
+      WallieBillState(ApiResponse(Status.none))
   );
 }
 

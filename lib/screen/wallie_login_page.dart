@@ -28,7 +28,7 @@ class _WallieLoginPageState extends State<WallieLoginPage> {
   //
   _login(BuildContext context, String username, String password) async {
     StoreProvider.of<AppState>(context)
-        .dispatch(LoginAction(context, username, password, ApiResponse(Status.none, null)));
+        .dispatch(LoginAction(context, username, password, ApiResponse(Status.none)));
   }
 
   @override

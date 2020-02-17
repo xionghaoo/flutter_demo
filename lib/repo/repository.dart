@@ -40,13 +40,13 @@ class Repository with RepoMixin {
   Future loadBillList(Store<AppState> store, WallieBillAction action, NextDispatcher next) async {
     print("loadBillList");
     final future = fetchWallieBillList();
-    next(WallieBillAction(action.context, ApiResponse(Status.loading, null)));
+    next(WallieBillAction(action.context, action.response));
     future.then((List<String> data) {
       print("success");
-      next(WallieBillAction(action.context, ApiResponse(Status.success, data)));
+      next(WallieBillAction(action.context, ApiResponse(Status.success, data: data)));
     }).catchError((e) {
       print("error");
-      next(WallieBillAction(action.context, ApiResponse(Status.failure, null, errorMessage: e.toString())));
+      next(WallieBillAction(action.context, ApiResponse(Status.failure, errorMessage: e.toString())));
     });
   }
 
@@ -62,16 +62,16 @@ class Repository with RepoMixin {
     ProgressDialog progressDialog = ProgressDialog(action.context);
     progressDialog.style(message: "正在登陆...");
     progressDialog.show();
-    next(LoginAction(action.context, null, null, ApiResponse(Status.loading, null)));
+    next(LoginAction(action.context, null, null, ApiResponse(Status.loading)));
     future.then((String data) {
       progressDialog.hide();
       Navigator.pushReplacementNamed(action.context, WallieMainPage.path, arguments: data);
       Fluttertoast.showToast(msg: "登陆成功: $data");
-      next(LoginAction(action.context, null, null, ApiResponse(Status.success, data)));
+      next(LoginAction(action.context, null, null, ApiResponse(Status.success, data: data)));
     }).catchError((e) {
       Fluttertoast.showToast(msg: e);
       progressDialog.hide();
-      next(LoginAction(action.context, null, null, ApiResponse(Status.failure, null, errorMessage: e.toString())));
+      next(LoginAction(action.context, null, null, ApiResponse(Status.failure, errorMessage: e.toString())));
     });
   }
 
