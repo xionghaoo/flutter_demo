@@ -10,9 +10,10 @@ import 'package:redux/redux.dart';
 // 1、如果没有执行action的state，那么返回的是最初传入的对象，可以判定相同，不需要更新ui
 // 2、执行过action的state，是新创建的state，判定与原始对象不同，不需要更新ui
 AppState appReducer(AppState state, action) => AppState(
-    _toDoListStateReducer(state.toDos, action),
-    _listStateReducer(state.listState, action),
-    _loginStateReducer(state.loginState, action)
+  _toDoListStateReducer(state.toDos, action),
+  _listStateReducer(state.listState, action),
+  _loginStateReducer(state.loginState, action),
+  _wallieStateReducer(state.billState, action)
 );
 
 Reducer<List<ToDoItem>> _toDoListStateReducer = combineReducers([
@@ -35,9 +36,14 @@ Reducer<ListState> _listStateReducer = combineReducers([
 ListState _displayListOnly(ListState state, DisplayListOnlyAction action) => ListState.ListOnly;
 ListState _displayListWithNewItem(ListState state, DisplayListWithNewItemAction action) => ListState.ListWithNewItem;
 
+
+// -------------- wallie app start --------------
 Reducer<LoginPageState> _loginStateReducer = combineReducers([
-  TypedReducer<LoginPageState, ResponseSuccessAction>((LoginPageState state, ResponseSuccessAction action) => LoginPageState(action.response)),
-  TypedReducer<LoginPageState, ResponseFailureAction>((LoginPageState state, ResponseFailureAction action) => LoginPageState(action.response)),
-  TypedReducer<LoginPageState, ResponseLoadingAction>((LoginPageState state, ResponseLoadingAction action) => LoginPageState(action.response))
+  TypedReducer<LoginPageState, LoginAction>((LoginPageState state, LoginAction action) => LoginPageState(action.response)),
 ]);
+
+Reducer<WallieBillState> _wallieStateReducer = combineReducers([
+  TypedReducer<WallieBillState, WallieBillAction>((WallieBillState state, WallieBillAction action) => WallieBillState(action.response))
+]);
+// -------------- wallie app end --------------
 

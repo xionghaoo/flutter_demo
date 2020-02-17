@@ -20,29 +20,21 @@ class NetworkWidget extends StatefulWidget {
 class _NetworkWidgetState extends State<NetworkWidget> {
 
   Widget _statusWidget() {
+
     switch(widget.status) {
       case Status.none:
         return SizedBox();
       case Status.success:
         return widget.child;
       case Status.loading:
-        return Center(
-          child: CircularProgressIndicator(),
-        );
+        return Center(child: CircularProgressIndicator());
       case Status.failure:
-        return Text("加载失败");
+        return Center(child: Text("加载失败"));
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.center,
-      children: <Widget>[
-        Container(
-          child: _statusWidget(),
-        ),
-      ],
-    );
+    return _statusWidget();
   }
 }

@@ -1,5 +1,6 @@
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_demo/core/network.dart';
 import 'package:flutter_demo/redux/state.dart';
 import 'package:flutter_demo/repo/data/todo_item.dart';
 
@@ -25,13 +26,14 @@ class LoginAction {
   final String username;
   final String password;
   final BuildContext context;
+  final ApiResponse response;
 
-  LoginAction(this.context, this.username, this.password);
+  LoginAction(this.context, this.username, this.password, this.response);
 }
 
-class LoginSuccessAction {}
-class LoginFailureAction {
-  final String message;
-  LoginFailureAction(this.message);
+// 两处地方用到，Middleware拦截时、Reducer处理时
+class WallieBillAction {
+  final BuildContext context;
+  final ApiResponse response;
+  WallieBillAction(this.context, this.response);
 }
-class LoginLoadingAction {}

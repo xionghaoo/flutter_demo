@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_demo/core/network.dart';
 import 'package:flutter_demo/redux/actions.dart';
 import 'package:flutter_demo/redux/state.dart';
 import 'package:flutter_demo/theme/colors.dart';
@@ -27,7 +28,7 @@ class _WallieLoginPageState extends State<WallieLoginPage> {
   //
   _login(BuildContext context, String username, String password) async {
     StoreProvider.of<AppState>(context)
-        .dispatch(LoginAction(context, username, password));
+        .dispatch(LoginAction(context, username, password, ApiResponse(Status.none, null)));
   }
 
   @override
