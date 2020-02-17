@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter_demo/core/network.dart';
 import 'package:flutter_demo/repo/data/todo_item.dart';
 
+/// 全局State
 class AppState {
   // todoList 测试页
   final List<ToDoItem> toDos;

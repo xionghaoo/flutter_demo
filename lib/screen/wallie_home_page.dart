@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_demo/screen/wallie_bill_page.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import '../constants.dart';
@@ -228,7 +229,7 @@ class _WallieHomePageState extends State<WallieHomePage> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              _menuItemWidget("Bill", Icons.content_paste, Color.fromRGBO(231, 239, 56, 0.2), () => Navigator.of(context).pushNamed(ScreenPath.WALLIE_BILL_PAGE)),
+                              _menuItemWidget("Bill", Icons.content_paste, Color.fromRGBO(231, 239, 56, 0.2), () => Navigator.of(context).pushNamed(WallieBillPage.path)),
                               _menuItemWidget("Games", Icons.games, Color.fromRGBO(68, 239, 56, 0.2), () {}),
                               _menuItemWidget("Mobile Prepaid", Icons.phone_android, Color.fromRGBO(239, 56, 96, 0.2), () {}),
                               _menuItemWidget("More", Icons.more_horiz, Color.fromRGBO(88, 114, 226, 0.2), () {}),

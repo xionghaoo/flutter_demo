@@ -21,11 +21,8 @@ class _WallieLoginPageState extends State<WallieLoginPage> {
   FocusNode _pwdFocusNode;
   TextEditingController _accountController;
   FocusNode _accountFocusNode;
-  double _keyboardHeight = 0.0;
 
-  ProgressDialog _progressDialog;
-
-  //
+  // dart会自动判断返回类型
   _login(BuildContext context, String username, String password) async {
     StoreProvider.of<AppState>(context)
         .dispatch(LoginAction(context, username, password, ApiResponse(Status.none)));
@@ -249,19 +246,3 @@ class _WallieLoginPageState extends State<WallieLoginPage> {
     );
   }
 }
-
-
-
-//class _ViewModel {
-//  final Function(BuildContext context, String, String) login;
-//  final LoginPageState loginState;
-//
-//  _ViewModel(this.login, this.loginState);
-//
-//  factory _ViewModel.create(Store<AppState> store) {
-//    return _ViewModel(
-//        (BuildContext context, String username, String password) => store.dispatch(LoginAction(context, username, password)),
-//        store.state.loginState
-//    );
-//  }
-//}

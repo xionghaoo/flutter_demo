@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_demo/core/utils.dart';
 
 class WallieScanPage extends StatefulWidget {
-
+  static final String path = "/wallieScan";
   @override
   _WallieScanPageState createState() => _WallieScanPageState();
 }

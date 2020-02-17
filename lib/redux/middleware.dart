@@ -13,6 +13,7 @@ import 'package:redux/redux.dart';
 
 import '../constants.dart';
 
+/// 异步任务
 List<Middleware<AppState>> createStoreMiddleware() => [
   TypedMiddleware<AppState, SaveListAction>(_saveList),
   // 将逻辑转移到Repository中

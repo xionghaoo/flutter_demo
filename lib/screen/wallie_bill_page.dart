@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_demo/core/network.dart';
 import 'package:flutter_demo/core/network_widget.dart';
+import 'package:flutter_demo/core/utils.dart';
 import 'package:flutter_demo/redux/actions.dart';
 import 'package:flutter_demo/redux/state.dart';
 import 'package:flutter_redux/flutter_redux.dart';
@@ -9,6 +10,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:redux/redux.dart';
 
 class WallieBillPage extends StatefulWidget {
+  static final String path = "/wallieBill";
   @override
   _WallieBillPageState createState() => _WallieBillPageState();
 }
@@ -17,16 +19,8 @@ class _WallieBillPageState extends State<WallieBillPage> {
 
   RefreshController _refreshController = RefreshController(
       initialRefresh: false);
-//  bool _isInit = true;
-  void _onRefresh() async {
-    // monitor network fetch
-//    print("_onRefresh start");
-    await Future.delayed(Duration(milliseconds: 1000));
-//    print("_onRefresh end ");
-    // if failed,use refreshFailed()
-    _refreshController.refreshCompleted();
-  }
 
+  // TODO SmartRefresh onLoading用法未知
   void _onLoading() async {
     // monitor network fetch
     print("_onLoading start");
@@ -40,13 +34,6 @@ class _WallieBillPageState extends State<WallieBillPage> {
       });
     _refreshController.loadComplete();
   }
-
-//  Future<void> _loadData() async {
-//    setState(() {
-//      _status = Status.loading;
-//    });
-//    await Future.delayed(Duration(seconds: 2));
-//  }
 
   Widget _toolbar() {
     return Container(
@@ -133,12 +120,6 @@ class _WallieBillPageState extends State<WallieBillPage> {
   @override
   void initState() {
     super.initState();
-//    _loadData().then((_) {
-//      setState(() {
-//        _status = Status.success;
-//      });
-//    }).catchError((e) => print(e));
-//    StoreProvider.of<AppState>(context).dispatch(WallieBillAction);
   }
 
   @override
@@ -148,8 +129,9 @@ class _WallieBillPageState extends State<WallieBillPage> {
       onInit: (Store<AppState> store) => store.dispatch(WallieBillAction(context, ApiResponse(Status.none))),
       // 首先触发初始化的Store，然后触发WallieBillAction的Store
       converter: (Store<AppState> store) => _ViewModel.create(store, context, _refreshController),
-      builder: (BuildContext context, _ViewModel viewModel) =>
-        Scaffold(
+      builder: (BuildContext context, _ViewModel viewModel) {
+        setStatusBarDark();
+        return Scaffold(
           body: SafeArea(
             child: Column(
               children: <Widget>[
@@ -164,15 +146,16 @@ class _WallieBillPageState extends State<WallieBillPage> {
                     child: viewModel.items.isEmpty
                         ? Center(child: CircularProgressIndicator(),)
                         : ListView.builder(
-                      itemCount: viewModel.items.length,
-                      itemBuilder: (context, index) => _itemView(index, viewModel.items[index])
+                        itemCount: viewModel.items.length,
+                        itemBuilder: (context, index) => _itemView(index, viewModel.items[index])
                     ),
                   ),
                 )
               ],
             ),
           ),
-        ),
+        );
+      }
     );
 }
 
@@ -191,17 +174,15 @@ class _ViewModel {
       data = store.state.billState.response.data;
     }
     if (store.state.billState.response.status == Status.success) {
-      print("load success");
       controller.refreshCompleted();
     }
     if (store.state.billState.response.status == Status.failure) {
-      print("load failure");
       controller.refreshFailed();
     }
     return _ViewModel(
       data,
       store.state.billState.response.status,
-      // data缓存
+      // 页面级data缓存
       () => store.dispatch(WallieBillAction(context, ApiResponse(Status.none, data: data))),
     );
   }

@@ -6,9 +6,11 @@ import 'package:flutter_demo/screen/wallie_login_page.dart';
 
 class WallieProfilePage extends StatefulWidget {
 
+  static final String path = "/wallieProfile";
+
   final String username;
 
-  WallieProfilePage({@required this.username});
+  WallieProfilePage({this.username});
 
   @override
   _WallieProfilePageState createState() => _WallieProfilePageState();

@@ -52,6 +52,7 @@ class Repository with RepoMixin {
 
 
   Future login(Store<AppState> store, LoginAction action, NextDispatcher next) async {
+    // 模拟后端校验
     final future = Future.delayed(Duration(seconds: 1), () {
       if (action.username == "ningque" && action.password == "n123") {
         return "宁缺";

@@ -61,17 +61,16 @@ class MyApp extends StatelessWidget {
         ScreenPath.TEST: (context) => TestPage(),
         ScreenPath.SQLITE: (context) => SqlitePage(),
         ScreenPath.SHARED_PREFERENCES: (context) => SharedPreferencesPage(),
-        WallieLoginPage.path: (context) => WallieLoginPage(),
-        WallieMainPage.path: (context) => WallieMainPage(),
         ScreenPath.TEST_ANIM: (context) => TestAnimPage(),
-        ScreenPath.WALLIE_BILL_PAGE: (context) => WallieBillPage(),
-        ScreenPath.WALLIE_PROFILE_PAGE: (context) => WallieProfilePage(),
         ScreenPath.FORM_PAGE: (context) => FormPage(),
         CameraTestPage.path: (context) => CameraTestPage(),
         NativeDevPage.path: (context) => NativeDevPage(),
-        NativePluginPage.path: (context) => NativePluginPage()
+        NativePluginPage.path: (context) => NativePluginPage(),
+        // wallie app
+        WallieLoginPage.path: (context) => WallieLoginPage(),
+        WallieMainPage.path: (context) => WallieMainPage(),
+        WallieBillPage.path: (context) => WallieBillPage(),
       },
-//      home: HomePage(),
     ),
   );
 }
