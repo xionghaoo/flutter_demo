@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_demo/platform_view/amap_param.dart';
 import 'package:flutter_demo/platform_view/amap_view.dart';
 
 class AmapPage extends StatefulWidget {
@@ -39,7 +40,9 @@ class _AmapPageState extends State<AmapPage> {
               child: Text("下面是高德地图的Flutter widget(Android端)"),
             ),
             Expanded(
-              child: AmapView(),
+              child: AmapView(AmapParam(
+                initialCenterPoint: [22.630019, 114.068159]
+              )),
             )
           ],
         ),

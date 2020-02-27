@@ -34,7 +34,7 @@ class AmapPlugin : FlutterPlugin, ActivityAware, DefaultLifecycleObserver {
             if (registrar.activity() == null) return
             val plugin = AmapPlugin()
             registrar.platformViewRegistry()
-                    .registerViewFactory(VIEW_TYPE_ID, AmapViewFactory(plugin.state))
+                    .registerViewFactory(VIEW_TYPE_ID, AmapViewFactory(null))
             Log.d("AmapPlugin", "registerWith")
 
         }
@@ -43,71 +43,37 @@ class AmapPlugin : FlutterPlugin, ActivityAware, DefaultLifecycleObserver {
     // FlutterPlugin
     override fun onAttachedToEngine(binding: FlutterPlugin.FlutterPluginBinding) {
         pluginBinding = binding
-        Log.d("AmapPlugin", "onAttachedToEngine")
+//        Log.d("AmapPlugin", "onAttachedToEngine")
     }
 
     override fun onDetachedFromEngine(binding: FlutterPlugin.FlutterPluginBinding) {
         pluginBinding = null
-        Log.d("AmapPlugin", "onDetachedFromEngine")
+//        Log.d("AmapPlugin", "onDetachedFromEngine")
     }
 
     // ActivityAware
     override fun onDetachedFromActivity() {
-        Log.d("AmapPlugin", "onDetachedFromActivity")
+//        Log.d("AmapPlugin", "onDetachedFromActivity")
     }
 
     override fun onReattachedToActivityForConfigChanges(binding: ActivityPluginBinding) {
         lifecycle = FlutterLifecycleAdapter.getActivityLifecycle(binding)
-        lifecycle?.addObserver(this)
+//        Log.d("AmapPlugin", "onReattachedToActivityForConfigChanges")
+
+//        lifecycle?.addObserver(this)
     }
 
     override fun onAttachedToActivity(binding: ActivityPluginBinding) {
-        Log.d("AmapPlugin", "onAttachedToActivity")
+//        Log.d("AmapPlugin", "onAttachedToActivity")
 
         lifecycle = FlutterLifecycleAdapter.getActivityLifecycle(binding)
-        lifecycle?.addObserver(this)
+//        lifecycle?.addObserver(this)
         pluginBinding?.platformViewRegistry
-                ?.registerViewFactory(VIEW_TYPE_ID, AmapViewFactory(state))
+                ?.registerViewFactory(VIEW_TYPE_ID, AmapViewFactory(lifecycle))
 
     }
 
     override fun onDetachedFromActivityForConfigChanges() {
-    }
-
-    // DefaultLifecycleObserver
-    override fun onCreate(owner: LifecycleOwner) {
-        state.set(CREATED)
-        Log.d("AmapPlugin", "onCreate")
-
-    }
-
-    override fun onResume(owner: LifecycleOwner) {
-        state.set(RESUMED)
-        Log.d("AmapPlugin", "onResume")
-
-    }
-
-    override fun onPause(owner: LifecycleOwner) {
-        state.set(PAUSED)
-        Log.d("AmapPlugin", "onPause")
-
-    }
-
-    override fun onStart(owner: LifecycleOwner) {
-        state.set(STARTED)
-        Log.d("AmapPlugin", "onStart")
-
-    }
-
-    override fun onStop(owner: LifecycleOwner) {
-        state.set(STOPPED)
-        Log.d("AmapPlugin", "onStop")
-
-    }
-
-    override fun onDestroy(owner: LifecycleOwner) {
-        state.set(DESTROYED)
-        Log.d("AmapPlugin", "onDestroy")
-
+//        Log.d("AmapPlugin", "onAttachedToActivity")
     }
 }
