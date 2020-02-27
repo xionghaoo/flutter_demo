@@ -2,9 +2,9 @@
 > flutter开发练习
 
 ## 基础功能
-> [官方的Cookbook](https://flutter.dev/docs/cookbook)
->
 > 开发中经常会用到一些基础功能
+
+[官方Cookbook](https://flutter.dev/docs/cookbook)
 
 - [x] 搜索框
 - [x] 网络请求(异步加载和json序列化)
@@ -29,22 +29,20 @@
 - [ ] ChangeNotifier
 
 ## Wallie(完整的app)
-> 尝试构建一个功能完善Flutter app
 
-- [x] 登陆
-- [x] 首页tabs切换
-- [x] 退出登陆
+- [x] 登陆/退出
+- [x] 首页tabs切换/下拉刷新
 - [x] Bill页面(下拉刷新)
-- [ ] 集成Redux
+- [x] 集成Redux
 
-## 动画效果
+## 动画效果示例
 
 |  |  |
 | --- | --- |
 | <img src="https://github.com/xionghaoo/flutter_demo/blob/master/screens/tab%E5%88%87%E6%8D%A2%E5%8A%A8%E7%94%BB.gif" width="300"/> | <img src="https://github.com/xionghaoo/flutter_demo/blob/master/screens/%E5%A4%AA%E6%9E%81%E5%8A%A8%E7%94%BB.gif" width="300"/> |
 
 ## 高德地图
-> Flutter提供原生Flutter提供原生View的渲染方式View的渲染方式，可以像使用Flutter Widget一样使用Native View
+> Flutter提供原生View的渲染方式View的渲染方式，可以像使用Flutter Widget一样使用Native View
 
 Android显示效果
 
