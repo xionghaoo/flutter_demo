@@ -17,8 +17,7 @@ class WallieBillPage extends StatefulWidget {
 
 class _WallieBillPageState extends State<WallieBillPage> {
 
-  RefreshController _refreshController = RefreshController(
-      initialRefresh: false);
+  RefreshController _refreshController = RefreshController(initialRefresh: false);
 
   // TODO SmartRefresh onLoading用法未知
   void _onLoading() async {

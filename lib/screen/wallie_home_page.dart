@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_demo/screen/wallie_bill_page.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../constants.dart';
 
@@ -18,6 +19,12 @@ class WallieHomePage extends StatefulWidget {
 class _WallieHomePageState extends State<WallieHomePage> {
 
   final PageController _pageController = PageController(initialPage: 0);
+  RefreshController _refreshController = RefreshController(initialRefresh: false);
+
+  _refresh() async {
+    await Future.delayed(Duration(seconds: 2));
+    _refreshController.refreshCompleted();
+  }
 
   Widget _toolbar(String username) {
     return Container(
@@ -190,98 +197,105 @@ class _WallieHomePageState extends State<WallieHomePage> {
           SizedBox(height: 20,),
           _toolbar(widget.username),
           Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Container(
-                    height: 150,
-                    child: PageView(
-                      controller: _pageController,
-                      scrollDirection: Axis.horizontal,
-                      children: <Widget>[
-                        _homeCard(),
-                        _homeCard(),
-                        _homeCard()
-                      ],
+            child: SmartRefresher(
+              enablePullDown: true,
+              enablePullUp: false,
+              controller: _refreshController,
+              onRefresh: _refresh,
+              header: WaterDropHeader(),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Container(
+                      height: 150,
+                      child: PageView(
+                        controller: _pageController,
+                        scrollDirection: Axis.horizontal,
+                        children: <Widget>[
+                          _homeCard(),
+                          _homeCard(),
+                          _homeCard()
+                        ],
+                      ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                    child: Text("Features", style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),),
-                  ),
-                  Container(
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                      child: Text("Features", style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),),
+                    ),
+                    Container(
+                        width: MediaQuery.of(context).size.width,
+                        margin: EdgeInsets.fromLTRB(20, 10, 20, 10),
+                        child: Column(
+                          children: <Widget>[
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                _menuItemWidget("Top up", Icons.access_time, Color.fromRGBO(88, 114, 226, 0.2), () {}),
+                                _menuItemWidget("Transfer", Icons.near_me, Color.fromRGBO(231, 239, 56, 0.2), () {}),
+                                _menuItemWidget("Internet", Icons.network_check, Color.fromRGBO(68, 239, 56, 0.2), () {}),
+                                _menuItemWidget("Wallet", Icons.content_paste, Color.fromRGBO(239, 56, 96, 0.2), () {}),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                _menuItemWidget("Bill", Icons.content_paste, Color.fromRGBO(231, 239, 56, 0.2), () => Navigator.of(context).pushNamed(WallieBillPage.path)),
+                                _menuItemWidget("Games", Icons.games, Color.fromRGBO(68, 239, 56, 0.2), () {}),
+                                _menuItemWidget("Mobile Prepaid", Icons.phone_android, Color.fromRGBO(239, 56, 96, 0.2), () {}),
+                                _menuItemWidget("More", Icons.more_horiz, Color.fromRGBO(88, 114, 226, 0.2), () {}),
+                              ],
+                            )
+                          ],
+                        )
+                    ),
+                    Container(
                       width: MediaQuery.of(context).size.width,
-                      margin: EdgeInsets.fromLTRB(20, 10, 20, 10),
+                      margin: EdgeInsets.fromLTRB(20, 0, 20, 10),
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.end,
                             children: <Widget>[
-                              _menuItemWidget("Top up", Icons.access_time, Color.fromRGBO(88, 114, 226, 0.2), () {}),
-                              _menuItemWidget("Transfer", Icons.near_me, Color.fromRGBO(231, 239, 56, 0.2), () {}),
-                              _menuItemWidget("Internet", Icons.network_check, Color.fromRGBO(68, 239, 56, 0.2), () {}),
-                              _menuItemWidget("Wallet", Icons.content_paste, Color.fromRGBO(239, 56, 96, 0.2), () {}),
+                              Text(
+                                "Speical Promo",
+                                style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18),
+                              ),
+                              GestureDetector(
+                                child: Text(
+                                  "View all",
+                                  style: TextStyle(color: Colors.grey, fontSize: 14),
+                                ),
+                                onTap: () {
+                                  Fluttertoast.showToast(msg: "View All");
+                                },
+                              )
                             ],
                           ),
+                          SizedBox(height: 20,),
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              _menuItemWidget("Bill", Icons.content_paste, Color.fromRGBO(231, 239, 56, 0.2), () => Navigator.of(context).pushNamed(WallieBillPage.path)),
-                              _menuItemWidget("Games", Icons.games, Color.fromRGBO(68, 239, 56, 0.2), () {}),
-                              _menuItemWidget("Mobile Prepaid", Icons.phone_android, Color.fromRGBO(239, 56, 96, 0.2), () {}),
-                              _menuItemWidget("More", Icons.more_horiz, Color.fromRGBO(88, 114, 226, 0.2), () {}),
+                              Flexible(
+                                flex: 1,
+                                child: _specialPromoCard("Bonus Crashback", "A card is a sheet of Material used to represent some related information, for example an album, a geographical location, a meal, contact details, etc."),
+                              ),
+                              SizedBox(width: 20,),
+                              Flexible(
+                                  flex: 1,
+                                  child: _specialPromoCard("Daily Diskon", "BoxShadow can cast non-rectangular shadows if the box is non-rectangular (e.g., has a border radius or a circular shape).")
+                              ),
                             ],
                           )
                         ],
-                      )
-                  ),
-                  Container(
-                    width: MediaQuery.of(context).size.width,
-                    margin: EdgeInsets.fromLTRB(20, 0, 20, 10),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: <Widget>[
-                            Text(
-                              "Speical Promo",
-                              style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18),
-                            ),
-                            GestureDetector(
-                              child: Text(
-                                "View all",
-                                style: TextStyle(color: Colors.grey, fontSize: 14),
-                              ),
-                              onTap: () {
-                                Fluttertoast.showToast(msg: "View All");
-                              },
-                            )
-                          ],
-                        ),
-                        SizedBox(height: 20,),
-                        Row(
-                          children: <Widget>[
-                            Flexible(
-                              flex: 1,
-                              child: _specialPromoCard("Bonus Crashback", "A card is a sheet of Material used to represent some related information, for example an album, a geographical location, a meal, contact details, etc."),
-                            ),
-                            SizedBox(width: 20,),
-                            Flexible(
-                                flex: 1,
-                                child: _specialPromoCard("Daily Diskon", "BoxShadow can cast non-rectangular shadows if the box is non-rectangular (e.g., has a border radius or a circular shape).")
-                            ),
-                          ],
-                        )
-                      ],
+                      ),
                     ),
-                  ),
-                  SizedBox(height: 60,)
-                ],
+                    SizedBox(height: 60,)
+                  ],
+                ),
               ),
             ),
           ),
