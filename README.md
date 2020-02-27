@@ -42,7 +42,7 @@
 | <img src="https://github.com/xionghaoo/flutter_demo/blob/master/screens/tab%E5%88%87%E6%8D%A2%E5%8A%A8%E7%94%BB.gif" width="300"/> | <img src="https://github.com/xionghaoo/flutter_demo/blob/master/screens/%E5%A4%AA%E6%9E%81%E5%8A%A8%E7%94%BB.gif" width="300"/> |
 
 ## 高德地图
-> Flutter提供原生View的渲染方式View的渲染方式，可以像使用Flutter Widget一样使用Native View
+> Flutter提供原生View的渲染方式，可以像使用Flutter Widget一样使用Native View
 
 Android显示效果
 
