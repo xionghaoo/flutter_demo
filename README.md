@@ -44,25 +44,24 @@
 | <img src="https://github.com/xionghaoo/flutter_demo/blob/master/screens/tab%E5%88%87%E6%8D%A2%E5%8A%A8%E7%94%BB.gif" width="300"/> | <img src="https://github.com/xionghaoo/flutter_demo/blob/master/screens/%E5%A4%AA%E6%9E%81%E5%8A%A8%E7%94%BB.gif" width="300"/> |
 
 ## 高德地图
+> Flutter提供原生Flutter提供原生View的渲染方式View的渲染方式，可以像使用Flutter Widget一样使用Native View
 
 Android显示效果
 
 <img src="https://github.com/xionghaoo/flutter_demo/blob/master/screens/Android_amap.jpg" width="300"/>
 
-## flutter 1.12版本以前的插件升级（v1 -> v2）
-> flutter的插件注册现在分为v1版本和v2版本
+## Flutter 1.12版本以前的插件升级（v1 -> v2）
+> Flutter的插件注册现在分为v1版本和v2版本
 
 官方文档
 
 [Supporting the new Android plugins APIs](https://flutter.dev/docs/development/packages-and-plugins/plugin-api-migration)
+
 [Upgrading pre 1.12 Android projects](https://github.com/flutter/flutter/wiki/Upgrading-pre-1.12-Android-projects)
 
 需要注意的是：
-+ 使用新版的io.flutter.embedding.android.FlutterActivity以后，  会发现没有PluginRegistry注册的方式，  
-可以借助ShimPluginRegistry来注册老版本的插件，新版本的插件直接用flutterEngine.plugins.add()方法添加就行了。
-不需要使用自动生成的GeneratedPluginRegistrant类
-+ MethodChannel在io.flutter.app.FlutterActivity(v1版本)中使用的是flutterView，
-在io.flutter.embedding.android.FlutterActivity(v2版本)中可以用flutterEngine.dartExecutor替代
++ 使用新版的io.flutter.embedding.android.FlutterActivity以后，会发现插件不能用PluginRegistry方式注册，可以借助ShimPluginRegistry来注册老版本的插件，新版本的插件直接用flutterEngine.plugins.add()方法添加就行了。不需要使用自动生成的GeneratedPluginRegistrant类
++ MethodChannel在io.flutter.app.FlutterActivity(v1版本)中使用的是flutterView，在io.flutter.embedding.android.FlutterActivity(v2版本)中可以用flutterEngine.dartExecutor替代
 
 ```kotlin
 override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
