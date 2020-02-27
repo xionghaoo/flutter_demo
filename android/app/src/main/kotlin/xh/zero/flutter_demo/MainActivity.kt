@@ -9,14 +9,23 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import com.ks.common.utils.SystemUtils
+import com.tekartik.sqflite.SqflitePlugin
+import io.flutter.embedding.android.FlutterActivity
+import io.flutter.embedding.engine.FlutterEngine
+import io.flutter.embedding.engine.plugins.shim.ShimPluginRegistry
 
-import io.flutter.app.FlutterActivity
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugins.GeneratedPluginRegistrant
+import io.flutter.plugins.camera.CameraPlugin
+import io.flutter.plugins.flutter_plugin_android_lifecycle.FlutterAndroidLifecyclePlugin
+import io.flutter.plugins.pathprovider.PathProviderPlugin
+import io.flutter.plugins.sharedpreferences.SharedPreferencesPlugin
+import io.github.ponnamkarthik.toast.fluttertoast.FluttertoastPlugin
 import xh.zero.flutter_demo.plugins.AmapPlugin
 import xh.zero.flutter_demo.plugins.TextViewPlugin
 
 class MainActivity: FlutterActivity() {
+
   companion object {
     private const val CHANNEL = "xh.zero/battery"
   }
@@ -24,13 +33,22 @@ class MainActivity: FlutterActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     SystemUtils.statusBarTransparent(window)
+  }
 
-    GeneratedPluginRegistrant.registerWith(this)
-    BuildConfigPlugin.registerWith(registrarFor("xh.zero.flutter_demo.BuildConfigPlugin"))
-    TextViewPlugin.registerWidth(registrarFor("xh.zero.flutter_demo.plugins.TextViewPlugin"))
-    AmapPlugin.registerWith(registrarFor("xh.zero.flutter_demo.plugins.AmapPlugin"))
+  override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
+    flutterEngine.plugins.add(CameraPlugin())
+    flutterEngine.plugins.add(PathProviderPlugin())
+    flutterEngine.plugins.add(SharedPreferencesPlugin())
+    flutterEngine.plugins.add(BuildConfigPlugin())
+    flutterEngine.plugins.add(AmapPlugin())
+    val registry = ShimPluginRegistry(flutterEngine)
+    FlutterAndroidLifecyclePlugin.registerWith(registry.registrarFor("io.flutter.plugins.flutter_plugin_android_lifecycle.FlutterAndroidLifecyclePlugin"))
+    FluttertoastPlugin.registerWith(registry.registrarFor("io.github.ponnamkarthik.toast.fluttertoast.FluttertoastPlugin"))
+    SqflitePlugin.registerWith(registry.registrarFor("com.tekartik.sqflite.SqflitePlugin"))
 
-    MethodChannel(flutterView, CHANNEL).setMethodCallHandler { call, result ->
+    TextViewPlugin.registerWidth(registry.registrarFor("xh.zero.flutter_demo.plugins.TextViewPlugin"))
+
+    MethodChannel(flutterEngine.dartExecutor, CHANNEL).setMethodCallHandler { call, result ->
       Log.d("amap_test", "getBatteryLevel, ${call.method}")
 
       when (call.method) {
@@ -47,12 +65,12 @@ class MainActivity: FlutterActivity() {
       }
     }
 
-    MethodChannel(flutterView, "xh.zero/map").setMethodCallHandler { call, result ->
+    MethodChannel(flutterEngine.dartExecutor, "xh.zero/map").setMethodCallHandler { call, result ->
       Log.d("amap_test", "启动高德地图, ${call.method}")
 
       if (call.method == "startAMapPage") {
 //        Log.d("amap_test", "启动高德地图")
-        startActivity(Intent(this@MainActivity, TestActivity::class.java))
+        startActivity(Intent(this, TestActivity::class.java))
         result.success(null)
       } else {
         result.notImplemented()
