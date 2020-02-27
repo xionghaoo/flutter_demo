@@ -144,6 +144,19 @@ class _NativeDevPageState extends State<NativeDevPage> with SingleTickerProvider
     return Scaffold(
       appBar: AppBar(
         title: Text("原生开发"),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.refresh),
+            onPressed: () {
+              if (_controller.isAnimating) {
+                Fluttertoast.showToast(msg: "动画正在播放...");
+                return;
+              }
+              _controller.value = 0;
+              _controller.forward();
+            },
+          )
+        ],
       ),
       backgroundColor: Colors.yellow,
       body: Center(

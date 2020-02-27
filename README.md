@@ -21,6 +21,7 @@
 - [x] 基本的原生调用(插件方式和非插件方式)
 - [x] Android高德地图集成
 - [ ] iOS高德地图集成
+- [ ] app打包
 - [ ] 图片选择上传
 - [ ] BLoC集成(State管理框架)
 - [ ] Scoped Model集成(State管理框架)
