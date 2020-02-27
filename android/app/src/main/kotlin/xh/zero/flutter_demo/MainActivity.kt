@@ -36,16 +36,18 @@ class MainActivity: FlutterActivity() {
   }
 
   override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
+    // v2 version plugin register
     flutterEngine.plugins.add(CameraPlugin())
     flutterEngine.plugins.add(PathProviderPlugin())
     flutterEngine.plugins.add(SharedPreferencesPlugin())
     flutterEngine.plugins.add(BuildConfigPlugin())
     flutterEngine.plugins.add(AmapPlugin())
+
+    // v1 version plugin register
     val registry = ShimPluginRegistry(flutterEngine)
     FlutterAndroidLifecyclePlugin.registerWith(registry.registrarFor("io.flutter.plugins.flutter_plugin_android_lifecycle.FlutterAndroidLifecyclePlugin"))
     FluttertoastPlugin.registerWith(registry.registrarFor("io.github.ponnamkarthik.toast.fluttertoast.FluttertoastPlugin"))
     SqflitePlugin.registerWith(registry.registrarFor("com.tekartik.sqflite.SqflitePlugin"))
-
     TextViewPlugin.registerWidth(registry.registrarFor("xh.zero.flutter_demo.plugins.TextViewPlugin"))
 
     MethodChannel(flutterEngine.dartExecutor, CHANNEL).setMethodCallHandler { call, result ->
