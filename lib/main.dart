@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_demo/constants.dart';
+import 'package:flutter_demo/screen/address_select_page.dart';
 import 'package:flutter_demo/screen/general_dev_page.dart';
 import 'package:flutter_demo/redux/middleware.dart';
 import 'package:flutter_demo/redux/reducers.dart';
@@ -63,6 +64,7 @@ class MyApp extends StatelessWidget {
         ScreenPath.SHARED_PREFERENCES: (context) => SharedPreferencesPage(),
         ScreenPath.TEST_ANIM: (context) => TestAnimPage(),
         ScreenPath.FORM_PAGE: (context) => FormPage(),
+        AddressSelectPage.path: (context) => AddressSelectPage(),
         CameraTestPage.path: (context) => CameraTestPage(),
         NativeDevPage.path: (context) => NativeDevPage(),
         NativePluginPage.path: (context) => NativePluginPage(),

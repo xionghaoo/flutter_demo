@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_demo/constants.dart';
 import 'package:flutter_demo/core/common_widgets.dart';
+import 'package:flutter_demo/screen/address_select_page.dart';
 import 'package:flutter_demo/screen/camera_test_page.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -37,7 +38,8 @@ class _GeneralDevPageState extends State<GeneralDevPage> {
         "Key-Value存储",
         "动画",
         "表单",
-        "相机"
+        "相机",
+        "地址选择"
       ], (index) {
         String page;
         switch (index) {
@@ -73,6 +75,9 @@ class _GeneralDevPageState extends State<GeneralDevPage> {
             break;
           case 10:
             page = CameraTestPage.path;
+            break;
+          case 11:
+            page = AddressSelectPage.path;
             break;
         }
         if (index == 4) {

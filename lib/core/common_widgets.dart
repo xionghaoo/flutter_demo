@@ -8,8 +8,8 @@ class InkBox extends StatelessWidget {
   final Function onTap;
 
   InkBox({
-    @required this.borderRadius,
-    @required this.color,
+    this.borderRadius,
+    this.color,
     @required this.onTap,
     @required this.child,
   });
@@ -23,7 +23,7 @@ class InkBox extends StatelessWidget {
       child: Ink(
         // 对InkWell包裹的widget进行装饰，可以添加padding
         decoration: BoxDecoration(
-          color: color,
+          color: color == null ? Colors.white : color,
           borderRadius: borderRadius,
         ),
         child: InkWell(
