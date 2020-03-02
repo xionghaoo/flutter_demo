@@ -9,7 +9,7 @@ class CascadeSelectorWidget extends StatefulWidget {
   final List<List<String>> data;
   final Function(String address) completeCallBack;
   final int maxTabsNum;
-  final Function(String, int) onAddTab;
+  final Function(String, int, Function) onAddTab;
 
   CascadeSelectorWidget(this.data, {this.maxTabsNum = 4, this.completeCallBack, this.onAddTab});
 
@@ -92,49 +92,46 @@ class _CascadeSelectorWidgetState extends State<CascadeSelectorWidget> with Sing
         itemCount: tabItemNames.length,
         itemBuilder: (context, index) => InkBox(
           onTap: () {
-            widget.onAddTab(tabItemNames[index], page);
-
-            if (page >= widget.maxTabsNum - 1) {
-              setState(() {
-                _tabNames[page] = tabItemNames[index];
-              });
-              String completeAddress = "";
-              for (int i = 0; i < _tabKeys.length; i++) {
-                completeAddress += _tabNames[i];
-              }
-              widget.completeCallBack(completeAddress);
-              resetSlider(_tabKeys[page]);
-              return;
-            }
-
-            // 新增tab
-            final maxPage = _tabKeys.length - 1;
-            _isAddTab = page == maxPage;
-            if (page == maxPage) {
-              setState(() {
-                _tabTitleOpacity = 0;
-                _tabKeys.add(GlobalKey());
-                _tabNames.insert(_tabNames.length - 1, tabItemNames[index]);
-              });
-
-              if (_tabKeys.length >= 2) {
-                WidgetsBinding.instance.addPostFrameCallback((_) {
-                  moveSlider(_tabKeys[_tabKeys.length - 1], _tabKeys.length - 1, withSliderTitle: true);
+            widget.onAddTab(tabItemNames[index], page, () {
+              print("call back");
+              if (page >= widget.maxTabsNum - 1) {
+                setState(() {
+                  _tabNames[page] = tabItemNames[index];
                 });
+                String completeAddress = "";
+                for (int i = 0; i < _tabKeys.length; i++) {
+                  completeAddress += _tabNames[i];
+                }
+                widget.completeCallBack(completeAddress);
+                resetSlider(_tabKeys[page]);
+                return;
               }
 
-              _pageController.animateToPage(_previousPage + 1, duration: Duration(milliseconds: 500), curve: Curves.ease);
-//              print("移动滑块: data: ${widget.data.length}");
-            } else {
-              // 修改地址
-              setState(() {
-                _tabNames[page] = tabItemNames[index];
-              });
-              _pageController.animateToPage(_previousPage + 1, duration: Duration(milliseconds: 500), curve: Curves.ease);
-            }
+              // 新增tab
+              final maxPage = _tabKeys.length - 1;
+              _isAddTab = page == maxPage;
+              if (page == maxPage) {
+                setState(() {
+                  _tabTitleOpacity = 0;
+                  _tabKeys.add(GlobalKey());
+                  _tabNames.insert(_tabNames.length - 1, tabItemNames[index]);
+                });
 
+                if (_tabKeys.length >= 2) {
+                  WidgetsBinding.instance.addPostFrameCallback((_) {
+                    moveSlider(_tabKeys[_tabKeys.length - 1], _tabKeys.length - 1, withSliderTitle: true);
+                  });
+                }
 
-
+                _pageController.animateToPage(_previousPage + 1, duration: Duration(milliseconds: 500), curve: Curves.ease);
+              } else {
+                // 修改地址
+                setState(() {
+                  _tabNames[page] = tabItemNames[index];
+                });
+                _pageController.animateToPage(_previousPage + 1, duration: Duration(milliseconds: 500), curve: Curves.ease);
+              }
+            });
           },
           child: Container(
             height: 50,

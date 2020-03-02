@@ -49,6 +49,8 @@ class _AddressSelectPageState extends State<AddressSelectPage> with SingleTicker
   }
 
   Future<List<String>> loadCities(int provinceCode) async {
+    await Future.delayed(Duration(seconds: 1));
+
     String str = await rootBundle.loadString('assets/china_area/${provinceCode}/city_list.json');
     Map<String, dynamic> data = json.decode(str);
     List<dynamic> provinces = data['cities'];
@@ -99,8 +101,8 @@ class _AddressSelectPageState extends State<AddressSelectPage> with SingleTicker
 //              Fluttertoast.showToast(msg: "地址：${address}");
             },
             maxTabsNum: 3,
-            onAddTab: (itemName, index) {
-              if (_data.length == 1) {
+            onAddTab: (itemName, index, complete) {
+              if (index == 0) {
                 print("选择：${itemName} ${_provinceMap[itemName]}, ${_data.length}");
 
                 _currentProvince = _provinceMap[itemName];
@@ -112,8 +114,9 @@ class _AddressSelectPageState extends State<AddressSelectPage> with SingleTicker
                       _data[index + 1] = value;
                     }
                   });
+                  complete();
                 });
-              } else if (_data.length == 2) {
+              } else if (index == 1) {
                 print("选择：${itemName} ${_currentCityMap[itemName]}, ${_data.length}");
 
                 loadDistricts(_currentProvince, _currentCityMap[itemName]).then((value) {
@@ -124,7 +127,10 @@ class _AddressSelectPageState extends State<AddressSelectPage> with SingleTicker
                       _data[index + 1] = value;
                     }
                   });
+                  complete();
                 });
+              } else {
+                complete();
               }
             },
           )
