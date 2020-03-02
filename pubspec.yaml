@@ -86,3 +86,26 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+  assets:
+    - assets/china_area/
+    - assets/china_area/1/
+    - assets/china_area/2/
+    - assets/china_area/3/
+    - assets/china_area/4/
+    - assets/china_area/5/
+    - assets/china_area/5/150100000000/
+    - assets/china_area/5/150200000000/
+    - assets/china_area/5/150300000000/
+    - assets/china_area/5/150400000000/
+    - assets/china_area/5/150500000000/
+    - assets/china_area/5/150600000000/
+    - assets/china_area/5/150700000000/
+    - assets/china_area/5/150800000000/
+    - assets/china_area/5/150900000000/
+    - assets/china_area/5/152200000000/
+    - assets/china_area/5/152500000000/
+    - assets/china_area/5/152900000000/
+    - assets/china_area/6/
+    - assets/china_area/7/
+    - assets/china_area/8/
+    - assets/test/

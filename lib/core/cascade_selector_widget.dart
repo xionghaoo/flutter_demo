@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import 'common_widgets.dart';
 
@@ -8,8 +9,9 @@ class CascadeSelectorWidget extends StatefulWidget {
   final List<List<String>> data;
   final Function(String address) completeCallBack;
   final int maxTabsNum;
+  final Function(String, int) onAddTab;
 
-  CascadeSelectorWidget(this.data, {this.maxTabsNum = 4, this.completeCallBack});
+  CascadeSelectorWidget(this.data, {this.maxTabsNum = 4, this.completeCallBack, this.onAddTab});
 
   @override
   _CascadeSelectorWidgetState createState() => _CascadeSelectorWidgetState();
@@ -37,6 +39,7 @@ class _CascadeSelectorWidgetState extends State<CascadeSelectorWidget> with Sing
   bool _isAddTab = false;
 
   List<String> _tabNames = ["请选择"];
+//  List<List<String>> _tabItemData;
 
   Widget _tabItemWidget(Function(int) onTap, Key key, String content, int index) {
     return InkBox(
@@ -84,14 +87,16 @@ class _CascadeSelectorWidgetState extends State<CascadeSelectorWidget> with Sing
     return tabs;
   }
 
-  Widget _selectPageItemWidget(List<String> addressNames, Function onTap, int page) {
+  Widget _selectPageItemWidget(List<String> tabItemNames, Function onTap, int page) {
     return ListView.builder(
-        itemCount: addressNames.length,
+        itemCount: tabItemNames.length,
         itemBuilder: (context, index) => InkBox(
           onTap: () {
-            if (page >= widget.data.length - 1) {
+            widget.onAddTab(tabItemNames[index], page);
+
+            if (page >= widget.maxTabsNum - 1) {
               setState(() {
-                _tabNames[page] = addressNames[index];
+                _tabNames[page] = tabItemNames[index];
               });
               String completeAddress = "";
               for (int i = 0; i < _tabKeys.length; i++) {
@@ -102,13 +107,14 @@ class _CascadeSelectorWidgetState extends State<CascadeSelectorWidget> with Sing
               return;
             }
 
+            // 新增tab
             final maxPage = _tabKeys.length - 1;
             _isAddTab = page == maxPage;
             if (page == maxPage) {
               setState(() {
                 _tabTitleOpacity = 0;
                 _tabKeys.add(GlobalKey());
-                _tabNames.insert(_tabNames.length - 1, addressNames[index]);
+                _tabNames.insert(_tabNames.length - 1, tabItemNames[index]);
               });
 
               if (_tabKeys.length >= 2) {
@@ -116,21 +122,24 @@ class _CascadeSelectorWidgetState extends State<CascadeSelectorWidget> with Sing
                   moveSlider(_tabKeys[_tabKeys.length - 1], _tabKeys.length - 1, withSliderTitle: true);
                 });
               }
+
+              _pageController.animateToPage(_previousPage + 1, duration: Duration(milliseconds: 500), curve: Curves.ease);
+//              print("移动滑块: data: ${widget.data.length}");
             } else {
               // 修改地址
               setState(() {
-                _tabNames[page] = addressNames[index];
+                _tabNames[page] = tabItemNames[index];
               });
+              _pageController.animateToPage(_previousPage + 1, duration: Duration(milliseconds: 500), curve: Curves.ease);
             }
 
-            _pageController.animateToPage(_previousPage + 1, duration: Duration(milliseconds: 500), curve: Curves.ease);
 
 
           },
           child: Container(
             height: 50,
             alignment: Alignment.center,
-            child: Text(addressNames[index]),
+            child: Text(tabItemNames[index]),
           ),
         )
     );
@@ -200,6 +209,7 @@ class _CascadeSelectorWidgetState extends State<CascadeSelectorWidget> with Sing
   @override
   void initState() {
     super.initState();
+
     _controller = AnimationController(
         duration: const Duration(milliseconds: 500),
         vsync: this
@@ -235,6 +245,7 @@ class _CascadeSelectorWidgetState extends State<CascadeSelectorWidget> with Sing
 
   @override
   Widget build(BuildContext context) {
+//    print("rebuild ${widget.data.length}");
     return Column(
       // dx必需从0开始
       crossAxisAlignment: CrossAxisAlignment.start,
