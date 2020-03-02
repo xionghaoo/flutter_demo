@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_demo/core/address_selector_widget.dart';
+import 'package:flutter_demo/core/cascade_selector_widget.dart';
 import 'package:flutter_demo/core/common_widgets.dart';
 import 'package:flutter_demo/platform_view/text_view.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -31,7 +31,7 @@ class _AddressSelectPageState extends State<AddressSelectPage> with SingleTicker
     "湖北省"
   ];
 
-  AddressSelectorWidget _addressSelectorWidget;
+  CascadeSelectorWidget _addressSelectorWidget;
 
   @override
   void initState() {
@@ -75,9 +75,11 @@ class _AddressSelectPageState extends State<AddressSelectPage> with SingleTicker
       ),
       body: Center(
         child: Container(
-          child: AddressSelectorWidget(completeCallBack: (address) {
-            Fluttertoast.showToast(msg: "地址：${address}");
-          })
+          child: CascadeSelectorWidget(
+              List.generate(3, (index) => ["地址1-${index}", "地址2-${index}", "地址3-${index}", "地址4-${index}"]),
+              completeCallBack: (address) {
+                Fluttertoast.showToast(msg: "地址：${address}");
+              })
         ),
       ),
     );
