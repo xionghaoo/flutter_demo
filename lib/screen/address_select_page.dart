@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_demo/core/address_selector_widget.dart';
 import 'package:flutter_demo/core/common_widgets.dart';
 import 'package:flutter_demo/platform_view/text_view.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class AddressSelectPage extends StatefulWidget {
 
@@ -74,7 +75,9 @@ class _AddressSelectPageState extends State<AddressSelectPage> with SingleTicker
       ),
       body: Center(
         child: Container(
-          child: AddressSelectorWidget()
+          child: AddressSelectorWidget(completeCallBack: (address) {
+            Fluttertoast.showToast(msg: "地址：${address}");
+          })
         ),
       ),
     );

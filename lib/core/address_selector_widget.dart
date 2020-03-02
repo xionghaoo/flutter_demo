@@ -14,11 +14,17 @@ class AddressSelectorWidget extends StatefulWidget {
 //    @required this.areas
 //  }): assert(provinces != null), assert(cities != null), assert(areas != null);
 
+  Function(String address) completeCallBack;
+
+  AddressSelectorWidget({this.completeCallBack});
+
   @override
   _AddressSelectorWidgetState createState() => _AddressSelectorWidgetState();
 }
 
 class _AddressSelectorWidgetState extends State<AddressSelectorWidget> with SingleTickerProviderStateMixin {
+
+  static final _MAX_TAB_NUNM = 4;
 
   AnimationController _controller;
   CurvedAnimation _curvedAnimation;
@@ -29,23 +35,22 @@ class _AddressSelectorWidgetState extends State<AddressSelectorWidget> with Sing
 
   PageController _pageController = PageController(initialPage: 0);
 
-  List<String> _addresses = ["请选择"];
+  List<String> _addressTabNames = ["请选择"];
 
   Animation _selectorTranslateXAnim;
   Animation _defaultSelectorTranslateXAnim;
-
-  void addAddress(String address) {
-    setState(() {
-      _addresses.add(address);
-    });
-  }
 
   double _slideLeftMargin = 0;
   double _selectorOpacity = 1;
 
   int _previousPage = 0;
-
   bool _isAddTab = false;
+
+  void _addAddress(String address) {
+    setState(() {
+      _addressTabNames.add(address);
+    });
+  }
 
   Widget _tabWidget(Function(int) onTap, Key key, String content, int index) {
     return InkBox(
@@ -54,7 +59,7 @@ class _AddressSelectorWidgetState extends State<AddressSelectorWidget> with Sing
         key: key,
         child: Padding(
           padding: const EdgeInsets.fromLTRB(15, 10, 15, 10),
-          child: Text(content),
+          child: Text(content, style: TextStyle(color: index == _tabKeys.length - 1 ? Colors.red : Colors.black),),
         ),
       ),
     );
@@ -86,7 +91,7 @@ class _AddressSelectorWidgetState extends State<AddressSelectorWidget> with Sing
         _pageController.animateToPage(index, duration: Duration(milliseconds: 500), curve: Curves.ease);
 
       };
-      Widget widget = _tabWidget(onTap, _tabKeys[i], _addresses[i], i);
+      Widget widget = _tabWidget(onTap, _tabKeys[i], _addressTabNames[i], i);
 
       if (i == _tabKeys.length - 1 && _tabKeys.length >= 2) {
         widget = AnimatedBuilder(
@@ -95,7 +100,7 @@ class _AddressSelectorWidgetState extends State<AddressSelectorWidget> with Sing
             offset: Offset(_selectorTranslateXAnim.value, 0),
             child: Opacity(
               opacity: _selectorOpacity,
-              child: _tabWidget(onTap, _tabKeys[i], _addresses[i], i)
+              child: _tabWidget(onTap, _tabKeys[i], _addressTabNames[i], i)
             ),
           ),
         );
@@ -113,13 +118,36 @@ class _AddressSelectorWidgetState extends State<AddressSelectorWidget> with Sing
         itemCount: addressNames.length,
         itemBuilder: (context, index) => InkBox(
           onTap: () {
+            if (page >= _MAX_TAB_NUNM - 1) {
+              setState(() {
+                _addressTabNames[page] = addressNames[index].name;
+              });
+              String completeAddress = "";
+              for (int i = 0; i < _tabKeys.length; i++) {
+                completeAddress += _addressTabNames[i];
+              }
+              widget.completeCallBack(completeAddress);
+//              WidgetsBinding.instance.addPostFrameCallback((_) {
+//                RenderBox slider = _sliderKey.currentContext.findRenderObject();
+//                Size sliderSize = slider.size;
+//                RenderBox tabOne = _tabKeys[page].currentContext.findRenderObject();
+//                Size tabOneSize = tabOne.size;
+//                final leftMargin = (tabOneSize.width - sliderSize.width) / 2;
+//                setState(() {
+//                  _slideLeftMargin = leftMargin;
+//                });
+//              });
+              resetSlider(_tabKeys[page]);
+              return;
+            }
+
             final maxPage = _tabKeys.length - 1;
             _isAddTab = page == maxPage;
             if (page == maxPage) {
               setState(() {
                 _selectorOpacity = 0;
                 _tabKeys.add(GlobalKey());
-                _addresses.insert(_addresses.length - 1, addressNames[index].name);
+                _addressTabNames.insert(_addressTabNames.length - 1, addressNames[index].name);
               });
 
               if (_tabKeys.length >= 2) {
@@ -155,7 +183,7 @@ class _AddressSelectorWidgetState extends State<AddressSelectorWidget> with Sing
             } else {
               // 修改地址
               setState(() {
-                _addresses[page] = addressNames[index].name;
+                _addressTabNames[page] = addressNames[index].name;
               });
             }
 
@@ -191,7 +219,7 @@ class _AddressSelectorWidgetState extends State<AddressSelectorWidget> with Sing
     if (_controller.isAnimating) {
       return;
     }
-    print("移动滑块");
+//    print("移动滑块");
 
     RenderBox slider = _sliderKey.currentContext.findRenderObject();
     Offset offset = slider.localToGlobal(Offset.zero);
@@ -205,21 +233,36 @@ class _AddressSelectorWidgetState extends State<AddressSelectorWidget> with Sing
     }
     final sliderAnimEndDx = totalWidth - extraWidth - slider.size.width - _slideLeftMargin;
 
+    // 新增tab时移动标题，非新增时不移动
     if (withSliderTitle) {
       final selectorTranslateXBegin = (currentTab.size.width - currentTab.size.width) / 2 + currentTab.size.width;
       _selectorTranslateXAnim = Tween<double>(begin: -selectorTranslateXBegin, end: 0).animate(_curvedAnimation);
-      _selectorTranslateXAnim..addStatusListener((state) {
+      _selectorTranslateXAnim.addStatusListener((state) {
         _selectorOpacity = 1;
         if (_animation.isCompleted) {
           _isAddTab = false;
         }
       });
+    } else {
+      _selectorTranslateXAnim = _defaultSelectorTranslateXAnim;
     }
 
     _animation = Tween<double>(begin: offset.dx - _slideLeftMargin, end: sliderAnimEndDx).animate(_curvedAnimation);
-    _selectorTranslateXAnim = _defaultSelectorTranslateXAnim;
     _controller.value = 0;
     _controller.forward();
+  }
+
+  void resetSlider(GlobalKey tabKey) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      RenderBox slider = _sliderKey.currentContext.findRenderObject();
+      Size sliderSize = slider.size;
+      RenderBox tab = tabKey.currentContext.findRenderObject();
+      Size tabSize = tab.size;
+      final leftMargin = (tabSize.width - sliderSize.width) / 2;
+      setState(() {
+        _slideLeftMargin = leftMargin;
+      });
+    });
   }
 
   @override
@@ -240,7 +283,7 @@ class _AddressSelectorWidgetState extends State<AddressSelectorWidget> with Sing
     _defaultSelectorTranslateXAnim = Tween<double>(begin: 0, end: 0).animate(_curvedAnimation);
     _selectorTranslateXAnim = _defaultSelectorTranslateXAnim;
 
-    for (int i = 0; i < _addresses.length; i++) {
+    for (int i = 0; i < _addressTabNames.length; i++) {
       _tabKeys.add(GlobalKey());
     }
 
@@ -271,17 +314,18 @@ class _AddressSelectorWidgetState extends State<AddressSelectorWidget> with Sing
 //      print("curren page: ${_pageController.page}");
     });
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      RenderBox slider = _sliderKey.currentContext.findRenderObject();
-      Size sliderSize = slider.size;
-      RenderBox tabOne = _tabKeys[0].currentContext.findRenderObject();
-      Size tabOneSize = tabOne.size;
-      final leftMargin = (tabOneSize.width - sliderSize.width) / 2;
-//      print("leftMargin: ${leftMargin}");
-      setState(() {
-        _slideLeftMargin = leftMargin;
-      });
-    });
+    // 布局完成后调整滑块的位置
+    resetSlider(_tabKeys[0]);
+//    WidgetsBinding.instance.addPostFrameCallback((_) {
+//      RenderBox slider = _sliderKey.currentContext.findRenderObject();
+//      Size sliderSize = slider.size;
+//      RenderBox tabOne = _tabKeys[0].currentContext.findRenderObject();
+//      Size tabOneSize = tabOne.size;
+//      final leftMargin = (tabOneSize.width - sliderSize.width) / 2;
+//      setState(() {
+//        _slideLeftMargin = leftMargin;
+//      });
+//    });
   }
 
   @override
