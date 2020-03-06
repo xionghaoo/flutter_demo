@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 import 'common_widgets.dart';
 
 @immutable
 class CascadeSelectorWidget extends StatefulWidget {
   
-//  final List<List<String>> data;
+  final List<List<String>> data;
+//  List<List<String>> pagesData;
   final CascadeSelectorController selectorController;
   final Function(String address) completeCallBack;
   final int maxTabsNum;
   final Function(int page, Function(List<String>)) onAddTab;
 
-  CascadeSelectorWidget({this.selectorController, this.maxTabsNum = 4, this.completeCallBack, this.onAddTab});
+  CascadeSelectorWidget(this.data, {this.selectorController, this.maxTabsNum = 4, this.completeCallBack, this.onAddTab});
 
   @override
   _CascadeSelectorWidgetState createState() => _CascadeSelectorWidgetState();
@@ -99,11 +99,11 @@ class _CascadeSelectorWidgetState extends State<CascadeSelectorWidget> with Sing
               // 切换选项时清空后面级别的的选择项
               if (widget.selectorController.selectedPages[page] != tabItemNames[index]
                   // 最后一级不需要进入这个流程
-                  && page < widget.selectorController.pagesData.length - 1) {
+                  && page < widget.data.length - 1) {
                 setState(() {
-                  final int pageNum = widget.selectorController.pagesData.length;
+                  final int pageNum = widget.data.length;
                   for(int p = page + 2; p < pageNum; p++) {
-                    widget.selectorController.pagesData.removeLast();
+                    widget.data.removeLast();
                     widget.selectorController.selectedPages.removeLast();
                     _tabNames.removeLast();
                     _tabKeys.removeLast();
@@ -112,20 +112,22 @@ class _CascadeSelectorWidgetState extends State<CascadeSelectorWidget> with Sing
                   _tabNames[page + 1] = initialSelectName;
                   widget.selectorController.selectedPages.removeLast();
                 });
+              } else {
+                print("widget.selectorController.selectedPages: ${widget.selectorController.selectedPages}");
+                widget.selectorController.selectedPages[page] = tabItemNames[index];
               }
-              widget.selectorController.selectedPages[page] = tabItemNames[index];
             } else {
               widget.selectorController.selectedPages.add(tabItemNames[index]);
             }
-
+            print("widget.onAddTab: ${widget.selectorController.selectedPages}");
 
             widget.onAddTab(page, (nextPageData) {
               if (nextPageData != null) {
                 setState(() {
-                  if (page == widget.selectorController.pagesData.length - 1) {
-                    widget.selectorController.pagesData.add(nextPageData);
+                  if (page == widget.data.length - 1) {
+                    widget.data.add(nextPageData);
                   } else {
-                    widget.selectorController.pagesData[page + 1] = nextPageData;
+                    widget.data[page + 1] = nextPageData;
                   }
                 });
               }
@@ -179,12 +181,12 @@ class _CascadeSelectorWidgetState extends State<CascadeSelectorWidget> with Sing
   }
 
   List<Widget> _selectPageWidgets() {
-    if (widget.selectorController.pagesData.length > _maxTabsNum) {
+    if (widget.data.length > _maxTabsNum) {
       throw Exception("级联选择器最多支持$_maxTabsNum级！");
     }
     List<Widget> widgets = [];
-    for (int i = 0; i < widget.selectorController.pagesData.length; i++) {
-      widgets.add(_selectPageItemWidget(widget.selectorController.pagesData[i], null, i));
+    for (int i = 0; i < widget.data.length; i++) {
+      widgets.add(_selectPageItemWidget(widget.data[i], null, i));
     }
     return widgets;
   }
@@ -326,7 +328,6 @@ class _CascadeSelectorWidgetState extends State<CascadeSelectorWidget> with Sing
 }
 
 class CascadeSelectorController {
-  List<List<String>> pagesData;
   List<String> selectedPages = [];
-  CascadeSelectorController({this.pagesData = const []});
+  CascadeSelectorController();
 }

@@ -170,7 +170,7 @@ class _AddressSelectPageState extends State<AddressSelectPage> with SingleTicker
       _provinces = value;
       setState(() {
         _data.add(_provinces.keys.toList());
-        _cascadeSelectorController.pagesData = [_provinces.keys.toList()];
+//        _cascadeSelectorController.pagesData = [_provinces.keys.toList()];
       });
       print("provinces: ${_provinces.length}");
     }).catchError((e) => print(e));
@@ -185,7 +185,7 @@ class _AddressSelectPageState extends State<AddressSelectPage> with SingleTicker
       body: Center(
         child: Container(
           child: Container(
-              child: CascadeSelectorWidget(
+              child: CascadeSelectorWidget(_data,
                 selectorController: _cascadeSelectorController,
                 completeCallBack: (address) {
                   Fluttertoast.showToast(msg: "selected: ${address}");
@@ -200,7 +200,7 @@ class _AddressSelectPageState extends State<AddressSelectPage> with SingleTicker
                   } else {
                     complete(null);
                   }
-                  print("selected pages: ${_cascadeSelectorController.selectedPages}, current page: ${currentPage}, total: ${_cascadeSelectorController.pagesData.length}");
+                  print("selected pages: ${_cascadeSelectorController.selectedPages}, current page: ${currentPage}, total: ${_data.length}");
                 },
               )
           )
