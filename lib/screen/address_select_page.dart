@@ -194,8 +194,10 @@ class _AddressSelectPageState extends State<AddressSelectPage> with SingleTicker
                 onAddTab: (currentPage, complete) {
                   final selectedPages = _cascadeSelectorController.selectedPages;
                   if (currentPage == 0) {
+                    print("list 0 ${_provinces[selectedPages[0]].cityMap.keys.toList()}");
                     complete(_provinces[selectedPages[0]].cityMap.keys.toList());
                   } else if (currentPage == 1) {
+                    print("list 1 ${_provinces[selectedPages[0]].cityMap[selectedPages[1]].districtMap.keys.toList()}");
                     complete(_provinces[selectedPages[0]].cityMap[selectedPages[1]].districtMap.keys.toList());
                   } else {
                     complete(null);

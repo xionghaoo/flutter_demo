@@ -39,7 +39,7 @@ class _CascadeSelectorWidgetState extends State<CascadeSelectorWidget> with Sing
   double _tabTitleOpacity = 1;
 
   int _previousPage = 0;
-  bool _isAddTab = false;
+//  bool _isAddTab = false;
 
   List<String> _tabNames = [initialSelectName];
 //  List<List<String>> _tabItemData;
@@ -110,16 +110,14 @@ class _CascadeSelectorWidgetState extends State<CascadeSelectorWidget> with Sing
                   }
                   // 后一级的tab名称修改为请选择
                   _tabNames[page + 1] = initialSelectName;
-                  widget.selectorController.selectedPages.removeLast();
+//                  widget.selectorController.selectedPages.removeLast();
                 });
               } else {
-                print("widget.selectorController.selectedPages: ${widget.selectorController.selectedPages}");
-                widget.selectorController.selectedPages[page] = tabItemNames[index];
               }
+              widget.selectorController.selectedPages[page] = tabItemNames[index];
             } else {
               widget.selectorController.selectedPages.add(tabItemNames[index]);
             }
-            print("widget.onAddTab: ${widget.selectorController.selectedPages}");
 
             widget.onAddTab(page, (nextPageData) {
               if (nextPageData != null) {
@@ -147,7 +145,7 @@ class _CascadeSelectorWidgetState extends State<CascadeSelectorWidget> with Sing
 
               // 新增tab
               final maxPage = _tabKeys.length - 1;
-              _isAddTab = page == maxPage;
+//              _isAddTab = page == maxPage;
               if (page == maxPage) {
                 setState(() {
                   _tabTitleOpacity = 0;
@@ -169,6 +167,9 @@ class _CascadeSelectorWidgetState extends State<CascadeSelectorWidget> with Sing
                 });
                 _pageController.animateToPage(_previousPage + 1, duration: Duration(milliseconds: 500), curve: Curves.ease);
               }
+
+
+
             });
           },
           child: Container(
@@ -194,7 +195,7 @@ class _CascadeSelectorWidgetState extends State<CascadeSelectorWidget> with Sing
   /// 移动滑块到指定的tab
   void moveSlider(GlobalKey tabKey, int currentSliderBeforeTabsNum, {bool withSliderTitle = false}) {
     if (_controller.isAnimating) {
-      return;
+      _controller.stop();
     }
     RenderBox slider = _sliderKey.currentContext.findRenderObject();
     Offset offset = slider.localToGlobal(Offset.zero);
@@ -214,9 +215,9 @@ class _CascadeSelectorWidgetState extends State<CascadeSelectorWidget> with Sing
       _tabTitleTranslateXAnim = Tween<double>(begin: -selectorTranslateXBegin, end: 0).animate(_curvedAnimation);
       _tabTitleTranslateXAnim.addStatusListener((state) {
         _tabTitleOpacity = 1;
-        if (_sliderAnimation.isCompleted) {
-          _isAddTab = false;
-        }
+//        if (_sliderAnimation.isCompleted) {
+//          _isAddTab = false;
+//        }
       });
     } else {
       _tabTitleTranslateXAnim = _defaultTabTitleTranslateXAnim;
@@ -264,13 +265,13 @@ class _CascadeSelectorWidgetState extends State<CascadeSelectorWidget> with Sing
       _tabKeys.add(GlobalKey());
     }
 
-    _pageController.addListener(() {
-      final currentPage = _pageController.page.round();
-      if (currentPage != _previousPage && !_isAddTab) {
-        moveSlider(_tabKeys[currentPage], currentPage);
-      }
-      _previousPage = currentPage;
-    });
+//    _pageController.addListener(() {
+//      final currentPage = _pageController.page.round();
+//      if (currentPage != _previousPage) {
+//        moveSlider(_tabKeys[currentPage], currentPage);
+//      }
+//      _previousPage = currentPage;
+//    });
 
     _maxTabsNum = widget.maxTabsNum;
 
@@ -317,9 +318,15 @@ class _CascadeSelectorWidgetState extends State<CascadeSelectorWidget> with Sing
           ],
         ),
         Expanded(
-          child: PageView(
+          child: PageView.builder(
+            itemCount: widget.data.length,
             controller: _pageController,
-            children: _selectPageWidgets(),
+            itemBuilder: (context, index) => _selectPageItemWidget(widget.data[index], null, index),
+            onPageChanged: (position) {
+              moveSlider(_tabKeys[position], position);
+              print("onPageChanged: ${position}");
+              _previousPage = position;
+            },
           ),
         ),
       ],
