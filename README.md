@@ -1,8 +1,8 @@
 # flutter_demo
 > flutter开发练习
 
-## 基础功能
-> 开发中经常会用到一些基础功能
+## Flutter层功能
+> flutter层的功能，一些基础的widget、Animation、state manage
 
 [官方Cookbook](https://flutter.dev/docs/cookbook)
 
@@ -18,16 +18,23 @@
 - [x] 动画
 - [x] 表单
 - [x] 相机
-- [x] 基本的原生调用(插件方式和非插件方式)
-- [x] Android高德地图集成
-- [ ] iOS高德地图集成
 - [ ] app打包
 - [ ] 图片选择上传
 - [ ] BLoC集成(State管理框架)
 - [ ] Scoped Model集成(State管理框架)
-- [ ] 二维码扫描
 - [ ] 屏幕适配
 - [ ] ChangeNotifier
+
+### 自定义Widget
+
+## Native Plugin
+> Flutter提供了丰富的插件接口，flutter层可以很好的和native层进行交互
+
+- [x] MethodChannel方式调用原生
+- [x] 简单视图类型插件，文本视图使用原生控件(TextView/UILabel)显示
+- [x] Android高德地图集成
+- [ ] iOS高德地图集成
+- [ ] 二维码扫描
 
 ## Wallie(完整的app)
 
@@ -36,20 +43,26 @@
 - [x] Bill页面(下拉刷新)
 - [x] 集成Redux
 
-## 动画效果示例
+## 效果示例
 
-|  |  |
+| 名称 | 显示效果 |
 | --- | --- |
-| <img src="https://github.com/xionghaoo/flutter_demo/blob/master/screens/tab%E5%88%87%E6%8D%A2%E5%8A%A8%E7%94%BB.gif" width="300"/> | <img src="https://github.com/xionghaoo/flutter_demo/blob/master/screens/%E5%A4%AA%E6%9E%81%E5%8A%A8%E7%94%BB.gif" width="300"/> |
+| 水滴Tab切换 | <img src="https://github.com/xionghaoo/flutter_demo/blob/master/screens/tab%E5%88%87%E6%8D%A2%E5%8A%A8%E7%94%BB.gif" width="300"/> |
+| 太极动画 | <img src="https://github.com/xionghaoo/flutter_demo/blob/master/screens/%E5%A4%AA%E6%9E%81%E5%8A%A8%E7%94%BB.gif" width="300"/> |
+| Android高德地图 | <img src="https://github.com/xionghaoo/flutter_demo/blob/master/screens/Android_amap.jpg" width="300"/> |
 
-## 高德地图
-> Flutter提供原生View的渲染方式，可以像使用Flutter Widget一样使用Native View
+## 开发参考资料
 
-Android显示效果
+### 原生插件部分
+> 官方的插件项目[flutter plugins](https://github.com/flutter/plugins)
 
-<img src="https://github.com/xionghaoo/flutter_demo/blob/master/screens/Android_amap.jpg" width="300"/>
+[Writing custom platform-specific code](https://flutter.dev/docs/development/platform-integration/platform-channels)
+[在Flutter中嵌入Native组件的正确姿势是...](https://juejin.im/post/5bed04d96fb9a049a42e9c40)
+[Flutter PlatformView: How to create Widgets from Native Views](https://medium.com/flutter-community/flutter-platformview-how-to-create-flutter-widgets-from-native-views-366e378115b6)
+[How to use Native UIs in Flutter with Swift & Platform View](https://medium.com/@phoomparin/how-to-use-native-uis-in-flutter-with-swift-platform-view-8b4dc7f833d8)
 
-## Flutter 1.12版本以前的插件升级（v1 -> v2）
+## 其他
+### Flutter 1.12版本以前的插件升级（v1 -> v2）
 > Flutter的插件注册现在分为v1版本和v2版本
 
 官方文档
@@ -77,7 +90,7 @@ override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
 }
 ```
 
-## Json Serialize
+### Json Serialize
 > 官方文档：[JSON and serialization](https://flutter.dev/docs/development/data-and-backend/json)
 
 Json序列化，代码手动生成命令
