@@ -15,11 +15,18 @@ class TextView extends StatefulWidget {
 }
 
 class _TextViewState extends State<TextView> {
+  static final String viewTypeID = "xh.zero/textview";
+
   @override
   Widget build(BuildContext context) {
     if (defaultTargetPlatform == TargetPlatform.android) {
       return AndroidView(
-        viewType: "xh.zero/textview",
+        viewType: viewTypeID,
+        onPlatformViewCreated: _onPlatformViewCreated,
+      );
+    } else if (defaultTargetPlatform == TargetPlatform.iOS) {
+      return UiKitView(
+        viewType: viewTypeID,
         onPlatformViewCreated: _onPlatformViewCreated,
       );
     }

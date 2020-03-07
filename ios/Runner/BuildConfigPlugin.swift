@@ -22,6 +22,7 @@ class BuildConfigPlugin: NSObject, FlutterPlugin {
         //        let channel = FlutterMethodChannel(name: "xh.zero/version", binaryMessenger: registrar.messenger())
         let instance = BuildConfigPlugin(registrar: registrar)
         registrar.addMethodCallDelegate(instance, channel: instance.channel)
+        
     }
     
     func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {

@@ -18,6 +18,9 @@
 		97C146FC1CF9000F007C117D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FA1CF9000F007C117D /* Main.storyboard */; };
 		97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FD1CF9000F007C117D /* Assets.xcassets */; };
 		97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */; };
+		DE6045C424135B59000AC060 /* TextViewPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6045C324135B59000AC060 /* TextViewPlugin.swift */; };
+		DE6045C624135BD6000AC060 /* TextViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6045C524135BD6000AC060 /* TextViewFactory.swift */; };
+		DE6045CA24135E28000AC060 /* FlutterTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6045C924135E28000AC060 /* FlutterTextView.swift */; };
 		DE6BC7B823ED7B8800F32AE7 /* BuildConfigPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6BC7B723ED7B8800F32AE7 /* BuildConfigPlugin.swift */; };
 /* End PBXBuildFile section */
 
@@ -56,6 +59,9 @@
 		97C147021CF9000F007C117D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C53A8917C7BECA96D91D8B73 /* Pods-Runner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.release.xcconfig"; sourceTree = "<group>"; };
 		DAA7CEB2A55AE7526AF2C3C6 /* Pods_Runner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Runner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DE6045C324135B59000AC060 /* TextViewPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewPlugin.swift; sourceTree = "<group>"; };
+		DE6045C524135BD6000AC060 /* TextViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewFactory.swift; sourceTree = "<group>"; };
+		DE6045C924135E28000AC060 /* FlutterTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlutterTextView.swift; sourceTree = "<group>"; };
 		DE6BC7B723ED7B8800F32AE7 /* BuildConfigPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildConfigPlugin.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -126,6 +132,7 @@
 		97C146F01CF9000F007C117D /* Runner */ = {
 			isa = PBXGroup;
 			children = (
+				DE6045CB24137747000AC060 /* plugins */,
 				97C146FA1CF9000F007C117D /* Main.storyboard */,
 				97C146FD1CF9000F007C117D /* Assets.xcassets */,
 				97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */,
@@ -135,7 +142,6 @@
 				1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */,
 				74858FAE1ED2DC5600515810 /* AppDelegate.swift */,
 				74858FAD1ED2DC5600515810 /* Runner-Bridging-Header.h */,
-				DE6BC7B723ED7B8800F32AE7 /* BuildConfigPlugin.swift */,
 			);
 			path = Runner;
 			sourceTree = "<group>";
@@ -145,6 +151,17 @@
 			children = (
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DE6045CB24137747000AC060 /* plugins */ = {
+			isa = PBXGroup;
+			children = (
+				DE6BC7B723ED7B8800F32AE7 /* BuildConfigPlugin.swift */,
+				DE6045C324135B59000AC060 /* TextViewPlugin.swift */,
+				DE6045C524135BD6000AC060 /* TextViewFactory.swift */,
+				DE6045C924135E28000AC060 /* FlutterTextView.swift */,
+			);
+			name = plugins;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -295,7 +312,10 @@
 			files = (
 				74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */,
 				1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */,
+				DE6045C424135B59000AC060 /* TextViewPlugin.swift in Sources */,
+				DE6045CA24135E28000AC060 /* FlutterTextView.swift in Sources */,
 				DE6BC7B823ED7B8800F32AE7 /* BuildConfigPlugin.swift in Sources */,
+				DE6045C624135BD6000AC060 /* TextViewFactory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

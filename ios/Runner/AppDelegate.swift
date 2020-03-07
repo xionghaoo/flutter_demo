@@ -27,6 +27,7 @@ import Flutter
         
         GeneratedPluginRegistrant.register(with: self)
         BuildConfigPlugin.register(with: registrar(forPlugin: "BuildConfigPlugin"))
+        TextViewPlugin.register(with: registrar(forPlugin: "TextViewPlugin"))
         return super.application(application, didFinishLaunchingWithOptions: launchOptions)
     }
     
