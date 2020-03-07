@@ -26,6 +26,7 @@
 - [ ] ChangeNotifier
 
 ### 自定义Widget
+- [x] 级联选择器(地址选择)
 
 ## Native Plugin
 > Flutter提供了丰富的插件接口，flutter层可以很好的和native层进行交互
@@ -36,10 +37,10 @@
 - [ ] iOS高德地图集成
 - [ ] 二维码扫描
 
-## Wallie(完整的app)
+## Wallie app
 
-- [x] 登陆/退出
-- [x] 首页tabs切换/下拉刷新
+- [x] 登陆页面
+- [x] 首页tabs切换
 - [x] Bill页面(下拉刷新)
 - [x] 集成Redux
 
@@ -51,14 +52,17 @@
 | 太极动画 | <img src="https://github.com/xionghaoo/flutter_demo/blob/master/screens/%E5%A4%AA%E6%9E%81%E5%8A%A8%E7%94%BB.gif" width="300"/> |
 | Android高德地图 | <img src="https://github.com/xionghaoo/flutter_demo/blob/master/screens/Android_amap.jpg" width="300"/> |
 
-## 开发参考资料
+## 参考资料
 
 ### 原生插件部分
 > 官方的插件项目[flutter plugins](https://github.com/flutter/plugins)
 
 [Writing custom platform-specific code](https://flutter.dev/docs/development/platform-integration/platform-channels)
+
 [在Flutter中嵌入Native组件的正确姿势是...](https://juejin.im/post/5bed04d96fb9a049a42e9c40)
+
 [Flutter PlatformView: How to create Widgets from Native Views](https://medium.com/flutter-community/flutter-platformview-how-to-create-flutter-widgets-from-native-views-366e378115b6)
+
 [How to use Native UIs in Flutter with Swift & Platform View](https://medium.com/@phoomparin/how-to-use-native-uis-in-flutter-with-swift-platform-view-8b4dc7f833d8)
 
 ## 其他
