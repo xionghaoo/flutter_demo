@@ -1,5 +1,6 @@
 import UIKit
 import Flutter
+import AMapFoundationKit
 
 @UIApplicationMain
 @objc class AppDelegate: FlutterAppDelegate {
@@ -9,6 +10,9 @@ import Flutter
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
+        
+        AMapServices.shared()?.apiKey = "2cc2c90111dfa82299d5b215bfd01178"
+        
         let controller : FlutterViewController = window?.rootViewController as! FlutterViewController
         // 创建IOS方法连接
         let batteryChannel = FlutterMethodChannel(name: CHANNEL,
@@ -28,6 +32,7 @@ import Flutter
         GeneratedPluginRegistrant.register(with: self)
         BuildConfigPlugin.register(with: registrar(forPlugin: "BuildConfigPlugin"))
         TextViewPlugin.register(with: registrar(forPlugin: "TextViewPlugin"))
+        AmapPlugin.register(with: registrar(forPlugin: "AmapPlugin"))
         return super.application(application, didFinishLaunchingWithOptions: launchOptions)
     }
     

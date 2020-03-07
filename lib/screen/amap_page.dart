@@ -37,11 +37,11 @@ class _AmapPageState extends State<AmapPage> {
             ),
             Padding(
               padding: EdgeInsets.all(10),
-              child: Text("下面是高德地图的Flutter widget(Android端)"),
+              child: Text("下面是高德地图的Flutter widget"),
             ),
             Expanded(
               child: AmapView(AmapParam(
-                initialCenterPoint: [22.630019, 114.068159]
+                initialCenterPoint: [22.630019, 114.068159],
               )),
             )
           ],

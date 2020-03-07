@@ -55,9 +55,14 @@ class FlutterAmapView(
 
     override fun onCreate(owner: LifecycleOwner) {
         mapView.onCreate(null)
+//        Log.d("AmapPlugin", "param.initialZoomLevel: ${param.initialZoomLevel}")
         aMap = mapView.map
         if (param.initialCenterPoint != null && param.initialCenterPoint.size == 2) {
-            aMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(param.initialCenterPoint[0], param.initialCenterPoint[1]), 14f))
+            aMap?.moveCamera(
+                CameraUpdateFactory.newLatLngZoom(
+                    LatLng(param.initialCenterPoint[0], param.initialCenterPoint[1]), param.initialZoomLevel ?: 17f
+                )
+            )
         }
 
         // 设置点击监听器
