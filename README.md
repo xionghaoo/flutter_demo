@@ -46,11 +46,10 @@
 
 ## 效果示例
 
-| 名称 | 显示效果 |
-| --- | --- |
-| 水滴Tab切换 | <img src="https://github.com/xionghaoo/flutter_demo/blob/master/screens/tab%E5%88%87%E6%8D%A2%E5%8A%A8%E7%94%BB.gif" width="300"/> |
-| 太极动画 | <img src="https://github.com/xionghaoo/flutter_demo/blob/master/screens/%E5%A4%AA%E6%9E%81%E5%8A%A8%E7%94%BB.gif" width="300"/> |
-| Android高德地图 | <img src="https://github.com/xionghaoo/flutter_demo/blob/master/screens/Android_amap.jpg" width="300"/> |
+| 名称 | 显示效果 | 名称 | 显示效果 |
+| --- | --- | --- | --- |
+| 水滴Tab切换 | <img src="https://github.com/xionghaoo/flutter_demo/blob/master/screens/tab%E5%88%87%E6%8D%A2%E5%8A%A8%E7%94%BB.gif" width="300"/> |  太极动画 | <img src="https://github.com/xionghaoo/flutter_demo/blob/master/screens/%E5%A4%AA%E6%9E%81%E5%8A%A8%E7%94%BB.gif" width="300"/> |
+| Android高德地图 | <img src="https://github.com/xionghaoo/flutter_demo/blob/master/screens/Android_amap.jpg" width="300"/> | 地址选择器 | <img src="https://github.com/xionghaoo/flutter_demo/blob/master/screens/address_selector.gif" width="300"/> |
 
 ## 参考资料
 
