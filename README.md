@@ -34,7 +34,8 @@
 - [x] MethodChannel方式调用原生
 - [x] 简单视图类型插件，文本视图使用原生控件(TextView/UILabel)显示
 - [x] Android高德地图集成
-- [ ] iOS高德地图集成
+- [x] iOS高德地图集成
+- [ ] Android&iOS高德地图功能完善
 - [ ] 二维码扫描
 
 ## Wallie app
