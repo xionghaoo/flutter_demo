@@ -27,6 +27,9 @@
 - [ ] 屏幕适配
 - [ ] ChangeNotifier
 
+## 通用组件库
+- [x] 级联选择器(地址选择)
+
 ## Native Plugin
 > Flutter提供了丰富的插件接口，flutter层可以很好的和native层进行交互
 
@@ -43,9 +46,6 @@
 - [x] 首页tabs切换
 - [x] Bill页面(下拉刷新)
 - [x] 集成Redux
-
-## 通用组件库
-- [x] 级联选择器(地址选择)
 
 ## 效果示例
 
