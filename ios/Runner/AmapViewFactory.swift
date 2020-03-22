@@ -18,18 +18,6 @@ class AmapViewFactory: NSObject, FlutterPlatformViewFactory {
     }
     
     func create(withFrame frame: CGRect, viewIdentifier viewId: Int64, arguments args: Any?) -> FlutterPlatformView {
-//        do {
-//            if let param = args! as? String {
-//                let data = param.data(using: .utf8)!
-//                print("args: \(param)")
-//                let jsonObj: Any? = try JSONSerialization.jsonObject(with: data, options: [])
-////                let initialCenterPointJson = (jsonObj as? [String:Any])!
-////                let initialCenterPoint = initialCenterPointJson["initialCenterPoint"] as? Array<Double>
-//                print("jsonObj: \(jsonObj)")
-//            }
-//        } catch let error {
-//            print("has error: \(error)")
-//        }
         print("args: \(args!)")
         var amapParam: AmapParam? = nil
         do {

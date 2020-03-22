@@ -2,6 +2,8 @@ PODS:
   - AMap3DMap (7.2.0):
     - AMapFoundation (~> 1.5)
   - AMapFoundation (1.6.2)
+  - AMapLocation (2.6.4):
+    - AMapFoundation (~> 1.6.1)
   - AMapSearch (7.1.0):
     - AMapFoundation (~> 1.4)
   - camera (0.0.1):
@@ -29,6 +31,7 @@ PODS:
 
 DEPENDENCIES:
   - AMap3DMap
+  - AMapLocation
   - AMapSearch
   - camera (from `.symlinks/plugins/camera/ios`)
   - Flutter (from `Flutter`)
@@ -45,6 +48,7 @@ SPEC REPOS:
   trunk:
     - AMap3DMap
     - AMapFoundation
+    - AMapLocation
     - AMapSearch
     - FMDB
     - SwiftyJSON
@@ -72,6 +76,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   AMap3DMap: be13191194c9aeb29a67d9d3e9a797588fb329aa
   AMapFoundation: 672dc3a4759cb733f447c1e1b020f7ba2729f4ab
+  AMapLocation: b4162db67f813508a14ee7e05c7ee4073785221d
   AMapSearch: 6bd6d361c5eb00110e0bffa4acf88b7bb9f7e059
   camera: 38cc83ae9a5667bb5a71c7d9edaf60a91920fd4e
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
@@ -85,6 +90,6 @@ SPEC CHECKSUMS:
   sqflite: 4001a31ff81d210346b500c55b17f4d6c7589dd0
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
 
-PODFILE CHECKSUM: f22e3bc92a082f8af55a0d79011342668f526601
+PODFILE CHECKSUM: ecbc565c3776a35465f3a9ff5dc590c27c73b6c6
 
 COCOAPODS: 1.9.0
