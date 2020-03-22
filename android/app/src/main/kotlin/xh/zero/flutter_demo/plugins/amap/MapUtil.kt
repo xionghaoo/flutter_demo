@@ -1,4 +1,4 @@
-package xh.zero.flutter_demo.plugins
+package xh.zero.flutter_demo.plugins.amap
 
 import com.amap.api.services.core.LatLonPoint
 

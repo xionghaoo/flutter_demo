@@ -2,10 +2,14 @@
 import 'package:flutter/cupertino.dart';
 
 class AmapParam {
+  static const int routeMap = 0;
+  static const int addressDescriptionMap = 1;
+
   List<double> initialCenterPoint;
   double initialZoomLevel;
   bool enableMyLocation;
   bool enableMyMarker;
+  int mapType;
 
   List<AddressInfo> startAddressList;
   List<AddressInfo> endAddressList;
@@ -16,7 +20,8 @@ class AmapParam {
     this.enableMyLocation = false,
     this.enableMyMarker = false,
     this.startAddressList = const [],
-    this.endAddressList = const []
+    this.endAddressList = const [],
+    this.mapType = routeMap
   });
 
   toJson() => <String, dynamic> {
@@ -24,6 +29,7 @@ class AmapParam {
     "initialZoomLevel": initialZoomLevel,
     "enableMyLocation": enableMyLocation,
     "enableMyMarker": enableMyMarker,
+    "mapType": mapType,
     "startAddressList": startAddressList,
     "endAddressList": endAddressList
   };

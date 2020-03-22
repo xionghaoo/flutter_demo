@@ -15,13 +15,12 @@ import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.embedding.engine.plugins.shim.ShimPluginRegistry
 
 import io.flutter.plugin.common.MethodChannel
-import io.flutter.plugins.GeneratedPluginRegistrant
 import io.flutter.plugins.camera.CameraPlugin
 import io.flutter.plugins.flutter_plugin_android_lifecycle.FlutterAndroidLifecyclePlugin
 import io.flutter.plugins.pathprovider.PathProviderPlugin
 import io.flutter.plugins.sharedpreferences.SharedPreferencesPlugin
 import io.github.ponnamkarthik.toast.fluttertoast.FluttertoastPlugin
-import xh.zero.flutter_demo.plugins.AmapPlugin
+import xh.zero.flutter_demo.plugins.amap.AmapPlugin
 import xh.zero.flutter_demo.plugins.TextViewPlugin
 
 class MainActivity: FlutterActivity() {
