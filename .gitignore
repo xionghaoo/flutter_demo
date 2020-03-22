@@ -33,7 +33,6 @@
 **/android/**/gradle-wrapper.jar
 **/android/.gradle
 **/android/captures/
-**/android/release/
 **/android/gradlew
 **/android/gradlew.bat
 **/android/local.properties
