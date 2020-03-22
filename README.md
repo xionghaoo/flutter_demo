@@ -12,7 +12,6 @@
 - [x] 网络请求(异步加载和json序列化)
 - [x] 底部tabs切换
 - [x] 顶部tabs切换
-- [x] 下拉刷新
 - [x] PageView(滑动切换页面)
 - [x] Redux集成
 - [x] Sqlite(本地数据库)
