@@ -23,15 +23,15 @@ class _AmapViewState extends State<AmapView> {
       return AndroidView(
         viewType: viewType,
         onPlatformViewCreated: _onPlatformViewCreated,
-        creationParams: widget.param.toJson().toString(),
+        creationParams: json.encode(widget.param),
         creationParamsCodec: StandardMessageCodec(),
       );
     } else if (defaultTargetPlatform == TargetPlatform.iOS) {
-      print("dart json: ${json.encode(widget.param.toJson())}");
+//      print("dart json: ${json.encode(widget.param.toJson())}");
       return UiKitView(
         viewType: viewType,
         onPlatformViewCreated: _onPlatformViewCreated,
-        creationParams: json.encode(widget.param.toJson()),
+        creationParams: json.encode(widget.param),
         creationParamsCodec: StandardMessageCodec(),
       );
     }

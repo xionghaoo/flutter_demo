@@ -42,6 +42,15 @@ class _AmapPageState extends State<AmapPage> {
             Expanded(
               child: AmapView(AmapParam(
                 initialCenterPoint: [22.630019, 114.068159],
+                enableMyMarker: true,
+                startAddressList: [
+                  // 114.038225,22.618959
+                  AddressInfo(GeoPoint(22.618959, 114.038225), "起点"),
+                ],
+                endAddressList: [
+                  // 114.060541,22.529242
+                  AddressInfo(GeoPoint(22.529242, 114.060541), "终点")
+                ]
               )),
             )
           ],

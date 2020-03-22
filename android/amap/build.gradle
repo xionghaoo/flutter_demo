@@ -11,7 +11,7 @@ android {
         versionName "1.0.0"
 
         manifestPlaceholders = [
-            AMAP_APPKEY : 'ae82e260a427d7c0b44bcc7e31b406ad'
+            AMAP_APPKEY : 'a6bbe57a5fed9cdad3c4c45953b27942'
         ]
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

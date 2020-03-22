@@ -349,22 +349,22 @@ public class DrivingRouteOverlay extends RouteOverlay{
             e.printStackTrace();
         }
     }
-
-    // 起点marker
-    @Override
-    public BitmapDescriptor getStartBitmapDescriptor() {
-        // 替换起点marker
-        return BitmapDescriptorFactory.fromView(startMarkerView);
-    }
-
-    /**
-     * 给终点Marker设置图标，并返回更换图标的图片。如不用默认图片，需要重写此方法。
-     * @return 更换的Marker图片。
-     * @since V2.1.0
-     */
-    @Override
-    public BitmapDescriptor getEndBitmapDescriptor() {
-        // 替换终点marker
-        return BitmapDescriptorFactory.fromView(endMarkerView);
-    }
+//
+//    // 起点marker
+//    @Override
+//    public BitmapDescriptor getStartBitmapDescriptor() {
+//        // 替换起点marker
+//        return BitmapDescriptorFactory.fromView(startMarkerView);
+//    }
+//
+//    /**
+//     * 给终点Marker设置图标，并返回更换图标的图片。如不用默认图片，需要重写此方法。
+//     * @return 更换的Marker图片。
+//     * @since V2.1.0
+//     */
+//    @Override
+//    public BitmapDescriptor getEndBitmapDescriptor() {
+//        // 替换终点marker
+//        return BitmapDescriptorFactory.fromView(endMarkerView);
+//    }
 }

@@ -20,6 +20,7 @@ class AmapViewFactory(
     // 视图第一次显示时调用
     override fun create(context: Context?, viewId: Int, args: Any?): PlatformView {
         val param = Gson().fromJson<AmapParam>(args as? String, AmapParam::class.java)
+//        Log.d("AmapViewFactory", "received: ${param.startAddressList}")
         val flutterAmapView = FlutterAmapView(context, lifecycle, param)
         flutterAmapView.initialize()
         return flutterAmapView

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--地图缩放边缘宽度，宽度越大，缩放精度越小-->
+    <dimen name="map_zoom_edge_width">115dp</dimen>
+</resources>
